@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { updateCartAsync } from "../cartSlice";
+import { discountedPrice } from "../../../app/constant";
 
 const Cartitem = ({ cart,delFromCart }) => {
   const val = cart.product;
@@ -58,11 +59,7 @@ const Cartitem = ({ cart,delFromCart }) => {
             </div>
             <div className="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
               <h5 className="mb-0">
-                $
-                {Math.ceil(
-                  (val.price - (val.price * val.discountPercentage) / 100) *
-                    count
-                )}
+                ${discountedPrice(val.price,val.discountPercentage,count)}
               </h5>
             </div>
             <div className="col-md-1 col-lg-1 col-xl-1 text-end">

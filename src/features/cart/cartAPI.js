@@ -41,14 +41,15 @@ export function delFromCart(item) {
 
 export function updateCart(item) {
   return new Promise(async (resolve) =>{
-    await fetch('http://localhost:5000/cart/update',{
+     const response = await fetch('http://localhost:5000/cart/update',{
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(item)
     }) 
-    resolve();
+    const data = await response.json();
+    resolve({data});
   }
   );
 }

@@ -11,6 +11,7 @@ import { useDispatch } from 'react-redux';
 import { fetchAllCartProductsAsync } from './features/cart/cartSlice';
 import { fetchAllWishlistProductsAsync } from './features/wishlist/wishlistSlice';
 import { fetchAllProductsAsync } from './features/product/productSlice';
+import Checkout from './features/Checkout/components/Checkout';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -44,12 +45,12 @@ const router = createBrowserRouter([
         <WishlistPage />
     ),
   },
-  // {
-  //   path: '/checkout',
-  //   element: (
-  //       <Checkout></Checkout>
-  //   ),
-  // },
+  {
+    path: '/checkout',
+    element: (
+        <Checkout />
+    ),
+  },
 ]);
 
 function App() {

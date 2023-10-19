@@ -3,9 +3,11 @@ import Cartitem from '../components/Cartitem';
 import { useDispatch, useSelector } from 'react-redux';
 import { delFromCartAsync, fetchAllCartProductsAsync, selectAllCartProducts } from '../cartSlice';
 import { Link } from 'react-router-dom';
+import { discountedPrice } from '../../../app/constant';
 const Cart = () => {
   const dispatch = useDispatch();
   const cartProducts = useSelector(selectAllCartProducts);
+  
     useEffect(()=>{
       dispatch(fetchAllCartProductsAsync());
       // eslint-disable-next-line
@@ -54,9 +56,9 @@ const Cart = () => {
         </div> */}
         <div className="card">
           <div className="card-body ">
-            <button type="button" className="btn btn-danger btn-block btn-lg ">
+            <Link to="/checkout" type="button" className="btn btn-danger btn-block btn-lg ">
               Proceed to Pay
-            </button>
+            </Link>
             <span className='ms-4 me-4'>Or</span>
             <Link to="/" style={{textDecoration:"none"}}>Continue Shopping</Link>
           </div>
