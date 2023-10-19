@@ -1,39 +1,56 @@
-.App {
-  text-align: center;
+
+*{
+  font-family: 'Poppins';
+
+}
+.nav-item{
+  border-bottom: 2px solid white;
+}
+.nav-item:hover{
+  border-bottom: 2px solid black;
+}
+#lblWishCount,#lblCartCount {
+line-height: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  position: relative;
+  bottom: 9px;
+  right: 12px;
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-float infinite 3s ease-in-out;
+
+#lblCartCount,#lblWishCount {
+    font-size: 12px;
+    color: #fff;
+    padding: 0 5px;
+    vertical-align: top;
+    margin-right: 10px; 
+}
+.wishlist{
+  background-color: red;
+}
+.abc:hover{
+cursor: pointer;
+}
+input {
+  color: transparent;
+  text-shadow: 0 0 0 #2196f3;
+
+  &:focus {
+      outline: none;
   }
 }
-
-.App-header {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
-
-.App-link {
-  color: rgb(112, 76, 182);
-}
-
-@keyframes App-logo-float {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(10px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
+input[type=number] {
+  appearance: none;
+  -moz-appearance: textfield;
 }
