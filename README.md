@@ -1,6 +1,7 @@
 # Getting Started with Create React App and Redux
 
 This project is under development.
+Log in and sign up backend functionality is not added yet.
 
 ## Available Scripts
 
