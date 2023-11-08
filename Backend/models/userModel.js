@@ -6,7 +6,10 @@ var validateEmail = function(email) {
 };
 const userSchema = new Schema (
     {
-        name:String,
+        name:{
+            type: String,
+            required: true
+        },
         email: {
             type: String,
             trim: true,
@@ -16,7 +19,10 @@ const userSchema = new Schema (
             validate: [validateEmail, 'Please fill a valid email address'],
             match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
         },
-        password: String,
+        password:{
+            type: String,
+            required: true
+        },
     }
 )
 exports.User = mongoose.model('User',userSchema);

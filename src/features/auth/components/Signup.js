@@ -35,6 +35,14 @@ const Signup = () => {
       placeholder='Password'
     />
   </div>
+  <div className="mb-3">
+    <input
+      type="password"
+      className="form-control border-0 border-bottom rounded-0 w-50"
+      id="InputPassword"
+      placeholder='Confirm Password'
+    />
+  </div>
   <button type="submit" className="btn btn-danger fs-6 fw-normal w-50">
     Create Account
   </button>

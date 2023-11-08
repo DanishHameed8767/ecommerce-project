@@ -30,13 +30,13 @@ const Navbar = () => {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link active fs-5" to="/about">
-                  About
+                <Link className="nav-link active fs-5" to="/order/list">
+                  My Orders
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link active fs-5" to="/signup">
-                  Sign Up
+                <Link className="nav-link active fs-5" to="/login">
+                  Log In
                 </Link>
               </li>
             </ul>

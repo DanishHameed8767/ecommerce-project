@@ -53,3 +53,17 @@ export function updateCart(item) {
   }
   );
 }
+
+export function clearCart() {
+  return new Promise(async (resolve) =>{
+    const response = await fetch('http://localhost:5000/cart/clear',{
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }) 
+    const data = await response.json();
+    resolve({data});
+  }
+  );
+}

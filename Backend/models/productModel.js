@@ -6,6 +6,7 @@ const productSchema = new Schema (
   description: String,
   price: Number,
   discountPercentage: Number,
+  longDescription:String,
   rating: Number,
   brand: String,
   stock: Number,

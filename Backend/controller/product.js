@@ -7,8 +7,9 @@ exports.getallProducts = async (req, res) =>{
 exports.addProduct = async (req,res)=>{
     
    try {
-    Product.insertMany(req.body);
-        res.send('Success');
+    const product = new Product(req.body);
+    await product.save();
+        res.send(product);
 }
 catch (error){
     res.send(error);

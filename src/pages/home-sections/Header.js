@@ -1,6 +1,6 @@
 import React from 'react';
-import bgimg from '../images/1.png';
-import AppleLogo from '../images/apple-logo.png'
+import bgimg from '../../images/1.png';
+import AppleLogo from '../../images/apple-logo.png'
 const Header = () => {
   return (
     <>

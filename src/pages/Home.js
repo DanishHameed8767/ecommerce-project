@@ -1,14 +1,26 @@
 import React from 'react';
-import Header from './Header';
-import ProductList from '../features/product/components/ProductList';
+import Header from './home-sections/Header';
 import Navbar from '../features/Navbar';
+import CardSlider from './home-sections/CardSlider';
+import CategorySlider from './home-sections/CategorySlider';
+import BSellSection from './home-sections/BSellSection';
+import ExpProducts from './home-sections/ExpProducts';
+import NewArrival from './home-sections/NewArrival';
+import Features from './home-sections/Features';
+import Footer from './home-sections/Footer';
 
 const Home = () => {
   return (
     <>
       <Navbar />
       <Header />
-      <ProductList />
+      <CardSlider />
+      <CategorySlider />
+      <BSellSection />
+      <ExpProducts />
+      <NewArrival />
+      <Features />
+      <Footer />
     </>
   )
 }

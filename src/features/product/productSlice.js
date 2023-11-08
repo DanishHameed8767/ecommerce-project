@@ -25,6 +25,9 @@ export const productSlice = createSlice({
   reducers: {
      getProductDetail: (state,action) => {
       state.productDetail = action.payload;
+     },
+     addProduct: (state,action) =>{
+      state.products.push(action.payload)
      }
   },
   extraReducers: (builder) => {
@@ -39,7 +42,7 @@ export const productSlice = createSlice({
   },
 });
 
-export const  { getProductDetail } = productSlice.actions;
+export const  { getProductDetail,addProduct } = productSlice.actions;
 
 export const selectAllProducts = (state) => state.product.products;
 export const selectProductDetails = (state) => state.product.productDetail;

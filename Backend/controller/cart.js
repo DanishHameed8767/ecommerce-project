@@ -51,3 +51,13 @@ exports.updateCart = async (req, res) =>{
         })
       }
 }
+
+exports.clearCart = async (req,res) => {
+  try{
+    await Cart.deleteMany({user:id});
+    res.status(200).json("success");
+  }
+  catch(err){
+    res.status(404).json(err);
+  }
+}

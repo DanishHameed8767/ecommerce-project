@@ -57,7 +57,7 @@ const Cart = () => {
         <div className="card">
           <div className="card-body ">
             <Link to="/checkout" type="button" className="btn btn-danger btn-block btn-lg ">
-              Proceed to Pay
+              Continue to Checkout
             </Link>
             <span className='ms-4 me-4'>Or</span>
             <Link to="/" style={{textDecoration:"none"}}>Continue Shopping</Link>

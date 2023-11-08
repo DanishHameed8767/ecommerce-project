@@ -12,6 +12,10 @@ import { fetchAllCartProductsAsync } from './features/cart/cartSlice';
 import { fetchAllWishlistProductsAsync } from './features/wishlist/wishlistSlice';
 import { fetchAllProductsAsync } from './features/product/productSlice';
 import Checkout from './features/Checkout/components/Checkout';
+import OrderPlaced from './features/Checkout/components/OrderPlaced';
+import OrderList from './features/Checkout/components/OrderList';
+import Footer from './pages/home-sections/Footer';
+import AdminProfile from './features/profile/AdminProfile';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -49,6 +53,30 @@ const router = createBrowserRouter([
     path: '/checkout',
     element: (
         <Checkout />
+    ),
+  },
+  {
+    path: '/order/placed',
+    element: (
+        <OrderPlaced />
+    ),
+  },
+  {
+    path: '/order/list',
+    element: (
+        <OrderList />
+    ),
+  },
+  {
+    path: '/admin',
+    element: (
+        <AdminProfile />
+    ),
+  },
+  {
+    path: '/test',
+    element: (
+        <Footer />
     ),
   },
 ]);
