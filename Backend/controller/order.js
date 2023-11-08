@@ -1,5 +1,4 @@
 const { Order } = require('../models/orderModel');
-const { TotalOrders } = require('../models/totalOrdersModel');
 const id ="6516dd04b8f369dccde44140";
 
 exports.showOrders = async (req,res) =>{
