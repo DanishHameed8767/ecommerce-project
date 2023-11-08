@@ -21,7 +21,7 @@ const {
 } = require("../controller/user");
 const { showOrders, addOrder } = require("../controller/order");
 var fetchuser = require("../middleware/fetchUser");
-const { addCategory } = require("../controller/category");
+const { addCategory, updateCategory, delCategory, getallCategories } = require("../controller/category");
 const Router = express.Router();
 Router.get("/allproducts", getallProducts);
 
@@ -61,6 +61,9 @@ Router.post(
 );
 Router.post("/getuser", fetchuser, getUser);
 
+Router.get("/showcategory", getallCategories);
 Router.post("/addcategory", addCategory);
+Router.patch("/addsubcategory", updateCategory);
+Router.delete("/delcategory", delCategory);
 
 exports.Router = Router;
