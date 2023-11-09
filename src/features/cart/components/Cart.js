@@ -3,7 +3,6 @@ import Cartitem from '../components/Cartitem';
 import { useDispatch, useSelector } from 'react-redux';
 import { delFromCartAsync, fetchAllCartProductsAsync, selectAllCartProducts } from '../cartSlice';
 import { Link } from 'react-router-dom';
-import { discountedPrice } from '../../../app/constant';
 const Cart = () => {
   const dispatch = useDispatch();
   const cartProducts = useSelector(selectAllCartProducts);

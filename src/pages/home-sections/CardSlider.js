@@ -29,7 +29,6 @@ export default function CardSlider() {
               <button
                 className="btn btn-danger mb-3 mr-1"
                 data-bs-target="#carouselExampleIndicators2"
-                role="button"
                 data-bs-slide="prev"
               >
                 <i className="fa fa-arrow-left" />
@@ -37,7 +36,6 @@ export default function CardSlider() {
               <button
                 className="btn btn-danger mb-3 ms-2 me-5"
                 data-bs-target="#carouselExampleIndicators2"
-                role="button"
                 data-bs-slide="next"
               >
                 <i className="fa fa-arrow-right" />

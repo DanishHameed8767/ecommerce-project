@@ -16,6 +16,11 @@ import OrderPlaced from './features/Checkout/components/OrderPlaced';
 import OrderList from './features/Checkout/components/OrderList';
 import Footer from './pages/home-sections/Footer';
 import AdminProfile from './features/profile/AdminProfile';
+import AddCategory from './features/profile/Components/AddCategory';
+import AddProduct from './features/profile/Components/AddProduct';
+import ProtectedAdmin from './features/auth/components/ProtectedAdmin';
+import { fetchAllCategoriesAsync } from './features/profile/AdminSlice';
+import ViewProductsPage from './pages/ViewProductsPage';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -41,6 +46,12 @@ const router = createBrowserRouter([
     path: '/products/details',
     element: (
         <ProductDetailPage />
+    ),
+  },
+  {
+    path: '/products/view',
+    element: (
+        <ViewProductsPage />
     ),
   },
   {
@@ -70,7 +81,25 @@ const router = createBrowserRouter([
   {
     path: '/admin',
     element: (
+      <ProtectedAdmin>
         <AdminProfile />
+      </ProtectedAdmin>
+    ),
+  },
+  {
+    path: '/admin/category',
+    element: (
+      <ProtectedAdmin>
+        <AddCategory />
+      </ProtectedAdmin>
+    ),
+  },
+  {
+    path: '/admin/product',
+    element: (
+      <ProtectedAdmin>
+        <AddProduct />
+      </ProtectedAdmin>
     ),
   },
   {
@@ -95,6 +124,7 @@ function App() {
   dispatch(fetchAllCartProductsAsync());
   dispatch(fetchAllWishlistProductsAsync());
   dispatch(fetchAllProductsAsync());
+  dispatch(fetchAllCategoriesAsync());
   },[])
 
   return (

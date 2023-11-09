@@ -62,7 +62,7 @@ export const wishlistSlice = createSlice({
       })
       .addCase(delFromWishlistAsync.fulfilled, (state, action) => {
         state.status = 'idle';
-        const index = state.items.findIndex(item=>item._id==action.payload._id)
+        const index = state.items.findIndex(item=>item._id===action.payload._id)
         state.items.splice(index,1);
       })
     //   .addCase(updateCartAsync.pending, (state) => {

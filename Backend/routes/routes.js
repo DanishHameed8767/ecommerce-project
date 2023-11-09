@@ -1,6 +1,7 @@
 const express = require("express");
-const { getallProducts, addProduct } = require("../controller/product");
+const { getallProducts, addProduct, getallProductsByCategory } = require("../controller/product");
 const { body } = require("express-validator");
+const path = require('path');
 const {
   showWishlist,
   addToWishlist,
@@ -23,7 +24,10 @@ const { showOrders, addOrder } = require("../controller/order");
 var fetchuser = require("../middleware/fetchUser");
 const { addCategory, updateCategory, delCategory, getallCategories } = require("../controller/category");
 const Router = express.Router();
+const multer  = require('multer')
+
 Router.get("/allproducts", getallProducts);
+Router.post("/category/products",getallProductsByCategory);
 
 Router.post("/addproduct", addProduct);
 Router.get("/wishlist", showWishlist);
@@ -66,4 +70,24 @@ Router.post("/addcategory", addCategory);
 Router.patch("/addsubcategory", updateCategory);
 Router.delete("/delcategory", delCategory);
 
+
+const storage = multer.diskStorage({
+  destination: (req,file,cb) => {
+    cb(null,"public/uploads")
+  },
+  filename: (req,file,cb) => {
+    cb(null,file.fieldname + "_" + Date.now() + path.extname(file.originalname))
+  },
+})
+const upload = multer({ storage:storage })
+Router.post('/uploadimage', upload.single('image'), function (req, res, next) {
+  const imageName = req.file.filename;
+  console.log(imageName);
+  res.json(imageName)
+})
+
+
+
+
 exports.Router = Router;
+

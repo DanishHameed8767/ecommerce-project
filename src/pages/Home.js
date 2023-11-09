@@ -8,11 +8,11 @@ import ExpProducts from './home-sections/ExpProducts';
 import NewArrival from './home-sections/NewArrival';
 import Features from './home-sections/Features';
 import Footer from './home-sections/Footer';
-
 const Home = () => {
   return (
     <>
       <Navbar />
+      <img src="" alt="" />
       <Header />
       <CardSlider />
       <CategorySlider />

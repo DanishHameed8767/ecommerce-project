@@ -28,18 +28,18 @@ export default function Footer() {
               <h5 className="mb-3">Support</h5>
               <ul className="nav flex-column te">
                 <li className="mb-3">
-                  <a href="#" className="nav-link p-0 text-white">
+                  <a href="..." className="nav-link p-0 text-white">
                     111 Bijoy sarani, Dhaka,
                     <br /> DH 1515, Bangladesh.
                   </a>
                 </li>
                 <li className="mb-3">
-                  <a href="#" className="nav-link p-0 text-white">
+                  <a href="..." className="nav-link p-0 text-white">
                     exclusive@gmail.com
                   </a>
                 </li>
                 <li className="mb-3">
-                  <a href="#" className="nav-link p-0 text-white">
+                  <a href="..." className="nav-link p-0 text-white">
                     +88015-88888-9999
                   </a>
                 </li>
@@ -49,27 +49,27 @@ export default function Footer() {
               <h5 className="mb-3">Account</h5>
               <ul className="nav flex-column">
                 <li className="mb-2">
-                  <a href="#" className="nav-link p-0 text-white">
+                  <a href="..." className="nav-link p-0 text-white">
                     My Account
                   </a>
                 </li>
                 <li className="mb-2">
-                  <a href="#" className="nav-link p-0 text-white">
+                  <a href="..." className="nav-link p-0 text-white">
                     Login / Register
                   </a>
                 </li>
                 <li className="mb-2">
-                  <a href="#" className="nav-link p-0 text-white">
+                  <a href="..." className="nav-link p-0 text-white">
                     Cart
                   </a>
                 </li>
                 <li className="mb-2">
-                  <a href="#" className="nav-link p-0 text-white">
+                  <a href="..." className="nav-link p-0 text-white">
                     Wishlist
                   </a>
                 </li>
                 <li className="mb-2">
-                  <a href="#" className="nav-link p-0 text-white">
+                  <a href="..." className="nav-link p-0 text-white">
                     Shop
                   </a>
                 </li>
@@ -79,22 +79,22 @@ export default function Footer() {
               <h5 className="mb-3">Quick Link</h5>
               <ul className="nav flex-column">
                 <li className="mb-3">
-                  <a href="#" className="nav-link p-0 text-white">
+                  <a href="..." className="nav-link p-0 text-white">
                     Privacy Policy
                   </a>
                 </li>
                 <li className="mb-3">
-                  <a href="#" className="nav-link p-0 text-white">
+                  <a href="..." className="nav-link p-0 text-white">
                     Terms Of Use
                   </a>
                 </li>
                 <li className="mb-3">
-                  <a href="#" className="nav-link p-0 text-white">
+                  <a href="..." className="nav-link p-0 text-white">
                     FAQ
                   </a>
                 </li>
                 <li className="mb-3">
-                  <a href="#" className="nav-link p-0 text-white">
+                  <a href="..." className="nav-link p-0 text-white">
                     Contact
                   </a>
                 </li>
@@ -108,14 +108,14 @@ export default function Footer() {
                   <img src={Qrcode} alt="" className="mx-auto" />
                 </div>
                 <div className="d-flex flex-column flex-sm-row w-100 gap-2">
-                  <a class="btn btn-google" href="#" title="Google Play">
+                  <a class="btn btn-google" href="..." title="Google Play">
                     Google Play
                   </a>
                 </div>
                 <div className="d-flex flex-column flex-sm-row w-100 gap-2">
                   <a
                     class="btn btn-google btn-apple"
-                    href="#"
+                    href="..."
                     title="Google Play"
                   >
                     Google Play
@@ -128,21 +128,21 @@ export default function Footer() {
             <p>© 2023 Company, Inc. All rights reserved.</p>
             <ul className="list-unstyled d-flex">
               <li className="ms-3">
-                <a className="link-body-emphasis" href="#">
+                <a className="link-body-emphasis" href="...">
                   <svg className="bi" width={24} height={24}>
                     <use xlinkHref="#twitter" />
                   </svg>
                 </a>
               </li>
               <li className="ms-3">
-                <a className="link-body-emphasis" href="#">
+                <a className="link-body-emphasis" href="...">
                   <svg className="bi" width={24} height={24}>
                     <use xlinkHref="#instagram" />
                   </svg>
                 </a>
               </li>
               <li className="ms-3">
-                <a className="link-body-emphasis" href="#">
+                <a className="link-body-emphasis" href="...">
                   <svg className="bi" width={24} height={24}>
                     <use xlinkHref="#facebook" />
                   </svg>

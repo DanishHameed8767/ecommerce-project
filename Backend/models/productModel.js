@@ -11,6 +11,7 @@ const productSchema = new Schema (
   brand: String,
   stock: Number,
   category: String,
+  subCategory: String,
   thumbnail: String,
   images: [ String ]
     }

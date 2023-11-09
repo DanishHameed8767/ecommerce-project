@@ -16,8 +16,8 @@ export const showOrdersAsync = createAsyncThunk(
 
 export const addOrderAsync = createAsyncThunk(
     'order/addOrder',
-    async (detail) => {
-      const response = await addOrder(detail);
+    async (data) => {
+      const response = await addOrder(data);
       return response.data;
     }
   )

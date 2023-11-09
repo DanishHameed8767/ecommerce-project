@@ -12,7 +12,7 @@ exports.addCategory = async (req, res) => {
     await category.save();
     res.send(category);
   } catch (error) {
-    res.send(error);
+    res.status(400);
   }
 };
 
@@ -20,8 +20,8 @@ exports.updateCategory = async (req, res) => {
   const category = req.body.category;
   const update = { ...req.body };
   try {
-    await Category.findOneAndUpdate({ category }, update, { new: true });
-    res.status(200).send({ ...req.body });
+    const newCat = await Category.findOneAndUpdate({ category }, update, { new: true });
+    res.status(200).send(newCat);
   } catch (error) {
     res.status(400).send({
       message: "Bad request",

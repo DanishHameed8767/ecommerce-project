@@ -4,6 +4,7 @@ exports.getallProducts = async (req, res) =>{
     const products = await Product.find();
     res.send(products);
 };
+
 exports.addProduct = async (req,res)=>{
     
    try {
@@ -15,4 +16,13 @@ catch (error){
     res.send(error);
 }
 }
+
+
+exports.getallProductsByCategory = async (req, res) =>{
+    const category = req.body.category;
+    const products = await Product.find({category});
+    res.send(products);
+};
+
+
 

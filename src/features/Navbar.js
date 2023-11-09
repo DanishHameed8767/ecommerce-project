@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { selectAllCartProducts } from "./cart/cartSlice";
@@ -42,15 +42,15 @@ const Navbar = () => {
             </ul>
             <Link to="/wishlist" className="link-dark">
               <i role="button" className="fa-regular fa-heart fa-xl"></i>
-            <span className="badge bg-danger" id="lblWishCount">
-              {wishProducts.length}
-            </span>
+              <span className="badge bg-danger" id="lblWishCount">
+                {wishProducts.length}
+              </span>
             </Link>
             <Link to="/cart" className="link-dark">
               <i role="button" className="fa-solid fa-cart-shopping fa-xl"></i>
-            <span className="badge bg-danger" id="lblCartCount">
-              {cartProducts.length}
-            </span>
+              <span className="badge bg-danger" id="lblCartCount">
+                {cartProducts.length}
+              </span>
             </Link>
           </div>
         </div>
