@@ -198,7 +198,11 @@ export default function Checkout() {
                     <label htmlFor="country" className="form-label">
                       Country
                     </label>
-                    <select className="form-select" id="country" required={true}>
+                    <select
+                      className="form-select"
+                      id="country"
+                      required={true}
+                    >
                       <option value="">Choose...</option>
                       <option>Pakistan</option>
                     </select>

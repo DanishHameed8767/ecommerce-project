@@ -35,11 +35,11 @@ export default function AddProduct() {
       body: formData,
     });
     const imageName = await img_response.json();
-    setCredentials({...credentials, thumbnail:imageName});
-    setCredentials(state=>{
+    setCredentials({ ...credentials, thumbnail: imageName });
+    setCredentials((state) => {
       console.log(state);
       return state;
-    })
+    });
     // const response = await fetch("http://localhost:5000/addproduct", {
     //   method: "POST",
     //   headers: {

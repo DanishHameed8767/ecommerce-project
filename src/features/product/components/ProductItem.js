@@ -12,9 +12,9 @@ const ProductItem = ({ item, handleClick, RouterChange }) => {
             -{Math.ceil(item.discountPercentage)}%
           </span>
           <span
-          onClick={(e) => {
-            handleClick(e);
-          }}
+            onClick={(e) => {
+              handleClick(e);
+            }}
             className="position-absolute text-center"
             style={{
               right: "10px",

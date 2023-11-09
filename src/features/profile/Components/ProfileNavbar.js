@@ -1,12 +1,12 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { selectAllWishlistProducts } from '../../wishlist/wishlistSlice';
-import { selectAllCartProducts } from '../../cart/cartSlice';
+import React from "react";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectAllWishlistProducts } from "../../wishlist/wishlistSlice";
+import { selectAllCartProducts } from "../../cart/cartSlice";
 
 export default function ProfileNavbar() {
-    const wishProducts = useSelector(selectAllWishlistProducts);
-    const cartProducts = useSelector(selectAllCartProducts);
+  const wishProducts = useSelector(selectAllWishlistProducts);
+  const cartProducts = useSelector(selectAllCartProducts);
   return (
     <>
       <nav className="navbar navbar-expand-sm navbar-light bg-white sticky-top border-bottom p-4">
@@ -42,19 +42,19 @@ export default function ProfileNavbar() {
             </ul>
             <Link to="/wishlist" className="link-dark">
               <i role="button" className="fa-regular fa-heart fa-xl"></i>
-            <span className="badge bg-danger" id="lblWishCount">
-              {wishProducts.length}
-            </span>
+              <span className="badge bg-danger" id="lblWishCount">
+                {wishProducts.length}
+              </span>
             </Link>
             <Link to="/cart" className="link-dark">
               <i role="button" className="fa-solid fa-cart-shopping fa-xl"></i>
-            <span className="badge bg-danger" id="lblCartCount">
-              {cartProducts.length}
-            </span>
+              <span className="badge bg-danger" id="lblCartCount">
+                {cartProducts.length}
+              </span>
             </Link>
           </div>
         </div>
       </nav>
     </>
-  )
+  );
 }

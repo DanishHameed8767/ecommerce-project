@@ -1,6 +1,6 @@
-import React from 'react'
-import ProductList from '../features/product/components/ProductList'
-import Navbar from '../features/Navbar'
+import React from "react";
+import ProductList from "../features/product/components/ProductList";
+import Navbar from "../features/Navbar";
 
 export default function ViewProductsPage() {
   return (
@@ -8,5 +8,5 @@ export default function ViewProductsPage() {
       <Navbar />
       <ProductList />
     </>
-  )
+  );
 }

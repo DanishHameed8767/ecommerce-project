@@ -1,20 +1,18 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const { Schema } = mongoose;
-const productSchema = new Schema (
-    {
-        title: String, 
+const productSchema = new Schema({
+  title: String,
   description: String,
   price: Number,
   discountPercentage: Number,
-  longDescription:String,
+  longDescription: String,
   rating: Number,
   brand: String,
   stock: Number,
   category: String,
   subCategory: String,
   thumbnail: String,
-  images: [ String ]
-    }
-)
+  images: [String],
+});
 
-exports.Product = mongoose.model('Product',productSchema);
+exports.Product = mongoose.model("Product", productSchema);

@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { updateCartAsync } from "../cartSlice";
 import { discountedPrice } from "../../../app/constant";
 
-const Cartitem = ({ cart,delFromCart }) => {
+const Cartitem = ({ cart, delFromCart }) => {
   const val = cart.product;
   const dispatch = useDispatch();
   const [count, setCount] = useState(cart.quantity);
@@ -16,10 +16,10 @@ const Cartitem = ({ cart,delFromCart }) => {
     count > 1 ? setCount(count - 1) : setCount(1);
   };
 
-  useEffect(()=>{
-    const item = {...cart,quantity:count};
+  useEffect(() => {
+    const item = { ...cart, quantity: count };
     dispatch(updateCartAsync(item));
-  },[count])
+  }, [count]);
 
   return (
     <>
@@ -59,11 +59,15 @@ const Cartitem = ({ cart,delFromCart }) => {
             </div>
             <div className="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
               <h5 className="mb-0">
-                ${discountedPrice(val.price,val.discountPercentage,count)}
+                ${discountedPrice(val.price, val.discountPercentage, count)}
               </h5>
             </div>
             <div className="col-md-1 col-lg-1 col-xl-1 text-end">
-              <button href="#" onClick={delFromCart} className="text-danger border-0 bg-white">
+              <button
+                href="#"
+                onClick={delFromCart}
+                className="text-danger border-0 bg-white"
+              >
                 <i className="fas fa-trash fa-lg" />
               </button>
             </div>

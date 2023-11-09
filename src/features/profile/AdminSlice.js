@@ -1,18 +1,13 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import {
-    addCategory,
-    addSubCategory,
-    fetchAllCategories
-} from './AdminAPI';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { addCategory, addSubCategory, fetchAllCategories } from "./AdminAPI";
 
 const initialState = {
   categories: [],
-  status: 'idle',
+  status: "idle",
 };
 
-
 export const fetchAllCategoriesAsync = createAsyncThunk(
-  'admin/fetchAllCategories',
+  "admin/fetchAllCategories",
   async () => {
     const response = await fetchAllCategories();
     // The value we return becomes the `fulfilled` action payload
@@ -21,7 +16,7 @@ export const fetchAllCategoriesAsync = createAsyncThunk(
 );
 
 export const addCategoryAsync = createAsyncThunk(
-  'admin/addCategory',
+  "admin/addCategory",
   async (data) => {
     const response = await addCategory(data);
     // The value we return becomes the `fulfilled` action payload
@@ -30,7 +25,7 @@ export const addCategoryAsync = createAsyncThunk(
 );
 
 export const addSubCategoryAsync = createAsyncThunk(
-  'admin/addSubCategory',
+  "admin/addSubCategory",
   async (data) => {
     const response = await addSubCategory(data);
     // The value we return becomes the `fulfilled` action payload
@@ -39,38 +34,38 @@ export const addSubCategoryAsync = createAsyncThunk(
 );
 
 export const adminSlice = createSlice({
-  name: 'admin',
+  name: "admin",
   initialState,
-  reducers: {
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchAllCategoriesAsync.pending, (state) => {
-        state.status = 'loading';
+        state.status = "loading";
       })
       .addCase(fetchAllCategoriesAsync.fulfilled, (state, action) => {
-        state.status = 'idle';
+        state.status = "idle";
         state.categories = action.payload;
       })
       .addCase(addCategoryAsync.pending, (state) => {
-        state.status = 'loading';
+        state.status = "loading";
       })
       .addCase(addCategoryAsync.fulfilled, (state, action) => {
-        state.status = 'idle';
+        state.status = "idle";
         state.categories.push(action.payload);
       })
       .addCase(addSubCategoryAsync.pending, (state) => {
-        state.status = 'loading';
+        state.status = "loading";
       })
-      .addCase(addSubCategoryAsync.fulfilled, (state,action) => {
-        state.status = 'idle';
-        console.log(action.payload)
-        const index = state.categories.findIndex(item=>item.category===action.payload.category)
-        state.categories.splice(index,1,action.payload)
-      })
+      .addCase(addSubCategoryAsync.fulfilled, (state, action) => {
+        state.status = "idle";
+        console.log(action.payload);
+        const index = state.categories.findIndex(
+          (item) => item.category === action.payload.category
+        );
+        state.categories.splice(index, 1, action.payload);
+      });
   },
 });
-
 
 export const selectAllCategories = (state) => state.admin.categories;
 

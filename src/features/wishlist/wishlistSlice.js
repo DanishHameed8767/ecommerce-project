@@ -1,35 +1,38 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { addToWishlist, delFromWishlist, fetchAllWishlistProducts } from './wishlistAPI';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import {
+  addToWishlist,
+  delFromWishlist,
+  fetchAllWishlistProducts,
+} from "./wishlistAPI";
 
 const initialState = {
   items: [],
-  status: 'idle',
+  status: "idle",
 };
 
 export const fetchAllWishlistProductsAsync = createAsyncThunk(
-  'wishlist/fetchAllWishlistProducts',
+  "wishlist/fetchAllWishlistProducts",
   async () => {
     const response = await fetchAllWishlistProducts();
     return response.data;
   }
 );
 
-
 export const addToWishlistAsync = createAsyncThunk(
-  'wishlist/addToWishlist',
+  "wishlist/addToWishlist",
   async (detail) => {
     const response = await addToWishlist(detail);
     return response.data;
   }
-)
+);
 
 export const delFromWishlistAsync = createAsyncThunk(
-  'wishlist/delFromWishlist',
+  "wishlist/delFromWishlist",
   async (detail) => {
     const response = await delFromWishlist(detail);
     return response.data;
   }
-)
+);
 
 // export const updateCartAsync = createAsyncThunk(
 //   'cart/updateCart',
@@ -39,32 +42,34 @@ export const delFromWishlistAsync = createAsyncThunk(
 // )
 
 export const wishlistSlice = createSlice({
-  name: 'wishlist',
+  name: "wishlist",
   initialState,
   extraReducers: (builder) => {
     builder
       .addCase(fetchAllWishlistProductsAsync.pending, (state) => {
-        state.status = 'loading';
+        state.status = "loading";
       })
       .addCase(fetchAllWishlistProductsAsync.fulfilled, (state, action) => {
-        state.status = 'idle';
+        state.status = "idle";
         state.items = action.payload;
       })
       .addCase(addToWishlistAsync.pending, (state) => {
-        state.status = 'loading';
+        state.status = "loading";
       })
       .addCase(addToWishlistAsync.fulfilled, (state, action) => {
-        state.status = 'idle';
+        state.status = "idle";
         state.items.push(action.payload);
       })
       .addCase(delFromWishlistAsync.pending, (state) => {
-        state.status = 'loading';
+        state.status = "loading";
       })
       .addCase(delFromWishlistAsync.fulfilled, (state, action) => {
-        state.status = 'idle';
-        const index = state.items.findIndex(item=>item._id===action.payload._id)
-        state.items.splice(index,1);
-      })
+        state.status = "idle";
+        const index = state.items.findIndex(
+          (item) => item._id === action.payload._id
+        );
+        state.items.splice(index, 1);
+      });
     //   .addCase(updateCartAsync.pending, (state) => {
     //     state.status = 'loading';
     //   })
@@ -74,7 +79,6 @@ export const wishlistSlice = createSlice({
     //  })
   },
 });
-
 
 export const selectAllWishlistProducts = (state) => state.wishlist.items;
 

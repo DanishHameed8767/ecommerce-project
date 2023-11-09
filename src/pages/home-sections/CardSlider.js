@@ -51,9 +51,8 @@ export default function CardSlider() {
                   <div className="carousel-item active">
                     <div className="row">
                       {products
-                        .filter((value, index) => index >99)
+                        .filter((value, index) => index > 99)
                         .map((value, index) => {
-                          
                           const handleClick = (e) => {
                             e.preventDefault();
                             e.target.style.color = "red";
@@ -80,7 +79,6 @@ export default function CardSlider() {
                       {products
                         .filter((value, index) => index > 3 && index < 8)
                         .map((value, index) => {
-                          
                           const handleClick = (e) => {
                             e.preventDefault();
                             e.target.style.color = "red";
@@ -107,7 +105,6 @@ export default function CardSlider() {
                       {products
                         .filter((value, index) => index > 7 && index < 12)
                         .map((value, index) => {
-                          
                           const handleClick = (e) => {
                             e.preventDefault();
                             e.target.style.color = "red";
@@ -134,7 +131,6 @@ export default function CardSlider() {
                       {products
                         .filter((value, index) => index > 11 && index < 16)
                         .map((value, index) => {
-                          
                           const handleClick = (e) => {
                             e.preventDefault();
                             e.target.style.color = "red";

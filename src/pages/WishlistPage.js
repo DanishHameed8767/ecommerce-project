@@ -1,6 +1,6 @@
-import React from 'react'
-import Wishlist from '../features/wishlist/components/Wishlist'
-import Navbar from '../features/Navbar'
+import React from "react";
+import Wishlist from "../features/wishlist/components/Wishlist";
+import Navbar from "../features/Navbar";
 
 export default function WishlistPage() {
   return (
@@ -8,5 +8,5 @@ export default function WishlistPage() {
       <Navbar />
       <Wishlist />
     </>
-  )
+  );
 }

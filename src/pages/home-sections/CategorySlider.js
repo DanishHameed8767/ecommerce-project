@@ -1,126 +1,133 @@
 import React from "react";
-import C1 from '../../images/Category-CellPhone.png';
-import C2 from '../../images/Category-Computer.png';
-import C3 from '../../images/Category-SmartWatch.png';
-import C4 from '../../images/Category-Camera.png';
-import C5 from '../../images/Category-Headphone.png';
+import C1 from "../../images/Category-CellPhone.png";
+import C2 from "../../images/Category-Computer.png";
+import C3 from "../../images/Category-SmartWatch.png";
+import C4 from "../../images/Category-Camera.png";
+import C5 from "../../images/Category-Headphone.png";
 export default function CategorySlider() {
-
   return (
     <>
-    <div className="container mt-5 card-gap">
+      <div className="container mt-5 card-gap">
         <hr />
-    </div>
-    <div className="container-fluid">
-      <div className="container d-flex justify-content-start px-0 card-gap ms-4">
-        <div className="red-box bg-danger"></div>
-        <div className="mt-2 text-danger ms-2">Categories</div>
       </div>
-      <section className="pt-5 pb-5">
-  <div className="container-fluid">
-    <div className="row">
-      <div className="col-9">
-        <div className="mb-3 fs-2 ms-2 fw-bold">Browse By Category</div>
-      </div>
-      <div className="col-3 text-right d-flex justify-content-center">
-        <button
-          className="btn btn-danger mb-3 mr-1"
-          data-bs-target="#carouselExampleIndicators2"
-          data-bs-slide="prev"
-        >
-          <i className="fa fa-arrow-left" />
-        </button>
-        <button
-          className="btn btn-danger ms-2 mb-3 me-5"
-          data-bs-target="#carouselExampleIndicators2"
-          data-bs-slide="next"
-        >
-          <i className="fa fa-arrow-right" />
-        </button>
-      </div>
-      <div className="col-12">
-        <div
-          id="carouselExampleIndicators2"
-          className="carousel slide"
-          data-ride="carousel"
-        >
-          <div className="carousel-inner">
-            <div className="carousel-item active">
-              <div className="row d-flex justify-content-center">
-                <div className="col-md-2 mb-3">
-                  <div className="card text-center ct-block">
-                    <img
-                      className="mx-auto mt-3"
-                      alt="100%x280"
-                      src={C1}
-                      height='56px'
-                      width='56px'
-                    />
-                    <div className="card-body">
-                      <span className="card-title fs-5">Phones</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-2 mb-3">
-                  <div className="card text-center ct-block">
-                    <img
-                      className="mx-auto mt-3"
-                      alt="100%x280"
-                      src={C2}
-                      height='56px'
-                      width='56px'
-                    />
-                    <div className="card-body">
-                      <span className="card-title fs-5"> Computers</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-2 mb-3">
-                  <div className="card text-center ct-block">
-                    <img
-                      className="mx-auto mt-3"
-                      alt="100%x280"
-                      src={C3}
-                      height='56px'
-                      width='56px'
-                    />
-                    <div className="card-body">
-                      <span className="card-title fs-5"> SmartWatch</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-2 mb-3">
-                  <div className="card text-center ct-block">
-                    <img
-                      className="mx-auto mt-3"
-                      alt="100%x280"
-                      src={C4}
-                      height='56px'
-                      width='56px'
-                    />
-                    <div className="card-body">
-                      <span className="card-title fs-5">Camera</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-2 mb-3">
-                  <div className="card text-center ct-block">
-                    <img
-                      className="mx-auto mt-3"
-                      alt="100%x280"
-                      src={C5}
-                      height='56px'
-                      width='56px'
-                    />
-                    <div className="card-body">
-                      <span className="card-title fs-5"> Headphones</span>
-                    </div>
-                  </div>
-                </div>
-
+      <div className="container-fluid">
+        <div className="container d-flex justify-content-start px-0 card-gap ms-4">
+          <div className="red-box bg-danger"></div>
+          <div className="mt-2 text-danger ms-2">Categories</div>
+        </div>
+        <section className="pt-5 pb-5">
+          <div className="container-fluid">
+            <div className="row">
+              <div className="col-9">
+                <div className="mb-3 fs-2 ms-2 fw-bold">Browse By Category</div>
               </div>
-            </div>
-            {/* <div className="carousel-item">
+              <div className="col-3 text-right d-flex justify-content-center">
+                <button
+                  className="btn btn-danger mb-3 mr-1"
+                  data-bs-target="#carouselExampleIndicators2"
+                  data-bs-slide="prev"
+                >
+                  <i className="fa fa-arrow-left" />
+                </button>
+                <button
+                  className="btn btn-danger ms-2 mb-3 me-5"
+                  data-bs-target="#carouselExampleIndicators2"
+                  data-bs-slide="next"
+                >
+                  <i className="fa fa-arrow-right" />
+                </button>
+              </div>
+              <div className="col-12">
+                <div
+                  id="carouselExampleIndicators2"
+                  className="carousel slide"
+                  data-ride="carousel"
+                >
+                  <div className="carousel-inner">
+                    <div className="carousel-item active">
+                      <div className="row d-flex justify-content-center">
+                        <div className="col-md-2 mb-3">
+                          <div className="card text-center ct-block">
+                            <img
+                              className="mx-auto mt-3"
+                              alt="100%x280"
+                              src={C1}
+                              height="56px"
+                              width="56px"
+                            />
+                            <div className="card-body">
+                              <span className="card-title fs-5">Phones</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-md-2 mb-3">
+                          <div className="card text-center ct-block">
+                            <img
+                              className="mx-auto mt-3"
+                              alt="100%x280"
+                              src={C2}
+                              height="56px"
+                              width="56px"
+                            />
+                            <div className="card-body">
+                              <span className="card-title fs-5">
+                                {" "}
+                                Computers
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-md-2 mb-3">
+                          <div className="card text-center ct-block">
+                            <img
+                              className="mx-auto mt-3"
+                              alt="100%x280"
+                              src={C3}
+                              height="56px"
+                              width="56px"
+                            />
+                            <div className="card-body">
+                              <span className="card-title fs-5">
+                                {" "}
+                                SmartWatch
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-md-2 mb-3">
+                          <div className="card text-center ct-block">
+                            <img
+                              className="mx-auto mt-3"
+                              alt="100%x280"
+                              src={C4}
+                              height="56px"
+                              width="56px"
+                            />
+                            <div className="card-body">
+                              <span className="card-title fs-5">Camera</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-md-2 mb-3">
+                          <div className="card text-center ct-block">
+                            <img
+                              className="mx-auto mt-3"
+                              alt="100%x280"
+                              src={C5}
+                              height="56px"
+                              width="56px"
+                            />
+                            <div className="card-body">
+                              <span className="card-title fs-5">
+                                {" "}
+                                Headphones
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    {/* <div className="carousel-item">
               <div className="row">
                 <div className="col-md-4 mb-3">
                   <div className="card">
@@ -224,19 +231,19 @@ export default function CategorySlider() {
                 </div>
               </div>
             </div> */}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
+        </section>
+
+        <div className="container d-flex justify-content-center">
+          <button className="btn btn-danger btn-view-all">
+            View All Products
+          </button>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-      <div className="container d-flex justify-content-center">
-        <button className="btn btn-danger btn-view-all">
-          View All Products
-        </button>
-      </div>
-    </div>
     </>
   );
 }

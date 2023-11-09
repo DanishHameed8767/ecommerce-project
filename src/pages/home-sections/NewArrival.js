@@ -17,20 +17,21 @@ export default function NewArrival() {
               <div className="col-12">
                 <div className="row d-flex justify-content-evenly">
                   <div className="col-5 bgc-black px-0">
-                  <div className="bcontent-4 text-white d-flex justify-content-end flex-column">
-                          <div className="fs-3 ms-4">PlayStation 5</div>
-                          <p className="ms-4 mb-3 text-light">
-                          Black and White version of the PS5 <br /> coming out on sale.
-                          </p>
-                          <div className="mb-5">
-                            <a
-                              href="..."
-                              className="ms-4 text-decoration-none text-white border-bottom border-white"
-                            >
-                              Shop now
-                            </a>
-                          </div>
-                        </div>
+                    <div className="bcontent-4 text-white d-flex justify-content-end flex-column">
+                      <div className="fs-3 ms-4">PlayStation 5</div>
+                      <p className="ms-4 mb-3 text-light">
+                        Black and White version of the PS5 <br /> coming out on
+                        sale.
+                      </p>
+                      <div className="mb-5">
+                        <a
+                          href="..."
+                          className="ms-4 text-decoration-none text-white border-bottom border-white"
+                        >
+                          Shop now
+                        </a>
+                      </div>
+                    </div>
                   </div>
                   <div className="col-5 px-0">
                     <div className="row">
@@ -55,9 +56,7 @@ export default function NewArrival() {
                         <div className="d-flex justify-content-center">
                           <div className="py-0 bgc-black new-arrival-boxes">
                             <div className="bcontent-2 text-white d-flex justify-content-end flex-column">
-                              <div className="fs-3 ms-3">
-                                Speakers
-                              </div>
+                              <div className="fs-3 ms-3">Speakers</div>
                               <p className="ms-3 mb-3 text-light">
                                 Amazon wireless speakers
                               </p>
@@ -77,7 +76,7 @@ export default function NewArrival() {
                                 Perfume
                               </div>
                               <p className="ms-3 mb-3 text-light">
-                              GUCCI INTENSE OUD EDP
+                                GUCCI INTENSE OUD EDP
                               </p>
                               <div className="mb-3">
                                 <a
@@ -98,7 +97,6 @@ export default function NewArrival() {
             </div>
           </div>
         </section>
-
       </div>
     </>
   );
