@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(express.static('Backend/public'));
 const port = 5000;
 const {Router} = require('./routes/routes');
 app.use('/',Router);
