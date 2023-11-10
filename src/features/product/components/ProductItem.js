@@ -1,6 +1,12 @@
 import React from "react";
 
 const ProductItem = ({ item, handleClick, RouterChange }) => {
+  var src = item.thumbnail;
+  if (item.thumbnail.slice(0,6)=='image_') {
+    console.log(item.thumbnail.slice(0,6));
+    const _path = "http://localhost:5000/images/";
+     src = _path + item.thumbnail;
+  }
   return (
     <>
       <div className="col-md-3">
@@ -33,7 +39,7 @@ const ProductItem = ({ item, handleClick, RouterChange }) => {
             ></i>
           </span>
           <img
-            src={item.thumbnail}
+            src={src}
             className="img-home card-img-top"
             onClick={() => RouterChange()}
             alt="img"

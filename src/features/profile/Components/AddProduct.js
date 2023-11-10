@@ -9,7 +9,8 @@ import { useEffect } from "react";
 export default function AddProduct() {
   const dispatch = useDispatch();
   const categories = useSelector(selectAllCategories);
-
+  var imageName;
+  const [productData,setProductData] = useState(null);
   const [credentials, setCredentials] = useState({
     title: "",
     price: 0,
@@ -34,23 +35,31 @@ export default function AddProduct() {
       method: "POST",
       body: formData,
     });
-    const imageName = await img_response.json();
-    setCredentials({ ...credentials, thumbnail: imageName });
-    setCredentials((state) => {
-      console.log(state);
-      return state;
-    });
-    // const response = await fetch("http://localhost:5000/addproduct", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(credentials),
-    // });
-    // const json = await response.json();
-    // console.log(json);
-    // dispatch(addProduct(json));
+    imageName = await img_response.json();
+    setProductData({ ...credentials, thumbnail: imageName})
   };
+  
+  useEffect(()=>{
+    if(productData==null){
+      return ;
+    }
+    else{
+      const sendData = async() =>{
+        const response = await fetch("http://localhost:5000/addproduct", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(productData),
+        });
+        const json = await response.json();
+        console.log(json);
+        dispatch(addProduct(json));
+    console.log(credentials);
+      }
+      sendData();
+    }
+  },[productData])
 
   const onChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
@@ -81,6 +90,7 @@ export default function AddProduct() {
   useEffect(() => {
     dispatch(fetchAllCategoriesAsync());
   }, []);
+
 
   return (
     <>

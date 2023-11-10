@@ -44,7 +44,7 @@ export default function BSellSection() {
                     <div className="carousel-item active">
                       <div className="row">
                         {products
-                          .filter((value, index) => index < 4)
+                          .filter((val, index) => index < 4)
                           .map((value, index) => {
                             const handleClick = (e) => {
                               e.preventDefault();
@@ -52,8 +52,7 @@ export default function BSellSection() {
                               dispatch(addToWishlistAsync(value));
                             };
                             const RouterChange = () => {
-                              dispatch(getProductDetail(value));
-                              navigate("/products/details");
+                              navigate("/products/details/" + value._id);
                             };
                             return (
                               <ProductItem

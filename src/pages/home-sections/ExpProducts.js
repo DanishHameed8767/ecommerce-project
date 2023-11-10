@@ -40,8 +40,7 @@ export default function ExpProducts() {
                         dispatch(addToWishlistAsync(value));
                       };
                       const RouterChange = () => {
-                        dispatch(getProductDetail(value));
-                        navigate("/products/details");
+                        navigate("/products/details/" + value._id + "/");
                       };
                       return (
                         <ProductItem

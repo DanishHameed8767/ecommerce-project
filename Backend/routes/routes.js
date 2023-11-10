@@ -3,6 +3,8 @@ const {
   getallProducts,
   addProduct,
   getallProductsByCategory,
+  updateProducts,
+  fetchProductById,
 } = require("../controller/product");
 const { body } = require("express-validator");
 const path = require("path");
@@ -36,6 +38,7 @@ const Router = express.Router();
 const multer = require("multer");
 
 Router.get("/allproducts", getallProducts);
+Router.get("/products/:id", fetchProductById);
 Router.post("/category/products", getallProductsByCategory);
 
 Router.post("/addproduct", addProduct);
@@ -96,5 +99,9 @@ Router.post("/uploadimage", upload.single("image"), function (req, res, next) {
   console.log(imageName);
   res.json(imageName);
 });
+
+Router.post("/updatemany",updateProducts)
+
+
 
 exports.Router = Router;

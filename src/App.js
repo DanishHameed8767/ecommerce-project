@@ -21,6 +21,7 @@ import AddProduct from "./features/profile/Components/AddProduct";
 import ProtectedAdmin from "./features/auth/components/ProtectedAdmin";
 import { fetchAllCategoriesAsync } from "./features/profile/AdminSlice";
 import ViewProductsPage from "./pages/ViewProductsPage";
+import AddSale from "./features/profile/Components/AddSale";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -39,7 +40,7 @@ const router = createBrowserRouter([
     element: <CartPage />,
   },
   {
-    path: "/products/details",
+    path: "/products/details/:id",
     element: <ProductDetailPage />,
   },
   {
@@ -83,6 +84,14 @@ const router = createBrowserRouter([
     element: (
       <ProtectedAdmin>
         <AddProduct />
+      </ProtectedAdmin>
+    ),
+  },
+  {
+    path: "/admin/sale",
+    element: (
+      <ProtectedAdmin>
+        <AddSale />
       </ProtectedAdmin>
     ),
   },

@@ -39,6 +39,11 @@ export default function ProfileNavbar() {
                   Add Product
                 </Link>
               </li>
+              <li className="nav-item">
+                <Link className="nav-link active fs-5" to="/admin/sale">
+                  Add Sale
+                </Link>
+              </li>
             </ul>
             <Link to="/wishlist" className="link-dark">
               <i role="button" className="fa-regular fa-heart fa-xl"></i>

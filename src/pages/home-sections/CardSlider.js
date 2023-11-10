@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  fetchProductByIdAsync,
   getProductDetail,
   selectAllProducts,
 } from "../../features/product/productSlice";
@@ -56,13 +57,10 @@ export default function CardSlider() {
                           const handleClick = (e) => {
                             e.preventDefault();
                             e.target.style.color = "red";
-                            console.log(value);
                             dispatch(addToWishlistAsync(value));
                           };
                           const RouterChange = () => {
-                            dispatch(getProductDetail(value));
-                            navigate("/products/details");
-                            console.log(value);
+                            navigate("/products/details/" + value._id + "/");
                           };
                           return (
                             <ProductItem
@@ -82,13 +80,10 @@ export default function CardSlider() {
                           const handleClick = (e) => {
                             e.preventDefault();
                             e.target.style.color = "red";
-                            console.log(value);
                             dispatch(addToWishlistAsync(value));
                           };
                           const RouterChange = () => {
-                            dispatch(getProductDetail(value));
-                            navigate("/products/details");
-                            console.log(value);
+                            navigate("/products/details/" + value._id + "/");
                           };
                           return (
                             <ProductItem
@@ -108,13 +103,10 @@ export default function CardSlider() {
                           const handleClick = (e) => {
                             e.preventDefault();
                             e.target.style.color = "red";
-                            console.log(value);
                             dispatch(addToWishlistAsync(value));
                           };
                           const RouterChange = () => {
-                            dispatch(getProductDetail(value));
-                            navigate("/products/details");
-                            console.log(value);
+                            navigate("/products/details/" + value._id + "/");
                           };
                           return (
                             <ProductItem
@@ -134,13 +126,10 @@ export default function CardSlider() {
                           const handleClick = (e) => {
                             e.preventDefault();
                             e.target.style.color = "red";
-                            console.log(value);
                             dispatch(addToWishlistAsync(value));
                           };
                           const RouterChange = () => {
-                            dispatch(getProductDetail(value));
-                            navigate("/products/details");
-                            console.log(value);
+                            navigate("/products/details/" + value._id + "/");
                           };
                           return (
                             <ProductItem

@@ -3,12 +3,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectProductDetails } from "../productSlice";
 import { addToCartAsync } from "../../cart/cartSlice";
 
+
 const ProductDetail = () => {
   const detail = useSelector(selectProductDetails);
   const dispatch = useDispatch();
-  const handleClick = () => {
-    dispatch(addToCartAsync(detail));
-  };
+   const handleClick = () => {
+     dispatch(addToCartAsync(detail));
+    };
+    var src = detail.thumbnail;
+  if (detail.thumbnail.slice(0,6)=='image_') {
+    console.log(detail.thumbnail.slice(0,6));
+    const _path = "http://localhost:5000/images/";
+     src = _path + detail.thumbnail;
+  }
   return (
     <>
       <div className="container-fluid row">
@@ -19,7 +26,7 @@ const ProductDetail = () => {
           <div className="carousel-inner">
             <div className="carousel-item active">
               <img
-                src={detail.images[0]}
+                src={src}
                 className="d-block mx-auto"
                 alt="..."
                 style={{ height: "400px" }}
@@ -90,7 +97,7 @@ const ProductDetail = () => {
           <div className="d-flex justify-content-start">
             <p>
               <i className="fa-solid fa-star me-2"></i>
-              {detail.rating} (150 reviews)
+              {detail.rating}
             </p>
             <div
               className="vr p-0 ms-3"

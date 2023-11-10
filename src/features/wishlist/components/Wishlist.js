@@ -23,19 +23,18 @@ const Wishlist = () => {
       </div>
       <div className="mt-4">
         <div className="card-group">
-          {wishProducts.map((val) => {
+          {wishProducts.map((value) => {
             const handleClick = (e) => {
               e.preventDefault();
-              dispatch(delFromWishlistAsync(val));
+              dispatch(delFromWishlistAsync(value));
             };
             const RouterChange = () => {
-              console.log(val);
-              dispatch(getProductDetail(val.product));
-              navigate("/products/details");
+              console.log(value);
+              navigate("/products/details/" + value.product._id + "/");
             };
             return (
               <WishlistItem
-                val={val}
+                val={value}
                 handleClick={handleClick}
                 RouterChange={RouterChange}
               />
