@@ -12,6 +12,7 @@ const Wishlist = () => {
   let navigate = useNavigate();
   let dispatch = useDispatch();
   const wishProducts = useSelector(selectAllWishlistProducts);
+  console.log(wishProducts);
   useEffect(() => {
     dispatch(fetchAllWishlistProductsAsync());
     // eslint-disable-next-line
@@ -30,7 +31,9 @@ const Wishlist = () => {
             };
             const RouterChange = () => {
               console.log(value);
-              navigate("/products/details/" + value.product._id + "/");
+              
+              value.product && navigate("/products/details/" + value.product._id + "/");
+              value.sale && navigate("/products/details/" + value.sale._id + "/");
             };
             return (
               <WishlistItem

@@ -4,9 +4,15 @@ import { updateCartAsync } from "../cartSlice";
 import { discountedPrice } from "../../../app/constant";
 
 const Cartitem = ({ cart, delFromCart }) => {
-  const val = cart.product;
+  const val = !cart.product ? cart.sale:cart.product;
   const dispatch = useDispatch();
   const [count, setCount] = useState(cart.quantity);
+  var src = val.thumbnail;
+  if (val.thumbnail.slice(0,6)=='image_') {
+    console.log(val.thumbnail.slice(0,6));
+    const _path = "http://localhost:5000/images/";
+     src = _path + val.thumbnail;
+  }
 
   const onPlusClick = () => {
     setCount(count + 1);
@@ -28,7 +34,7 @@ const Cartitem = ({ cart, delFromCart }) => {
           <div className="row d-flex justify-content-between align-items-center">
             <div className="col-md-2 col-lg-2 col-xl-2">
               <img
-                src={val.thumbnail}
+                src={src}
                 className="img-fluid rounded-3"
                 alt="val.title"
               />

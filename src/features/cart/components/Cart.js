@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 const Cart = () => {
   const dispatch = useDispatch();
   const cartProducts = useSelector(selectAllCartProducts);
+  console.log(cartProducts);
 
   useEffect(() => {
     dispatch(fetchAllCartProductsAsync());
@@ -24,7 +25,7 @@ const Cart = () => {
               <div className="d-flex justify-content-between align-items-center mb-4">
                 <h3 className="fw-normal mb-0 text-black">Shopping Cart</h3>
               </div>
-              {cartProducts.map((val) => {
+              {cartProducts && cartProducts.map((val) => {
                 const delFromCart = () => {
                   dispatch(delFromCartAsync(val));
                 };

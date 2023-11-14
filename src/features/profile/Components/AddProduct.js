@@ -1,16 +1,22 @@
 import JoditEditor from "jodit-react";
 import React, { useState, useRef } from "react";
-import { addProduct } from "../../product/productSlice";
+import { showProduct } from "../../product/productSlice";
 import { useDispatch, useSelector } from "react-redux";
 import ProfileNavbar from "./ProfileNavbar";
-import { fetchAllCategoriesAsync, selectAllCategories } from "../AdminSlice";
+import {
+  addProductAsync,
+  fetchAllCategoriesAsync,
+  selectAllCategories,
+  selectUploadedImage,
+  uploadImageAsync,
+} from "../AdminSlice";
 import { useEffect } from "react";
 
 export default function AddProduct() {
   const dispatch = useDispatch();
   const categories = useSelector(selectAllCategories);
-  var imageName;
-  const [productData,setProductData] = useState(null);
+  // const imageName = useSelector(selectUploadedImage);
+  const [productData, setProductData] = useState(null);
   const [credentials, setCredentials] = useState({
     title: "",
     price: 0,
@@ -35,31 +41,21 @@ export default function AddProduct() {
       method: "POST",
       body: formData,
     });
-    imageName = await img_response.json();
-    setProductData({ ...credentials, thumbnail: imageName})
+    var imageName = await img_response.json();
+    setProductData({ ...credentials, thumbnail: imageName });
   };
-  
-  useEffect(()=>{
-    if(productData==null){
-      return ;
-    }
-    else{
-      const sendData = async() =>{
-        const response = await fetch("http://localhost:5000/addproduct", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(productData),
-        });
-        const json = await response.json();
-        console.log(json);
-        dispatch(addProduct(json));
-    console.log(credentials);
-      }
+
+  useEffect(() => {
+    if (productData == null) {
+      return;
+    } else {
+      const sendData = async () => {
+        dispatch(addProductAsync(productData));
+        console.log(credentials);
+      };
       sendData();
     }
-  },[productData])
+  }, [productData]);
 
   const onChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
@@ -90,7 +86,6 @@ export default function AddProduct() {
   useEffect(() => {
     dispatch(fetchAllCategoriesAsync());
   }, []);
-
 
   return (
     <>

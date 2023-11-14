@@ -10,7 +10,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fetchAllCartProductsAsync } from "./features/cart/cartSlice";
 import { fetchAllWishlistProductsAsync } from "./features/wishlist/wishlistSlice";
-import { fetchAllProductsAsync } from "./features/product/productSlice";
+import { fetchAllProductsAsync, fetchAllSalesAsync } from "./features/product/productSlice";
 import Checkout from "./features/Checkout/components/Checkout";
 import OrderPlaced from "./features/Checkout/components/OrderPlaced";
 import OrderList from "./features/Checkout/components/OrderList";
@@ -22,6 +22,9 @@ import ProtectedAdmin from "./features/auth/components/ProtectedAdmin";
 import { fetchAllCategoriesAsync } from "./features/profile/AdminSlice";
 import ViewProductsPage from "./pages/ViewProductsPage";
 import AddSale from "./features/profile/Components/AddSale";
+import Timer from "./features/Timer";
+import CardSlider from "./pages/home-sections/CardSlider";
+import SalesDetailPage from "./pages/SalesDetailPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -42,6 +45,10 @@ const router = createBrowserRouter([
   {
     path: "/products/details/:id",
     element: <ProductDetailPage />,
+  },
+  {
+    path: "/sale/products/details/:id",
+    element: <SalesDetailPage />,
   },
   {
     path: "/products/view",
@@ -97,7 +104,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/test",
-    element: <Footer />,
+    element: <CardSlider />,
   },
 ]);
 
@@ -115,6 +122,7 @@ function App() {
     dispatch(fetchAllCartProductsAsync());
     dispatch(fetchAllWishlistProductsAsync());
     dispatch(fetchAllProductsAsync());
+    dispatch(fetchAllSalesAsync());
     dispatch(fetchAllCategoriesAsync());
   }, []);
 

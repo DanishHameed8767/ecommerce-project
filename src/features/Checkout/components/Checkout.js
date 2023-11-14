@@ -4,6 +4,7 @@ import { clearCartAsync, selectAllCartProducts } from "../../cart/cartSlice";
 import { discountedPrice } from "../../../app/constant";
 import { useNavigate } from "react-router-dom";
 import { addOrderAsync, selectAllOrders } from "../orderSlice";
+import { updateProductStockAsync } from "../../product/productSlice";
 
 export default function Checkout() {
   const navigate = useNavigate();
@@ -11,17 +12,18 @@ export default function Checkout() {
   const cartProducts = useSelector(selectAllCartProducts);
   const orders = useSelector(selectAllOrders);
   const totalAmount = cartProducts.reduce((total, value) => {
-    const product = value.product;
+    const product = value.product || value.sale;
     return (total += discountedPrice(
       product.price,
       product.discountPercentage,
       value.quantity
     ));
   }, 0);
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    console.log("form submitted");
     const item = { total_amount: totalAmount, order_number: orders.length + 1 };
+    const data = [...cartProducts];
+    dispatch(updateProductStockAsync(data));
     dispatch(addOrderAsync(item));
     dispatch(clearCartAsync());
     navigate("/order/placed");
@@ -29,6 +31,7 @@ export default function Checkout() {
   useEffect(() => {
     if (cartProducts.length === 0) {
       navigate("/cart");
+      return;
     }
   }, []);
   return (
@@ -48,7 +51,7 @@ export default function Checkout() {
               </h4>
               <ul className="list-group mb-3">
                 {cartProducts.map((value) => {
-                  const item = value.product;
+                  const item = value.product || value.sale;
                   return (
                     <li className="list-group-item d-flex justify-content-between lh-sm">
                       <div>

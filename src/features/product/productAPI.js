@@ -9,9 +9,23 @@ export function fetchAllProducts() {
 }
 
 export function fetchAllProductsByCategory(item) {
-  console.log(item);
   return new Promise(async (resolve) => {
     const response = await fetch("http://localhost:5000/category/products", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(item),
+    });
+    const data = await response.json();
+    resolve({ data });
+  });
+}
+
+
+export function updateProductStock(item) {
+  return new Promise(async (resolve) => {
+    const response = await fetch("http://localhost:5000/updatemany", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -31,4 +45,23 @@ export function fetchProductById(id) {
     resolve({data})
   }
   );
+}
+
+export function fetchSalesById(id) {
+  return new Promise(async (resolve) =>{
+    //TODO: we will not hard-code server URL here
+    const response = await fetch('http://localhost:5000/sale/products/'+id) 
+    const data = await response.json()
+    resolve({data})
+  }
+  );
+}
+
+export function fetchAllSales() {
+  return new Promise(async (resolve) => {
+    //TODO: we will not hard-code server URL here
+    const response = await fetch("http://localhost:5000/allsales");
+    const data = await response.json();
+    resolve({ data });
+  });
 }

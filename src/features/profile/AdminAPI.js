@@ -46,7 +46,34 @@ export function addSubCategory(item) {
       body: JSON.stringify(item),
     });
     const data = await response.json();
-    console.log(data);
+    resolve({ data });
+  });
+}
+
+export function addProduct(item) {
+  return new Promise(async (resolve) => {
+    await fetch("http://localhost:5000/addproduct", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(item),
+    });
+    resolve();
+  });
+}
+
+export function uploadImage(formData) {
+  console.log(formData);
+  return new Promise(async (resolve) => {
+    const response = await fetch("http://localhost:5000/uploadimage", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: formData,
+    });
+    const data = await response.json();
     resolve({ data });
   });
 }

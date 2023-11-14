@@ -9,17 +9,33 @@ export function fetchAllCartProducts() {
 }
 
 export function addToCart(item) {
-  return new Promise(async (resolve) => {
-    const response = await fetch("http://localhost:5000/cart/add", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(item),
+  console.log(item);
+  if(item.saleStarts || item.saleStock){
+    return new Promise(async (resolve) => {
+      const response = await fetch("http://localhost:5000/cart/sales/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(item),
+      });
+      const data = await response.json();
+      resolve({ data });
     });
-    const data = await response.json();
-    resolve({ data });
-  });
+  }
+  else{
+    return new Promise(async (resolve) => {
+      const response = await fetch("http://localhost:5000/cart/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(item),
+      });
+      const data = await response.json();
+      resolve({ data });
+    });
+  }
 }
 
 export function delFromCart(item) {

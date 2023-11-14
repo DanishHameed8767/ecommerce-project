@@ -12,6 +12,7 @@ const {
   showWishlist,
   addToWishlist,
   delFromWishlist,
+  addToSalesWishlist,
 } = require("../controller/wishlist");
 const {
   addToCart,
@@ -19,6 +20,7 @@ const {
   delFromCart,
   updateCart,
   clearCart,
+  addToSalesCart,
 } = require("../controller/cart");
 const {
   createUser,
@@ -36,6 +38,7 @@ const {
 } = require("../controller/category");
 const Router = express.Router();
 const multer = require("multer");
+const { addToSale, getallSales, fetchSalesById } = require("../controller/sale");
 
 Router.get("/allproducts", getallProducts);
 Router.get("/products/:id", fetchProductById);
@@ -44,10 +47,12 @@ Router.post("/category/products", getallProductsByCategory);
 Router.post("/addproduct", addProduct);
 Router.get("/wishlist", showWishlist);
 Router.post("/wishlist/add", addToWishlist);
+Router.post("/wishlist/sales/add", addToSalesWishlist);
 Router.delete("/wishlist/del", delFromWishlist);
 
 Router.get("/cart", showCart);
 Router.post("/cart/add", addToCart);
+Router.post("/cart/sales/add", addToSalesCart);
 Router.delete("/cart/del", delFromCart);
 Router.patch("/cart/update", updateCart);
 Router.delete("/cart/clear", clearCart);
@@ -66,7 +71,7 @@ Router.post(
     }),
   ],
   createUser
-);
+  );
 Router.post(
   "/login",
   [
@@ -100,8 +105,10 @@ Router.post("/uploadimage", upload.single("image"), function (req, res, next) {
   res.json(imageName);
 });
 
-Router.post("/updatemany",updateProducts)
+Router.post("/updatemany", updateProducts);
 
-
+Router.post("/addsale", addToSale);
+Router.get("/allsales", getallSales);
+Router.get("/sale/products/:id", fetchSalesById);
 
 exports.Router = Router;

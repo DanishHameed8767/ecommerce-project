@@ -1,7 +1,15 @@
 import React from "react";
 
 const WishlistItem = ({ val, handleClick, RouterChange }) => {
-  const item = val.product;
+  var item = val.product;
+  if(!item){
+    item = val.sale;
+  }
+  var src = item.thumbnail;
+  if (item.thumbnail.slice(0,6)=='image_') {
+    const _path = "http://localhost:5000/images/";
+     src = _path + item.thumbnail;
+  }
   return (
     <>
       <div className="col-md-3">
@@ -34,7 +42,7 @@ const WishlistItem = ({ val, handleClick, RouterChange }) => {
             ></i>
           </span>
           <img
-            src={item.thumbnail}
+            src={src}
             className="img-home card-img-top"
             onClick={() => RouterChange()}
             alt="img"

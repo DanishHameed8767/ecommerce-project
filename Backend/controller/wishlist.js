@@ -3,18 +3,31 @@ const id = "6516dd04b8f369dccde44140";
 exports.showWishlist = async (req, res) => {
   const id = "6516dd04b8f369dccde44140";
   try {
-    const products = await Wishlist.find({ user: id }).populate("product");
-    res.send(products);
+    const products = await Wishlist.find({ user: id, product: { $exists: true }}).populate("product");
+    const saleProducts = await Wishlist.find({ user: id, sale: { $exists: true }}).populate("sale");
+    res.send([...products,...saleProducts]);
   } catch (error) {
     res.send(error);
   }
 };
+
 exports.addToWishlist = async (req, res) => {
   const product_id = req.body._id;
   const wishlist = new Wishlist({ product: product_id, user: id });
   try {
     await wishlist.save();
     res.status(200).send(await wishlist.populate("product"));
+  } catch (error) {
+    res.status(400);
+  }
+};
+
+exports.addToSalesWishlist = async (req, res) => {
+  const product_id = req.body._id;
+  const wishlist = new Wishlist({ sale: product_id, user: id });
+  try {
+    await wishlist.save();
+    res.status(200).send(await wishlist.populate("sale"));
   } catch (error) {
     res.status(400);
   }

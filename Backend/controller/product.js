@@ -1,4 +1,5 @@
 const { Product } = require("../models/productModel");
+const { Sale } = require("../models/saleModel");
 
 exports.getallProducts = async (req, res) => {
   const products = await Product.find();
@@ -9,7 +10,7 @@ exports.addProduct = async (req, res) => {
   try {
     const product = new Product(req.body);
     await product.save();
-    res.send(product);
+    res.send('success');
   } catch (error) {
     res.send(error);
   }
@@ -22,19 +23,35 @@ exports.getallProductsByCategory = async (req, res) => {
 };
 
 exports.updateProducts = async (req, res) => {
-  const find_cat = req.body.cat;
-  const product_category = req.body.category;
-  const product_subCategory = req.body.subCategory;
-  const products = await Product.updateMany({category:find_cat },{category:product_category,subCategory:product_subCategory},{new:true});
-  res.send(products);
-}
-
+  const arr = req.body;
+  try{arr.forEach(async(value)=>{
+    const product = value.product;
+    if(product){
+    await Product.findOneAndUpdate({_id:value.product._id},{stock: value.product.stock - 1},{new: true});
+    }
+  else{
+    await Sale.findOneAndUpdate({_id:value.sale._id},{stock: value.sale.stock - 1},{new: true})
+    if(value.sale.saleStock){
+      await Sale.findOneAndUpdate({_id:value.sale._id},{saleStock: value.sale.saleStock - 1},{new: true})
+    }
+  }
+  })
+  res.json("success");}
+  catch(err){
+    res.status(400);
+  }
+};
 
 exports.fetchProductById = async (req, res) => {
   const { id } = req.params;
 
   try {
     const product = await Product.findById(id);
+    if(!product){
+      const sale = await Sale.findById(id);
+      res.status(200).json(sale);
+      return;
+    }
     res.status(200).json(product);
   } catch (err) {
     res.status(400).json(err);

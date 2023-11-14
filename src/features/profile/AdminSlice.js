@@ -1,16 +1,16 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { addCategory, addSubCategory, fetchAllCategories } from "./AdminAPI";
+import { addCategory, addProduct, addSubCategory, fetchAllCategories, uploadImage } from "./AdminAPI";
 
 const initialState = {
   categories: [],
   status: "idle",
+  image:""
 };
 
 export const fetchAllCategoriesAsync = createAsyncThunk(
   "admin/fetchAllCategories",
   async () => {
     const response = await fetchAllCategories();
-    // The value we return becomes the `fulfilled` action payload
     return response.data;
   }
 );
@@ -19,7 +19,6 @@ export const addCategoryAsync = createAsyncThunk(
   "admin/addCategory",
   async (data) => {
     const response = await addCategory(data);
-    // The value we return becomes the `fulfilled` action payload
     return response.data;
   }
 );
@@ -28,8 +27,23 @@ export const addSubCategoryAsync = createAsyncThunk(
   "admin/addSubCategory",
   async (data) => {
     const response = await addSubCategory(data);
-    // The value we return becomes the `fulfilled` action payload
     return response.data;
+  }
+);
+
+export const uploadImageAsync = createAsyncThunk(
+  "admin/uploadImage",
+  async (formData) => {
+    console.log(formData);
+    const response = await uploadImage(formData);
+    return response.data;
+  }
+);
+
+export const addProductAsync = createAsyncThunk(
+  "admin/addProduct",
+  async (data) => {
+    await addProduct(data);
   }
 );
 
@@ -53,6 +67,19 @@ export const adminSlice = createSlice({
         state.status = "idle";
         state.categories.push(action.payload);
       })
+      .addCase(uploadImageAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(uploadImageAsync.fulfilled, (state, action) => {
+        state.status = "idle";
+        state.image = action.payload;
+      })
+      .addCase(addProductAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(addProductAsync.fulfilled, (state) => {
+        state.status = "idle";
+      })
       .addCase(addSubCategoryAsync.pending, (state) => {
         state.status = "loading";
       })
@@ -68,5 +95,6 @@ export const adminSlice = createSlice({
 });
 
 export const selectAllCategories = (state) => state.admin.categories;
+export const selectUploadedImage = (state) => state.admin.image;
 
 export default adminSlice.reducer;

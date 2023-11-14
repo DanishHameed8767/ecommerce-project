@@ -5,16 +5,17 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  fetchProductByIdAsync,
+  fetchAllSalesAsync,
+  fetchSalesByIdAsync,
   selectProductDetails,
 } from "../features/product/productSlice";
 
-export default function ProductDetailPage() {
+export default function SalesDetailPage() {
   const dispatch = useDispatch();
   const pd = useSelector(selectProductDetails);
   const params = useParams();
   useEffect(() => {
-    dispatch(fetchProductByIdAsync(params.id));
+    dispatch(fetchSalesByIdAsync(params.id));
   }, []);
   return (
     <>
