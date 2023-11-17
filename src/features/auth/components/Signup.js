@@ -1,7 +1,39 @@
 import React from "react";
 import loginImg from "../../../images/login.png";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
+import { useState } from "react";
+
 const Signup = () => {
+  const [credentials, setCredentials] = useState({ userName:"",email: "", password: "" });
+  let navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const response = await fetch("http://localhost:5000/signup/createuser", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: credentials.email,
+        password: credentials.password,
+      }),
+    });
+    const json = await response.json();
+    console.log(json);
+    if (json.success) {
+      // Save the auth token and redirect
+      localStorage.setItem("token", json.authtoken);
+      navigate("/admin");
+      // props.showAlert("Logged in successfully","success")
+    } else {
+      // props.showAlert("Invalid Credentials","danger")
+    }
+  };
+
+  const onChange = (e) => {
+    setCredentials({ ...credentials, [e.target.name]: e.target.value });
+  };
   return (
     <>
       <div className="container-fluid row mt-5">
@@ -11,7 +43,7 @@ const Signup = () => {
         >
           <img src={loginImg} alt="" className="w-75" />
         </div>
-        <form className=" mt-3 col  mt-5 ms-5">
+        <form className=" mt-3 col  mt-5 ms-5" onSubmit={handleSubmit}>
           <h2 className="">Create an account</h2>
           <span>Enter your details below</span>
           <div className="mb-3 mt-4">
@@ -20,6 +52,8 @@ const Signup = () => {
               className="form-control border-0 border-bottom rounded-0 w-50"
               id="InputName"
               placeholder="Name"
+              value={credentials.userName}
+              onChange={(e)=>onChange(e)}
             />
           </div>
           <div className="mb-3 mt-4">
@@ -28,6 +62,8 @@ const Signup = () => {
               className="form-control border-0 border-bottom rounded-0 w-50"
               id="InputEmail"
               placeholder="Email or Phone Number"
+              value={credentials.email}
+              onChange={(e)=>onChange(e)}
             />
           </div>
           <div className="mb-3">
@@ -44,6 +80,8 @@ const Signup = () => {
               className="form-control border-0 border-bottom rounded-0 w-50"
               id="InputPassword"
               placeholder="Confirm Password"
+              value={credentials.password}
+              onChange={(e)=>onChange(e)}
             />
           </div>
           <button type="submit" className="btn btn-danger fs-6 fw-normal w-50">

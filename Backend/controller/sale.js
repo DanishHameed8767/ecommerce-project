@@ -2,7 +2,7 @@ const { Sale } = require("../models/saleModel");
 const { Product } = require("../models/productModel");
 
 exports.addToSale = async (req, res) => {
-    const sale = new Sale(req.body);
+    const sale = new Sale({...req.body, sellCount:0});
     try {
       await sale.save();
       res.status(200).send(sale);

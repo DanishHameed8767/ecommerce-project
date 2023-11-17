@@ -57,6 +57,16 @@ export function fetchSalesById(id) {
   );
 }
 
+export function fetchArrivalsById(id) {
+  return new Promise(async (resolve) =>{
+    //TODO: we will not hard-code server URL here
+    const response = await fetch('http://localhost:5000/arrivals/'+id) 
+    const data = await response.json()
+    resolve({data})
+  }
+  );
+}
+
 export function fetchAllSales() {
   return new Promise(async (resolve) => {
     //TODO: we will not hard-code server URL here

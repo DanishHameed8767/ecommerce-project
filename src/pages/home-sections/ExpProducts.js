@@ -3,14 +3,18 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getProductDetail,
   selectAllProducts,
+  viewSaleProducts,
 } from "../../features/product/productSlice";
 import ProductItem from "../../features/product/components/ProductItem";
 import { addToWishlistAsync } from "../../features/wishlist/wishlistSlice";
 import { useNavigate } from "react-router-dom";
+import { shuffle } from "../../app/constant";
+
 export default function ExpProducts() {
-  const products = useSelector(selectAllProducts);
+  const selectProducts = useSelector(selectAllProducts);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const products = shuffle([...selectProducts]);
   return (
     <>
       <div className="container mt-5 card-gap">
@@ -57,7 +61,12 @@ export default function ExpProducts() {
         </section>
 
         <div className="container d-flex justify-content-center">
-          <button className="btn btn-danger btn-view-all me-2">
+          <button className="btn btn-danger btn-view-all text-white me-2" onClick={
+            ()=>{
+              dispatch(viewSaleProducts(products))
+              navigate("/products/view")
+            }
+          }>
             View All Products
           </button>
         </div>

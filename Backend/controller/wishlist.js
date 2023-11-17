@@ -5,7 +5,8 @@ exports.showWishlist = async (req, res) => {
   try {
     const products = await Wishlist.find({ user: id, product: { $exists: true }}).populate("product");
     const saleProducts = await Wishlist.find({ user: id, sale: { $exists: true }}).populate("sale");
-    res.send([...products,...saleProducts]);
+    const arrivalProducts = await Wishlist.find({ user: id, arrival: { $exists: true }}).populate("arrival");
+    res.send([...products,...saleProducts,...arrivalProducts]);
   } catch (error) {
     res.send(error);
   }
@@ -28,6 +29,20 @@ exports.addToSalesWishlist = async (req, res) => {
   try {
     await wishlist.save();
     res.status(200).send(await wishlist.populate("sale"));
+  } catch (error) {
+    res.status(400);
+  }
+};
+
+exports.addToArrivalsWishlist = async (req, res) => {
+  const product_id = req.body._id;
+  const cart = new Wishlist({
+    arrival: product_id,
+    user: id
+  });
+  try {
+    await cart.save();
+    res.status(200).send(await cart.populate("arrival"));
   } catch (error) {
     res.status(400);
   }

@@ -1,8 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { addCategory, addProduct, addSubCategory, fetchAllCategories, uploadImage } from "./AdminAPI";
+import { addCategory, addProduct, addSubCategory, fetchAllArrivals, fetchAllCategories, updateArrival, uploadImage } from "./AdminAPI";
 
 const initialState = {
   categories: [],
+  arrivals:null,
   status: "idle",
   image:""
 };
@@ -15,10 +16,26 @@ export const fetchAllCategoriesAsync = createAsyncThunk(
   }
 );
 
+export const fetchAllArrivalsAsync = createAsyncThunk(
+  "admin/fetchAllArrivals",
+  async () => {
+    const response = await fetchAllArrivals();
+    return response.data;
+  }
+);
+
 export const addCategoryAsync = createAsyncThunk(
   "admin/addCategory",
   async (data) => {
     const response = await addCategory(data);
+    return response.data;
+  }
+);
+
+export const updateArrivalAsync = createAsyncThunk(
+  "admin/updateArrival",
+  async (data) => {
+    const response = await updateArrival(data);
     return response.data;
   }
 );
@@ -60,6 +77,13 @@ export const adminSlice = createSlice({
         state.status = "idle";
         state.categories = action.payload;
       })
+      .addCase(fetchAllArrivalsAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(fetchAllArrivalsAsync.fulfilled, (state, action) => {
+        state.status = "idle";
+        state.arrivals = action.payload;
+      })
       .addCase(addCategoryAsync.pending, (state) => {
         state.status = "loading";
       })
@@ -95,6 +119,7 @@ export const adminSlice = createSlice({
 });
 
 export const selectAllCategories = (state) => state.admin.categories;
+export const selectAllArrivals = (state) => state.admin.arrivals;
 export const selectUploadedImage = (state) => state.admin.image;
 
 export default adminSlice.reducer;

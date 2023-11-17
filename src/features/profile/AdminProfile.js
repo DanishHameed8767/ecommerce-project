@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ProfileNavbar from "./Components/ProfileNavbar";
+import { useDispatch } from "react-redux";
+import { fetchAllArrivalsAsync } from "./AdminSlice";
 
 export default function AdminProfile() {
+  const dispatch = useDispatch();
   return (
     <>
       <ProfileNavbar />

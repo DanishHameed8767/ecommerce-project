@@ -22,6 +22,19 @@ export function addToWishlist(item) {
       resolve({ data });
     });
   }
+  else if(item.type){
+    return new Promise(async (resolve) => {
+      const response = await fetch("http://localhost:5000/wishlist/arrivals/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(item),
+      });
+      const data = await response.json();
+      resolve({ data });
+  })
+}
   else{
     return new Promise(async (resolve) => {
       const response = await fetch("http://localhost:5000/wishlist/add", {

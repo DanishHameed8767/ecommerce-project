@@ -13,6 +13,7 @@ const productSchema = new Schema({
   subCategory: String,
   thumbnail: String,
   images: [String],
+  sellCount: Number,
 });
 
 exports.Product = mongoose.model("Product", productSchema);

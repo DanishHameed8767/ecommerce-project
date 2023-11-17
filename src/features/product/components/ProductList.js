@@ -5,18 +5,24 @@ import {
   fetchAllProductsAsync,
   getProductDetail,
   selectAllProducts,
+  selectAllProductsList,
 } from "../productSlice";
 import { useNavigate } from "react-router-dom";
 import { addToWishlistAsync } from "../../wishlist/wishlistSlice";
 
 export default function ProductList() {
   const navigate = useNavigate();
-  const products = useSelector(selectAllProducts);
+  const selectProducts = useSelector(selectAllProductsList);
+  var products = selectProducts.filter((product) =>product.stock != 0);
+   products = [...products].sort(function(a, b){
+    return b.sellCount - a.sellCount;
+    });
   const dispatch = useDispatch();
   return (
     <>
       <div className="mt-4  d-flex flex-row">
-        <div className="card-group">
+        <div className="row container-fluid">
+
           {products.map((value) => {
             const handleClick = (e) => {
               e.preventDefault();
@@ -25,9 +31,7 @@ export default function ProductList() {
               dispatch(addToWishlistAsync(value));
             };
             const RouterChange = () => {
-              dispatch(getProductDetail(value));
-              navigate("/products/details");
-              console.log(value);
+              navigate("/products/details/" + value._id + "/");
             };
             return (
               <ProductItem

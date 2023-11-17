@@ -12,6 +12,11 @@ const wishlistSchema = new Schema({
     ref: "Sale",
     unique: true,
   },
+  arrival: {
+    type: Schema.Types.ObjectId,
+    ref: "Arrival",
+    unique: true,
+  },
   user: { type: Schema.Types.ObjectId, ref: "User", required: true },
 });
 exports.Wishlist = mongoose.model("Wishlist", wishlistSchema);

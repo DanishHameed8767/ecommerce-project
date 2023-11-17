@@ -12,7 +12,7 @@ export default function Checkout() {
   const cartProducts = useSelector(selectAllCartProducts);
   const orders = useSelector(selectAllOrders);
   const totalAmount = cartProducts.reduce((total, value) => {
-    const product = value.product || value.sale;
+    const product = value.product || value.sale || value.arrival;
     return (total += discountedPrice(
       product.price,
       product.discountPercentage,
@@ -51,7 +51,7 @@ export default function Checkout() {
               </h4>
               <ul className="list-group mb-3">
                 {cartProducts.map((value) => {
-                  const item = value.product || value.sale;
+                  const item = value.product || value.sale || value.arrival;
                   return (
                     <li className="list-group-item d-flex justify-content-between lh-sm">
                       <div>

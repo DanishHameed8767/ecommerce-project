@@ -77,3 +77,26 @@ export function uploadImage(formData) {
     resolve({ data });
   });
 }
+
+export function fetchAllArrivals() {
+  return new Promise(async (resolve) => {
+    const response = await fetch("http://localhost:5000/allarrivals");
+    const data = await response.json();
+    resolve({ data });
+  });
+}
+
+
+export function updateArrival(item) {
+  return new Promise(async (resolve) => {
+    const response = await fetch("http://localhost:5000/updatearrival", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(item),
+    });
+    const data = await response.json();
+    resolve({ data });
+  });
+}

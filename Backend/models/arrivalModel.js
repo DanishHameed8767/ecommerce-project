@@ -1,22 +1,18 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
-
-const saleSchema = new Schema({
+const arrivalSchema = new Schema({
+  type: String,
   title: String,
   description: String,
   price: Number,
+  discountPercentage: Number,
   longDescription: String,
-  rating: Number,
-  brand: String,
   stock: Number,
   category: String,
   subCategory: String,
   thumbnail: String,
   images: [String],
-  saleStock: Number,
-  saleStarts: Number,
-  saleEnds: Number,
-  discountPercentage: Number,
   sellCount: Number,
 });
-exports.Sale = mongoose.model("Sale", saleSchema);
+
+exports.Arrival = mongoose.model("Arrival", arrivalSchema);

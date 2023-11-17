@@ -25,6 +25,8 @@ import AddSale from "./features/profile/Components/AddSale";
 import Timer from "./features/Timer";
 import CardSlider from "./pages/home-sections/CardSlider";
 import SalesDetailPage from "./pages/SalesDetailPage";
+import UpdateArrival from "./features/profile/Components/UpdateArrival";
+import ArrivalsDetailPage from "./pages/ArrivalsDetailPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -51,6 +53,10 @@ const router = createBrowserRouter([
     element: <SalesDetailPage />,
   },
   {
+    path: "/arrivals/details/:id",
+    element: <ArrivalsDetailPage />,
+  },
+  {
     path: "/products/view",
     element: <ViewProductsPage />,
   },
@@ -75,6 +81,14 @@ const router = createBrowserRouter([
     element: (
       <ProtectedAdmin>
         <AdminProfile />
+      </ProtectedAdmin>
+    ),
+  },
+  {
+    path: "/admin/updatearrival",
+    element: (
+      <ProtectedAdmin>
+        <UpdateArrival />
       </ProtectedAdmin>
     ),
   },

@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectAllCategories } from "../../features/profile/AdminSlice";
 import { Link, useNavigate } from "react-router-dom";
 import { fetchAllProductsByCategoryAsync } from "../../features/product/productSlice";
+import { shuffle } from "../../app/constant";
 const Header = () => {
   const dispatch = useDispatch();
   // const arrNum = [1,2,3];
@@ -14,15 +15,17 @@ const Header = () => {
   const filter = useMemo(()=>genRandom(),[]);
 
   const navigate = useNavigate();
-  const categories = useSelector(selectAllCategories);
+  const selectCategory = useSelector(selectAllCategories);
+  const categories = shuffle([...selectCategory]);
+  console.log(categories);
   return (
     <>
       <div className="row container-fluid">
         <div className="list-group col-3">
-          {categories.map((value) => {
-            const val = value.category;
-            const abc = val.charAt(0).toUpperCase();
-            const category = abc + val.slice(1);
+          {categories.filter((x,i,arr)=>i<9).map((value) => {
+            const word = value.category;
+            const first_letter = word.charAt(0).toUpperCase();
+            const category = first_letter + word.slice(1);
 
             const handleClick = () => {
               dispatch(fetchAllProductsByCategoryAsync({ category: category }));

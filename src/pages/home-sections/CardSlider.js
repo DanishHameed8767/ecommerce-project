@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  selectAllSaleProducts,
+  selectAllSaleProducts, viewSaleProducts,
 } from "../../features/product/productSlice";
 import { addToWishlistAsync } from "../../features/wishlist/wishlistSlice";
 import { useNavigate } from "react-router-dom";
@@ -158,7 +158,10 @@ export default function CardSlider() {
         </div>
       </section>
       <div className="container d-flex justify-content-center">
-        <button className="btn btn-danger btn-view-all">
+        <button className="btn btn-danger btn-view-all text-white" onClick={()=>{
+          dispatch(viewSaleProducts(saleProducts))
+          navigate("/products/view")
+        }}>
           View All Products
         </button>
       </div>
