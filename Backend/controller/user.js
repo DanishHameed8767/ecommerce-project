@@ -94,10 +94,9 @@ exports.loginUser = async (req, res) => {
     };
     const authtoken = jwt.sign(data, JWT_SECRET);
     success = true;
-    res.json({ success, authtoken });
+    res.json({ success, authtoken,user });
   } catch (error) {
-    console.error(error.message);
-    res.status(500).send("Internal Server Error");
+    res.status(500).send({error:"Internal Server Error"});
   }
 };
 
@@ -106,7 +105,7 @@ exports.getUser = async (req, res) => {
   try {
     userId = req.user.id;
     const user = await User.findById(userId).select("-password");
-    res.send(user);
+    res.send({user});
   } catch (error) {
     console.error(error.message);
     res.status(500).send("Internal Server Error");

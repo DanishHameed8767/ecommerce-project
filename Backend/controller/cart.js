@@ -5,9 +5,7 @@ exports.showCart = async (req, res) => {
   const id = "6516dd04b8f369dccde44140";
   try {
     const products = await Cart.find({ user: id, product: { $exists: true }}).populate("product");
-    const saleProducts = await Cart.find({ user: id, sale: { $exists: true }}).populate("sale");
-    const arrivalProducts = await Cart.find({ user: id, arrival: { $exists: true }}).populate("arrival");
-    res.send([...products,...saleProducts,...arrivalProducts]);
+    res.send(products);
   } catch (error) {
     res.send(error);
   }
@@ -24,38 +22,6 @@ exports.addToCart = async (req, res) => {
   try {
     await cart.save();
     res.status(200).send(await cart.populate("product"));
-  } catch (error) {
-    res.status(400);
-  }
-};
-
-exports.addToSalesCart = async (req, res) => {
-  const product_id = req.body._id;
-  const product_quantity = 1;
-  const cart = new Cart({
-    sale: product_id,
-    user: id,
-    quantity: product_quantity,
-  });
-  try {
-    await cart.save();
-    res.status(200).send(await cart.populate("sale"));
-  } catch (error) {
-    res.status(400);
-  }
-};
-
-exports.addToArrivalsCart = async (req, res) => {
-  const product_id = req.body._id;
-  const product_quantity = 1;
-  const cart = new Cart({
-    arrival: product_id,
-    user: id,
-    quantity: product_quantity,
-  });
-  try {
-    await cart.save();
-    res.status(200).send(await cart.populate("arrival"));
   } catch (error) {
     res.status(400);
   }

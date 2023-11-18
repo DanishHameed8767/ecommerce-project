@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchAllProducts, fetchAllProductsByCategory, fetchAllSales, fetchArrivalsById, fetchProductById, fetchSalesById, updateProductStock } from "./productAPI";
+import { fetchAllProducts, fetchAllProductsByCategory, fetchAllSales, fetchArrivalsById, fetchProductById, fetchSalesById, searchProducts, updateProductStock } from "./productAPI";
 
 const initialState = {
   products: [],
@@ -11,8 +11,8 @@ const initialState = {
 
 export const fetchAllProductsAsync = createAsyncThunk(
   "product/fetchAllProducts",
-  async () => {
-    const response = await fetchAllProducts();
+  async (type) => {
+    const response = await fetchAllProducts(type);
     // The value we return becomes the `fulfilled` action payload
     return response.data;
   }
@@ -72,6 +72,14 @@ export const updateProductStockAsync = createAsyncThunk(
   }
 )
 
+export const searchProductsAsync = createAsyncThunk(
+  "product/searchProducts",
+  async (keyword) => {
+    const response = await searchProducts(keyword);
+    return response.data;
+  }
+)
+
 export const productSlice = createSlice({
   name: "product",
   initialState,
@@ -102,7 +110,6 @@ export const productSlice = createSlice({
         state.status = "idle";
         const items = action.payload.filter(item => item.saleStarts);
         const itemsStock = action.payload.filter(item => item.saleStock > 0);
-        // console.log(items,itemsStock);
         state.saleProducts = [...items, ...itemsStock];
       })
       .addCase(fetchAllProductsByCategoryAsync.pending, (state) => {
@@ -140,6 +147,17 @@ export const productSlice = createSlice({
         state.status = "idle";
       })
       .addCase(updateProductStockAsync.rejected, (state,action) => {
+        state.status = "idle";
+        console.log(action.error);
+      })
+      .addCase(searchProductsAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(searchProductsAsync.fulfilled, (state,action) => {
+        state.status = "idle";
+        state.productsList = action.payload;
+      })
+      .addCase(searchProductsAsync.rejected, (state,action) => {
         state.status = "idle";
         console.log(action.error);
       })

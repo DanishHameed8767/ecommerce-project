@@ -11,7 +11,6 @@ const Home = () => {
   return (
     <>
       <Navbar />
-      <img src="" alt="" />
       <Header />
       <CardSlider />
       <BSellSection />

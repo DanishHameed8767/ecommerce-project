@@ -9,10 +9,10 @@ export default function ProfileNavbar() {
   const cartProducts = useSelector(selectAllCartProducts);
   return (
     <>
-      <nav className="navbar navbar-expand-sm navbar-light bg-white sticky-top border-bottom p-4">
+      <nav className="navbar navbar-expand-sm navbar-dark sticky-top border-bottom p-4">
         <div className="container-fluid">
           <Link className="navbar-brand fs-3" to="/">
-            E-Commerce
+          Urban Cart
           </Link>
           <button
             className="navbar-toggler"

@@ -21,7 +21,7 @@ export default function Features() {
                     FREE AND FAST DELIVERY
                   </div>
                   <p className="text-center mt-2">
-                    Free delivery for all orders over $140
+                    Free delivery for all orders over PKR 140
                   </p>
                 </div>
               </div>

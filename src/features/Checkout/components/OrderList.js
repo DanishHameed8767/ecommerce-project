@@ -40,7 +40,7 @@ export default function OrderList() {
                   <div>
                     <h6 className="mb-0"># {val.order_number}</h6>
                   </div>
-                  <div className="ps-4">$ {val.total}</div>
+                  <div className="ps-4">PKR {val.total}</div>
                   <div>{val.status}</div>
                   <small className="opacity-50 text-nowrap"></small>
                 </div>

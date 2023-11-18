@@ -7,6 +7,7 @@ import Timer from "../../Timer";
 
 const ProductDetail = () => {
   var detail = useSelector(selectProductDetails);
+  console.log(detail);
   const dispatch = useDispatch();
   var currentTime = Date.now();
   var saleEnds = detail.saleEnds;
@@ -122,11 +123,10 @@ const ProductDetail = () => {
           </span>}
           <div className="d-flex justify-content-start">
             <p className="text-decoration-line-through fs-3 ">
-              ${detail.price}
+              PKR {detail.price}
             </p>
             <p className="text-danger fs-3 ms-3">
-              $
-              {detail.price -
+              PKR {detail.price -
                 Math.ceil((detail.price * detail.discountPercentage) / 100)}
               .00
             </p>

@@ -10,7 +10,6 @@ import { Link } from "react-router-dom";
 const Cart = () => {
   const dispatch = useDispatch();
   const cartProducts = useSelector(selectAllCartProducts);
-  console.log(cartProducts);
 
   useEffect(() => {
     dispatch(fetchAllCartProductsAsync());

@@ -80,7 +80,7 @@ export function uploadImage(formData) {
 
 export function fetchAllArrivals() {
   return new Promise(async (resolve) => {
-    const response = await fetch("http://localhost:5000/allarrivals");
+    const response = await fetch("http://localhost:5000/allproducts?type=arrival");
     const data = await response.json();
     resolve({ data });
   });

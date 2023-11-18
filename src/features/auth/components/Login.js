@@ -1,33 +1,33 @@
 import React, { useState } from "react";
 import loginImg from "../../../images/login.png";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUserAsync, selectLoggedInUser } from "../authSlice";
+import { useEffect } from "react";
 const Login = () => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
   let navigate = useNavigate();
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector(selectLoggedInUser);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:5000/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: credentials.email,
-        password: credentials.password,
-      }),
-    });
-    const json = await response.json();
-    console.log(json);
-    if (json.success) {
+    const userData = {
+      email: credentials.email,
+      password: credentials.password,
+    }
+    dispatch(loginUserAsync(userData));
+  };
+
+  useEffect(()=>{
+    if (isLoggedIn) {
       // Save the auth token and redirect
-      localStorage.setItem("token", json.authtoken);
       navigate("/admin");
       // props.showAlert("Logged in successfully","success")
     } else {
       // props.showAlert("Invalid Credentials","danger")
     }
-  };
+  },[isLoggedIn])
 
   const onChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
@@ -76,6 +76,15 @@ const Login = () => {
           <a href="#!" className="text-danger text-decoration-none ms-3">
             Forgot Password?
           </a>
+          <div className="mt-3">
+            <span className="text-secondary">Don't have an account?</span>
+            <Link
+              to="/signup"
+              className="ms-2 text-decoration-none border-bottom text-dark border-dark"
+            >
+              Sign Up
+            </Link>
+          </div>
         </form>
       </div>
     </>

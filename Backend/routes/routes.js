@@ -6,6 +6,9 @@ const {
   updateProducts,
   fetchProductById,
   updateMany,
+  searchProducts,
+  getProductsByType,
+  updateArrival,
 } = require("../controller/product");
 const { body } = require("express-validator");
 const path = require("path");
@@ -13,8 +16,6 @@ const {
   showWishlist,
   addToWishlist,
   delFromWishlist,
-  addToSalesWishlist,
-  addToArrivalsWishlist,
 } = require("../controller/wishlist");
 const {
   addToCart,
@@ -22,8 +23,6 @@ const {
   delFromCart,
   updateCart,
   clearCart,
-  addToSalesCart,
-  addToArrivalsCart,
 } = require("../controller/cart");
 const {
   createUser,
@@ -41,24 +40,20 @@ const {
 } = require("../controller/category");
 const Router = express.Router();
 const multer = require("multer");
-const { addToSale, getallSales, fetchSalesById } = require("../controller/sale");
-const { addArrival, getallArrivals, updateArrival, fetchArrivalsById } = require("../controller/arrival");
 
 Router.get("/allproducts", getallProducts);
+Router.get("/products", getProductsByType);
 Router.get("/products/:id", fetchProductById);
 Router.post("/category/products", getallProductsByCategory);
 
 Router.post("/addproduct", addProduct);
+Router.post("/updatearrival", updateArrival);
 Router.get("/wishlist", showWishlist);
 Router.post("/wishlist/add", addToWishlist);
-Router.post("/wishlist/sales/add", addToSalesWishlist);
-Router.post("/wishlist/arrivals/add", addToArrivalsWishlist);
 Router.delete("/wishlist/del", delFromWishlist);
 
 Router.get("/cart", showCart);
 Router.post("/cart/add", addToCart);
-Router.post("/cart/sales/add", addToSalesCart);
-Router.post("/cart/arrivals/add", addToArrivalsCart);
 Router.delete("/cart/del", delFromCart);
 Router.patch("/cart/update", updateCart);
 Router.delete("/cart/clear", clearCart);
@@ -77,7 +72,7 @@ Router.post(
     }),
   ],
   createUser
-  );
+);
 Router.post(
   "/login",
   [
@@ -86,7 +81,7 @@ Router.post(
   ],
   loginUser
 );
-Router.post("/getuser", fetchuser, getUser);
+Router.get("/getuser", fetchuser, getUser);
 
 Router.get("/showcategory", getallCategories);
 Router.post("/addcategory", addCategory);
@@ -114,13 +109,6 @@ Router.post("/uploadimage", upload.single("image"), function (req, res, next) {
 Router.post("/updatemany", updateProducts);
 Router.post("/updatem", updateMany);
 
-Router.post("/addsale", addToSale);
-Router.get("/allsales", getallSales);
-Router.get("/sale/products/:id", fetchSalesById);
-
-Router.get("/allarrivals", getallArrivals);
-Router.post("/updatearrival", updateArrival);
-Router.post("/addarrival", addArrival);
-Router.get("/arrivals/:id", fetchArrivalsById);
+Router.get("/search", searchProducts);
 
 exports.Router = Router;

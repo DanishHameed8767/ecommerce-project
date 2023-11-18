@@ -14,6 +14,11 @@ const productSchema = new Schema({
   thumbnail: String,
   images: [String],
   sellCount: Number,
+  saleStock: Number,
+  saleStarts: Number,
+  saleEnds: Number,
+  type: { type: String, default: "product" },
+  arrivalType: String,
 });
 
 exports.Product = mongoose.model("Product", productSchema);

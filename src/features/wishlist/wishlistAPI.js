@@ -9,33 +9,6 @@ export function fetchAllWishlistProducts() {
 }
 
 export function addToWishlist(item) {
-  if(item.saleStarts){
-    return new Promise(async (resolve) => {
-      const response = await fetch("http://localhost:5000/wishlist/sales/add", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(item),
-      });
-      const data = await response.json();
-      resolve({ data });
-    });
-  }
-  else if(item.type){
-    return new Promise(async (resolve) => {
-      const response = await fetch("http://localhost:5000/wishlist/arrivals/add", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(item),
-      });
-      const data = await response.json();
-      resolve({ data });
-  })
-}
-  else{
     return new Promise(async (resolve) => {
       const response = await fetch("http://localhost:5000/wishlist/add", {
         method: "POST",
@@ -47,7 +20,6 @@ export function addToWishlist(item) {
       const data = await response.json();
       resolve({ data });
     });
-  }
 }
 
 export function delFromWishlist(item) {
@@ -59,21 +31,9 @@ export function delFromWishlist(item) {
       },
       body: JSON.stringify(item),
     });
+    console.log(item)
     const data = await response.json();
     resolve({ data });
   });
 }
 
-//   export function updateCart(item) {
-//     return new Promise(async (resolve) =>{
-//       await fetch('http://localhost:5000/cart/update',{
-//         method: "PATCH",
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify(item)
-//       })
-//       resolve();
-//     }
-//     );
-//   }

@@ -63,7 +63,7 @@ export default function CardSlider() {
                           };
                           const RouterChange = () => {
                             navigate(
-                              "/sale/products/details/" + value._id + "/"
+                              "/products/details/" + value._id + "/"
                             );
                           };
                           return (

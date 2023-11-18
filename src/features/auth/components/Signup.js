@@ -1,33 +1,45 @@
 import React from "react";
 import loginImg from "../../../images/login.png";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 const Signup = () => {
-  const [credentials, setCredentials] = useState({ userName:"",email: "", password: "" });
+  const [credentials, setCredentials] = useState({
+    userName: "",
+    email: "",
+    password: "",
+    cPassword: "",
+  });
   let navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:5000/signup/createuser", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: credentials.email,
-        password: credentials.password,
-      }),
-    });
-    const json = await response.json();
-    console.log(json);
-    if (json.success) {
-      // Save the auth token and redirect
-      localStorage.setItem("token", json.authtoken);
-      navigate("/admin");
-      // props.showAlert("Logged in successfully","success")
+    if (credentials.password != credentials.cPassword) {
+      console.log("Passwords do not match");
+      return;
     } else {
-      // props.showAlert("Invalid Credentials","danger")
+      const response = await fetch("http://localhost:5000/signup/createuser", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: credentials.userName,
+          email: credentials.email,
+          password: credentials.password,
+        }),
+      });
+      const json = await response.json();
+      console.log(json);
+      if (json.success) {
+        // Save the auth token and redirect
+        localStorage.setItem("token", json.authtoken);
+        navigate("/admin");
+        // props.showAlert("Logged in successfully","success")
+        // } else {
+        // props.showAlert("Invalid Credentials","danger")
+        // }
+      }
     }
   };
 
@@ -52,8 +64,9 @@ const Signup = () => {
               className="form-control border-0 border-bottom rounded-0 w-50"
               id="InputName"
               placeholder="Name"
+              name="userName"
               value={credentials.userName}
-              onChange={(e)=>onChange(e)}
+              onChange={(e) => onChange(e)}
             />
           </div>
           <div className="mb-3 mt-4">
@@ -62,26 +75,31 @@ const Signup = () => {
               className="form-control border-0 border-bottom rounded-0 w-50"
               id="InputEmail"
               placeholder="Email or Phone Number"
+              name="email"
               value={credentials.email}
-              onChange={(e)=>onChange(e)}
+              onChange={(e) => onChange(e)}
             />
           </div>
           <div className="mb-3">
             <input
               type="password"
               className="form-control border-0 border-bottom rounded-0 w-50"
-              id="InputPassword"
+              id="inputPassword"
               placeholder="Password"
+              name="password"
+              value={credentials.password}
+              onChange={(e) => onChange(e)}
             />
           </div>
           <div className="mb-3">
             <input
               type="password"
               className="form-control border-0 border-bottom rounded-0 w-50"
-              id="InputPassword"
+              id="inputCPassword"
               placeholder="Confirm Password"
-              value={credentials.password}
-              onChange={(e)=>onChange(e)}
+              name="cPassword"
+              value={credentials.cPassword}
+              onChange={(e) => onChange(e)}
             />
           </div>
           <button type="submit" className="btn btn-danger fs-6 fw-normal w-50">

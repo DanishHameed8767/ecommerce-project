@@ -1,9 +1,14 @@
-const { Arrival } = require("../models/arrivalModel");
 const { Product } = require("../models/productModel");
-const { Sale } = require("../models/saleModel");
 
 exports.getallProducts = async (req, res) => {
-  const products = await Product.find();
+  const type = req.query.type;
+  const products = await Product.find({type});
+  res.send(products);
+};
+
+exports.getProductsByType = async (req, res) => {
+  const type = req.query.type;
+  const products = await Product.find({type});
   res.send(products);
 };
 
@@ -26,23 +31,8 @@ exports.getallProductsByCategory = async (req, res) => {
 exports.updateProducts = async (req, res) => {
   const arr = req.body;
   try{arr.forEach(async(value)=>{
-    const product = value.product ;
-    const arrival = value.arrival;
-    if(product){
-    await Product.updateOne({_id:value.product._id},{stock: value.product.stock - 1},{new: true});
-    await Product.updateOne({_id:value.product._id},{sellCount: value.product.sellCount + 1},{new: true});
-  }
-  else if(arrival){
-    await Arrival.updateOne({_id:value.arrival._id},{stock: value.arrival.stock - 1},{new: true})
-    await Arrival.updateOne({_id:value.arrival._id},{sellCount: value.arrival.sellCount + 1},{new: true});
-  }
-  else{
-    await Sale.updateOne({_id:value.sale._id},{stock: value.sale.stock - 1},{new: true})
-    await Sale.updateOne({_id:value.sale._id},{sellCount: value.sale.sellCount + 1},{new: true});
-    if(value.sale.saleStock){
-      await Sale.findOneAndUpdate({_id:value.sale._id},{saleStock: value.sale.saleStock - 1},{new: true})
-    }
-  }
+    await Product.updateOne({_id:value.product._id},{stock: value.product.stock - value.quantity},{new: true});
+    await Product.updateOne({_id:value.product._id},{sellCount: value.product.sellCount + value.quantity},{new: true});
   })
   res.json("success");}
   catch(err){
@@ -51,8 +41,7 @@ exports.updateProducts = async (req, res) => {
 };
 
 exports.fetchProductById = async (req, res) => {
-  const { id } = req.params;
-
+  const id = req.params.id;
   try {
     const product = await Product.findById(id);
     if(!product){
@@ -69,6 +58,43 @@ exports.fetchProductById = async (req, res) => {
 
 exports.updateMany = async (req, res) => {
 
-  const products = await Product.updateMany({},{sellCount:0},{new:true});
+  const products = await Product.updateMany({},{type:'product'},{new:true});
   res.send(products);
 }
+
+exports.searchProducts = async (req, res) => {
+  const keyword = req.query.q;
+  const regex = new RegExp(keyword, 'i');
+
+// Mongoose query to search products based on keywords
+const searchQuery = {
+  $or: [
+    { title: { $regex: regex } },
+    { description: { $regex: regex } },
+    { category: { $regex: regex } },
+    { subCategory: { $regex: regex } },
+    { brands: { $regex: regex } },
+  ],
+};
+try{
+  const products = await Product.find(searchQuery);
+  res.send(products)
+} catch(error){
+  res.status(400).send({error});
+}
+
+};
+
+
+exports.updateArrival = async (req, res) => {
+  const product_id = req.body._id;
+  const update = { ...req.body };
+  try {
+    await Product.findOneAndUpdate({ _id: product_id }, update, { new: true });
+    res.status(200).send({ ...req.body });
+  } catch (error) {
+    res.status(400).send({
+      message: "Bad request",
+    });
+  }
+};

@@ -29,6 +29,7 @@ export default function AddProduct() {
     longDescription: "",
     rating: 0,
     images: [],
+    type: "product",
   });
   const [subCategories, setSubCategories] = useState([]);
   const editor = useRef(null);

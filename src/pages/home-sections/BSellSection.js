@@ -1,7 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getProductDetail,
   selectAllProducts,
   viewSaleProducts,
 } from "../../features/product/productSlice";
@@ -12,11 +11,9 @@ export default function BSellSection() {
   const selectProducts = useSelector(selectAllProducts);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // console.log(products.length)
   const products = [...selectProducts].sort(function(a, b){
     return b.sellCount - a.sellCount;
     });
-  console.log(products);
   return (
     <>
       <div className="container-fluid card-gap">

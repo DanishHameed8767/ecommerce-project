@@ -1,5 +1,6 @@
 import React from "react";
 import Qrcode from "../../images/Qrcode 1.png";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
@@ -49,29 +50,29 @@ export default function Footer() {
               <h5 className="mb-3">Account</h5>
               <ul className="nav flex-column">
                 <li className="mb-2">
-                  <a href="..." className="nav-link p-0 text-white">
+                  <Link to="/login" className="nav-link p-0 text-white">
                     My Account
-                  </a>
+                  </Link>
                 </li>
                 <li className="mb-2">
-                  <a href="..." className="nav-link p-0 text-white">
-                    Login / Register
-                  </a>
+                  <Link to='/order/list' className="nav-link p-0 text-white">
+                    My Orders
+                  </Link>
                 </li>
                 <li className="mb-2">
-                  <a href="..." className="nav-link p-0 text-white">
+                  <Link to="/cart" className="nav-link p-0 text-white">
                     Cart
-                  </a>
+                  </Link>
                 </li>
                 <li className="mb-2">
-                  <a href="..." className="nav-link p-0 text-white">
+                  <Link to="/wishlist" className="nav-link p-0 text-white">
                     Wishlist
-                  </a>
+                  </Link>
                 </li>
                 <li className="mb-2">
-                  <a href="..." className="nav-link p-0 text-white">
+                  <Link to="/" className="nav-link p-0 text-white">
                     Shop
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -103,7 +104,7 @@ export default function Footer() {
             <div className="col-md-2 mb-3">
               <form>
                 <h5>Download App</h5>
-                <p>Save $3 with App New User Only</p>
+                <p>Save PKR 3 with App New User Only</p>
                 <div className="d-flex flex-column flex-sm-row w-100 gap-2">
                   <img src={Qrcode} alt="" className="mx-auto" />
                 </div>

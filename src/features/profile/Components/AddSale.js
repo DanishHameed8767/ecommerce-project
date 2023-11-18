@@ -28,6 +28,7 @@ export default function AddSale() {
     longDescription: "",
     rating: 0,
     images: [],
+    type: "sale",
   });
   const [time, setTime] = useState("");
 
@@ -53,21 +54,7 @@ export default function AddSale() {
     if (salesData == null) {
       return;
     } else {
-      const sendData = async () => {
-        const response = await fetch("http://localhost:5000/addsale", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(salesData),
-        });
-        const json = await response.json();
-        console.log(json);
-
-        //     dispatch(addProduct(json));
-        // console.log(credentials);
-      };
-      sendData();
+        dispatch(addProductAsync(salesData));
     }
   }, [salesData]);
 

@@ -62,9 +62,9 @@ export default function NewArrival() {
                         </p>
                       <div className="mb-5">
                         <Link
-                          to={"/arrivals/details/" + main._id}
+                          to={"/products/details/" + main._id}
                           className="ms-4 text-decoration-none text-white border-bottom border-white"
-                        >
+                        > 
                           Shop now
                         </Link>
                       </div>
@@ -80,7 +80,7 @@ export default function NewArrival() {
                           </p>
                           <div className="mb-3">
                             <Link
-                              to={"/arrivals/details/" + side1._id}
+                              to={"/products/details/" + side1._id}
                               className="ms-3 text-decoration-none text-white border-bottom border-white"
                             >
                               Shop now
@@ -98,7 +98,7 @@ export default function NewArrival() {
                               </p>
                               <div className="mb-3">
                                 <Link
-                                  to={"/arrivals/details/" + side2._id}
+                                  to={"/products/details/" + side2._id}
                                   className="ms-3 text-decoration-none text-white border-bottom border-white"
                                 >
                                   Shop now
@@ -116,7 +116,7 @@ export default function NewArrival() {
                               </p>
                               <div className="mb-3">
                                 <Link
-                                  to={"/arrivals/details/" + side3._id}
+                                  to={"/products/details/" + side3._id}
                                   className="ms-3 text-decoration-none text-white border-bottom border-white"
                                 >
                                   Shop now

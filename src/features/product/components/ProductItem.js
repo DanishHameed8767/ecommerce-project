@@ -3,7 +3,6 @@ import React from "react";
 const ProductItem = ({ item, handleClick, RouterChange }) => {
   var src = item.thumbnail;
   if (item.thumbnail.slice(0,6)=='image_') {
-    console.log(item.thumbnail.slice(0,6));
     const _path = "http://localhost:5000/images/";
      src = _path + item.thumbnail;
   }
@@ -51,13 +50,12 @@ const ProductItem = ({ item, handleClick, RouterChange }) => {
             </h5>
             <p className="card-text">{item.description.slice(0, 50)}...</p>
             <span className="text-danger">
-              $
-              {Math.ceil(
+              PKR {Math.ceil(
                 item.price - (item.price * item.discountPercentage) / 100
               )}
             </span>
             <span className="text-decoration-line-through text-secondary ms-3">
-              ${item.price}
+              PKR {item.price}
             </span>
             <div className="float-end">
               <i className="fa-regular fa-star"></i>

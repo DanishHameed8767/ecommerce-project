@@ -24,9 +24,9 @@ import ViewProductsPage from "./pages/ViewProductsPage";
 import AddSale from "./features/profile/Components/AddSale";
 import Timer from "./features/Timer";
 import CardSlider from "./pages/home-sections/CardSlider";
-import SalesDetailPage from "./pages/SalesDetailPage";
 import UpdateArrival from "./features/profile/Components/UpdateArrival";
-import ArrivalsDetailPage from "./pages/ArrivalsDetailPage";
+import { checkUserAsync } from "./features/auth/authSlice";
+import ViewSearchPage from "./pages/ViewSearchPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -49,16 +49,12 @@ const router = createBrowserRouter([
     element: <ProductDetailPage />,
   },
   {
-    path: "/sale/products/details/:id",
-    element: <SalesDetailPage />,
-  },
-  {
-    path: "/arrivals/details/:id",
-    element: <ArrivalsDetailPage />,
-  },
-  {
     path: "/products/view",
     element: <ViewProductsPage />,
+  },
+  {
+    path: "/search/results",
+    element: <ViewSearchPage />,
   },
   {
     path: "/wishlist",
@@ -135,9 +131,10 @@ function App() {
   useEffect(() => {
     dispatch(fetchAllCartProductsAsync());
     dispatch(fetchAllWishlistProductsAsync());
-    dispatch(fetchAllProductsAsync());
+    dispatch(fetchAllProductsAsync('product'));
     dispatch(fetchAllSalesAsync());
     dispatch(fetchAllCategoriesAsync());
+    dispatch(checkUserAsync());
   }, []);
 
   return (
