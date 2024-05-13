@@ -1,6 +1,7 @@
 import React from "react";
 
 const ProductItem = ({ item, handleClick, RouterChange }) => {
+  console.log(item);
   var src = item.thumbnail;
   if (item.thumbnail.slice(0,6)=='image_') {
     const _path = "http://localhost:5000/images/";

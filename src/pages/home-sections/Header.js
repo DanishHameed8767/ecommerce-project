@@ -23,12 +23,17 @@ const Header = () => {
       <div className="row container-fluid">
         <div className="list-group col-3">
           {categories.filter((x,i,arr)=>i<9).map((value) => {
-            const word = value.category;
-            const first_letter = word.charAt(0).toUpperCase();
-            const category = first_letter + word.slice(1);
+            const cat = value.category;
+            const words = cat.split(' ');
+            words.forEach((element,i,arr) => {
+              const fst_letter = element.charAt(0).toUpperCase();
+              arr[i] = fst_letter + element.slice(1);
+            });
+           const capWords = words.join(' ');
+           console.log(capWords)
 
             const handleClick = () => {
-              dispatch(fetchAllProductsByCategoryAsync({ category: category }));
+              dispatch(fetchAllProductsByCategoryAsync({ category: cat }));
               navigate("/products/view");
             };
             return (
@@ -37,7 +42,7 @@ const Header = () => {
                 onClick={handleClick}
                 className="list-group-item cursor-pointer border-0 text-end fs-5"
               >
-                {category}
+                {capWords}
               </a>
             );
           })}
@@ -60,7 +65,7 @@ const Header = () => {
               Up to 10% off Voucher
             </div>
             <Link
-              to="products/details/654dc36556de68f9f953c575"
+              to="products/details/66404c55ed8d0a1edabfeef8"
               className="ms-3 text-decoration-none text-white border-bottom border-white"
             >
               Shop now
@@ -85,7 +90,7 @@ const Header = () => {
               Up to 10% off Voucher
             </div>
             <Link
-              to="/products/details/654dc40a56de68f9f953c595"
+              to="/products/details/66404d18ed8d0a1edabfeef9"
               className="ms-3 text-decoration-none text-white border-bottom border-white"
             >
               Shop now
@@ -107,10 +112,10 @@ const Header = () => {
               </div>
             </div>
             <div className="fs-1 fw-normal text-white ms-3">
-              Up to 15% off Voucher
+              Up to 7% off Voucher
             </div>
             <Link
-              to="/products/details/654dc3c456de68f9f953c585"
+              to="/products/details/66404b93ed8d0a1edabfeef7"
               className="ms-3 text-decoration-none text-white border-bottom border-white"
             >
               Shop now

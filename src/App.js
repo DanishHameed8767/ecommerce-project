@@ -7,10 +7,10 @@ import CartPage from "./pages/CartPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import WishlistPage from "./pages/WishlistPage";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchAllCartProductsAsync } from "./features/cart/cartSlice";
 import { fetchAllWishlistProductsAsync } from "./features/wishlist/wishlistSlice";
-import { fetchAllProductsAsync, fetchAllSalesAsync } from "./features/product/productSlice";
+import { fetchAllProductsAsync, fetchAllSalesAsync, selectAllProducts, selectAllProductsList } from "./features/product/productSlice";
 import Checkout from "./features/Checkout/components/Checkout";
 import OrderPlaced from "./features/Checkout/components/OrderPlaced";
 import OrderList from "./features/Checkout/components/OrderList";
@@ -136,7 +136,8 @@ function App() {
     dispatch(fetchAllCategoriesAsync());
     dispatch(checkUserAsync());
   }, []);
-
+  const products = useSelector(selectAllProducts)
+  console.log(products);
   return (
     <>
       <div className="App">

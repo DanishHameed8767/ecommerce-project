@@ -20,6 +20,7 @@ export const fetchAllArrivalsAsync = createAsyncThunk(
   "admin/fetchAllArrivals",
   async () => {
     const response = await fetchAllArrivals();
+    console.log(response.data)
     return response.data;
   }
 );

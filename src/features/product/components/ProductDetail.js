@@ -17,6 +17,7 @@ const ProductDetail = () => {
     discount = null;
 
   }
+  console.log(detail);
    const handleClick = () => {
      dispatch(addToCartAsync(detail));
     };

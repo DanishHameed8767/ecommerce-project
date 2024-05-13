@@ -9,6 +9,7 @@ const {
   searchProducts,
   getProductsByType,
   updateArrival,
+  addProductMany,
 } = require("../controller/product");
 const { body } = require("express-validator");
 const path = require("path");
@@ -51,6 +52,7 @@ Router.post("/updatearrival", updateArrival);
 Router.get("/wishlist", showWishlist);
 Router.post("/wishlist/add", addToWishlist);
 Router.delete("/wishlist/del", delFromWishlist);
+Router.post("/addmany",addProductMany);
 
 Router.get("/cart", showCart);
 Router.post("/cart/add", addToCart);

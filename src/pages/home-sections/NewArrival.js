@@ -29,6 +29,7 @@ export default function NewArrival() {
 
   useEffect(()=>{
     if(selectArrivals){
+      console.log(selectArrivals)
       setMain(selectArrivals[0]);
       setSide1(selectArrivals[1]);
       setSide2(selectArrivals[2]);

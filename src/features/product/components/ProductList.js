@@ -31,6 +31,7 @@ export default function ProductList() {
               dispatch(addToWishlistAsync(value));
             };
             const RouterChange = () => {
+              console.log(value.id)
               navigate("/products/details/" + value._id + "/");
             };
             return (

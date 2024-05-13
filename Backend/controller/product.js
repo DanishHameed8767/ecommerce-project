@@ -22,6 +22,18 @@ exports.addProduct = async (req, res) => {
   }
 };
 
+
+exports.addProductMany = async (req, res) => {
+  try {
+    console.log(req.body);
+    const product = Product.insertMany(req.body);
+    await product.save();
+    res.send('success');
+  } catch (error) {
+    res.send(error);
+  }
+};
+
 exports.getallProductsByCategory = async (req, res) => {
   const category = req.body.category;
   const products = await Product.find({ category });
@@ -58,7 +70,7 @@ exports.fetchProductById = async (req, res) => {
 
 exports.updateMany = async (req, res) => {
 
-  const products = await Product.updateMany({},{type:'product'},{new:true});
+  const products = await Product.updateMany({category:req.body.oldCat},{category:req.body.newCat,subCategory:req.body.oldCat},{new:true});
   res.send(products);
 }
 
