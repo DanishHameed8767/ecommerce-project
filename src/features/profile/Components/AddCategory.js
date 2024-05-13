@@ -9,6 +9,7 @@ import {
   selectAllCategories,
 } from "../AdminSlice";
 import { useState } from "react";
+import { capitalizeAllWords } from "../../../app/constant";
 
 export default function AddCategory() {
   const [category, setCategory] = useState("");
@@ -16,7 +17,6 @@ export default function AddCategory() {
   const [subCategory, setSubCategory] = useState("");
   const dispatch = useDispatch();
   const categories = useSelector(selectAllCategories);
-
   const handleAddCategory = () => {
     const data = {
       category: category,
@@ -36,7 +36,6 @@ export default function AddCategory() {
       const arr2 = Arr.slice();
       arr2.push(subCategory);
       const data = { category: chooseCategory, subCategory: arr2 };
-      console.log(data);
       dispatch(addSubCategoryAsync(data));
       setSubCategory("");
     }
@@ -81,9 +80,9 @@ export default function AddCategory() {
               >
                 Add Category
               </div>
-              <div className="btn btn-primary" id="del-course">
+              {/* <div className="btn btn-primary" id="del-course">
                 Delete Category
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -97,10 +96,8 @@ export default function AddCategory() {
           >
             <option value="">Choose Category</option>
             {categories.map((value) => {
-              const val = value.category;
-              const abc = val.charAt(0).toUpperCase();
-              const category = abc + val.slice(1);
-              return <option value={category}>{category}</option>;
+              const category = capitalizeAllWords(value.category);
+              return <option value={value.category}>{category}</option>;
             })}
           </select>
           <div>
@@ -121,9 +118,9 @@ export default function AddCategory() {
               >
                 Add Sub Category
               </div>
-              <div className="btn btn-primary" id="del-user">
+              {/* <div className="btn btn-primary" id="del-user">
                 Delete Sub Category
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

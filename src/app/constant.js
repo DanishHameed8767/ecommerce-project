@@ -21,3 +21,35 @@ export function shuffle(array) {
 
   return array;
 }
+
+export function capitalizeFirstWord(word) {
+  const first_letter = word.charAt(0).toUpperCase();
+  const finalWord = first_letter + word.slice(1);
+  return finalWord;
+}
+
+export function uncapitalizeFirstWord(word) {
+  const first_letter = word.charAt(0).toLowerCase();
+  const finalWord = first_letter + word.slice(1);
+  return finalWord;
+}
+
+export function capitalizeAllWords(strng) {
+            const words = strng.split(' ');
+            words.forEach((element,i,arr) => {
+              const fst_letter = element.charAt(0).toUpperCase();
+              arr[i] = fst_letter + element.slice(1);
+            });
+           const capString = words.join(' ');
+           return capString;
+}
+
+export function unCapitalizeAllWords(strng) {
+            const words = strng.split(' ');
+            words.forEach((element,i,arr) => {
+              const fst_letter = element.charAt(0).toLowerCase();
+              arr[i] = fst_letter + element.slice(1);
+            });
+           const capString = words.join(' ');
+           return capString;
+}

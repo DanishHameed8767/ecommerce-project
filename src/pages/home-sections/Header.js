@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectAllCategories } from "../../features/profile/AdminSlice";
 import { Link, useNavigate } from "react-router-dom";
 import { fetchAllProductsByCategoryAsync } from "../../features/product/productSlice";
-import { shuffle } from "../../app/constant";
+import { capitalizeAllWords, shuffle } from "../../app/constant";
 const Header = () => {
   const dispatch = useDispatch();
   // const arrNum = [1,2,3];
@@ -23,17 +23,9 @@ const Header = () => {
       <div className="row container-fluid">
         <div className="list-group col-3">
           {categories.filter((x,i,arr)=>i<9).map((value) => {
-            const cat = value.category;
-            const words = cat.split(' ');
-            words.forEach((element,i,arr) => {
-              const fst_letter = element.charAt(0).toUpperCase();
-              arr[i] = fst_letter + element.slice(1);
-            });
-           const capWords = words.join(' ');
-           console.log(capWords)
-
+            const capWords = capitalizeAllWords(value.category);
             const handleClick = () => {
-              dispatch(fetchAllProductsByCategoryAsync({ category: cat }));
+              dispatch(fetchAllProductsByCategoryAsync({ category: value.category }));
               navigate("/products/view");
             };
             return (
