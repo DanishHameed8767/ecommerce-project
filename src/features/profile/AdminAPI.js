@@ -64,7 +64,6 @@ export function addProduct(item) {
 }
 
 export function uploadImage(formData) {
-  console.log(formData);
   return new Promise(async (resolve) => {
     const response = await fetch("http://localhost:5000/uploadimage", {
       method: "POST",

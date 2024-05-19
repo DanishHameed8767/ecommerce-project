@@ -29,7 +29,7 @@ export default function OrderList() {
               <small className="opacity-50 text-nowrap"></small>
             </div>
           </a>
-          {allOrders.map((val) => {
+          {allOrders.map((val,i) => {
             return (
               <a
                 href="..."
@@ -38,9 +38,9 @@ export default function OrderList() {
               >
                 <div className="d-flex gap-2 w-100 justify-content-between">
                   <div>
-                    <h6 className="mb-0"># {val.order_number}</h6>
+                    <h6 className="mb-0"># {++i}</h6>
                   </div>
-                  <div className="ps-4">PKR {val.total}</div>
+                  <div className="ps-4">PKR {val.total_amount}</div>
                   <div>{val.status}</div>
                   <small className="opacity-50 text-nowrap"></small>
                 </div>

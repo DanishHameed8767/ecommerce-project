@@ -11,6 +11,7 @@ import {
   uploadImageAsync,
 } from "../AdminSlice";
 import { useEffect } from "react";
+import { capitalizeAllWords } from "../../../app/constant";
 
 export default function AddProduct() {
   const dispatch = useDispatch();
@@ -52,7 +53,6 @@ export default function AddProduct() {
     } else {
       const sendData = async () => {
         dispatch(addProductAsync(productData));
-        console.log(credentials);
       };
       sendData();
     }
@@ -176,10 +176,8 @@ export default function AddProduct() {
           >
             <option value={credentials.category}>Choose Category</option>
             {categories.map((value) => {
-              const val = value.category;
-              const abc = val.charAt(0).toUpperCase();
-              const category = abc + val.slice(1);
-              return <option value={category}>{category}</option>;
+              const category = capitalizeAllWords(value.category)
+              return <option value={value.category}>{category}</option>;
             })}
           </select>
         </div>

@@ -12,7 +12,6 @@ const Wishlist = () => {
   let navigate = useNavigate();
   let dispatch = useDispatch();
   const wishProducts = useSelector(selectAllWishlistProducts);
-  console.log(wishProducts);
   useEffect(() => {
     dispatch(fetchAllWishlistProductsAsync());
     // eslint-disable-next-line
@@ -30,7 +29,6 @@ const Wishlist = () => {
               dispatch(delFromWishlistAsync(value));
             };
             const RouterChange = () => {
-              console.log(value);
               
               value.product && navigate("/products/details/" + value.product._id + "/");
               value.sale && navigate("/products/details/" + value.sale._id + "/");

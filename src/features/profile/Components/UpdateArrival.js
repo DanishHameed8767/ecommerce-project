@@ -27,7 +27,6 @@ export default function UpdateArrival() {
   const side3ImageStyle = {
     background: `url(${_path}${side3.thumbnail}) no-repeat center`,
   }
-  console.log(selectArrivals);
 
   const handleUpdate = (e) => {
     switch (e.target.name) {
@@ -69,7 +68,6 @@ export default function UpdateArrival() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if(credentials.thumbnail.slice(0,6) != 'image_'){
-      console.log("Please")
       const formData = new FormData();
       formData.append("image", credentials.thumbnail);
       const img_response = await fetch("http://localhost:5000/uploadimage", {
@@ -85,7 +83,6 @@ export default function UpdateArrival() {
   };
   
   useEffect(() => {
-    console.log(productData)
     if (productData == null) {
       return;
     } else {
@@ -124,7 +121,6 @@ export default function UpdateArrival() {
 
   useEffect(()=>{
     if(selectArrivals){
-      console.log(selectArrivals)
       setMain(selectArrivals[0]);
       setSide1(selectArrivals[1]);
       setSide2(selectArrivals[2]);

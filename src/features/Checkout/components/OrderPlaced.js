@@ -1,6 +1,16 @@
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { addOrderAsync } from "../orderSlice";
 
 function OrderPlaced() {
+  const dispatch = useDispatch();
+  useEffect(()=>{
+    if(localStorage.getItem("order")){
+      dispatch(addOrderAsync());
+      localStorage.removeItem("order")
+    }
+  },[])
   return (
     <>
       <div className="container">

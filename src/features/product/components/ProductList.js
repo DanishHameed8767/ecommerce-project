@@ -27,11 +27,9 @@ export default function ProductList() {
             const handleClick = (e) => {
               e.preventDefault();
               e.target.style.color = "red";
-              console.log(value);
               dispatch(addToWishlistAsync(value));
             };
             const RouterChange = () => {
-              console.log(value.id)
               navigate("/products/details/" + value._id + "/");
             };
             return (

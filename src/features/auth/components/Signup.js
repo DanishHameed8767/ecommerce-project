@@ -15,7 +15,6 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (credentials.password != credentials.cPassword) {
-      console.log("Passwords do not match");
       return;
     } else {
       const response = await fetch("http://localhost:5000/signup/createuser", {
@@ -30,7 +29,6 @@ const Signup = () => {
         }),
       });
       const json = await response.json();
-      console.log(json);
       if (json.success) {
         // Save the auth token and redirect
         localStorage.setItem("token", json.authtoken);

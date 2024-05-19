@@ -1,6 +1,10 @@
 import "./App.css";
 import Home from "./pages/Home";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  useNavigate,
+} from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import CartPage from "./pages/CartPage";
@@ -10,7 +14,12 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllCartProductsAsync } from "./features/cart/cartSlice";
 import { fetchAllWishlistProductsAsync } from "./features/wishlist/wishlistSlice";
-import { fetchAllProductsAsync, fetchAllSalesAsync, selectAllProducts, selectAllProductsList } from "./features/product/productSlice";
+import {
+  fetchAllProductsAsync,
+  fetchAllSalesAsync,
+  selectAllProducts,
+  selectAllProductsList,
+} from "./features/product/productSlice";
 import Checkout from "./features/Checkout/components/Checkout";
 import OrderPlaced from "./features/Checkout/components/OrderPlaced";
 import OrderList from "./features/Checkout/components/OrderList";
@@ -120,24 +129,15 @@ const router = createBrowserRouter([
 
 function App() {
   const dispatch = useDispatch();
-  // const user = useSelector(selectLoggedInUser);
 
-  // useEffect(() => {
-  //   if (user) {
-  //     dispatch(fetchItemsByUserIdAsync(user.id));
-  //     dispatch(fetchLoggedInUserAsync(user.id));
-  //   }
-  // }, [dispatch, user]);
   useEffect(() => {
     dispatch(fetchAllCartProductsAsync());
     dispatch(fetchAllWishlistProductsAsync());
-    dispatch(fetchAllProductsAsync('product'));
+    dispatch(fetchAllProductsAsync("product"));
     dispatch(fetchAllSalesAsync());
     dispatch(fetchAllCategoriesAsync());
     dispatch(checkUserAsync());
   }, []);
-  const products = useSelector(selectAllProducts)
-  console.log(products);
   return (
     <>
       <div className="App">

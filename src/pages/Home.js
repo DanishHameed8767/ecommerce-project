@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 import Header from "./home-sections/Header";
 import Navbar from "../features/Navbar";
 import CardSlider from "./home-sections/CardSlider";

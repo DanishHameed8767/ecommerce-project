@@ -2,11 +2,10 @@
 
 export function fetchAllCartProducts() {
   return new Promise(async (resolve) => {
-    const response = await fetch("http://localhost:5000/cart",{
+    const response = await fetch("http://localhost:5000/cart", {
       method: "GET",
       headers: {
-          'Content-Type': 'application/json',
-          "auth-token": localStorage.getItem("token")
+        "auth-token": localStorage.getItem("token"),
       },
     });
     const data = await response.json();
@@ -15,17 +14,18 @@ export function fetchAllCartProducts() {
 }
 
 export function addToCart(item) {
-    return new Promise(async (resolve) => {
-      const response = await fetch("http://localhost:5000/cart/add", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(item),
-      });
-      const data = await response.json();
-      resolve({ data });
+  return new Promise(async (resolve) => {
+    const response = await fetch("http://localhost:5000/cart/add", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": localStorage.getItem("token"),
+      },
+      body: JSON.stringify(item),
     });
+    const data = await response.json();
+    resolve({ data });
+  });
 }
 
 export function delFromCart(item) {
@@ -50,19 +50,6 @@ export function updateCart(item) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(item),
-    });
-    const data = await response.json();
-    resolve({ data });
-  });
-}
-
-export function clearCart() {
-  return new Promise(async (resolve) => {
-    const response = await fetch("http://localhost:5000/cart/clear", {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
     });
     const data = await response.json();
     resolve({ data });

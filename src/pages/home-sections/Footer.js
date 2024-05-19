@@ -8,13 +8,13 @@ export default function Footer() {
       <div className="container-fluid bg-black text-white">
         <footer className="py-5 container">
           <div className="row">
-            <div className="col-md-3 mb-3">
+            <div className="col-md-3 mb-3 footer-email">
               <form>
                 <h5 className="mb-3">Exclusive</h5>
                 <p>Subscribe</p>
                 <p>Get 10% off your first order</p>
-                <div className="d-flex flex-column flex-sm-row w-100 gap-2">
-                  <div className="input-icons">
+                <div className="d-flex flex-column flex-sm-row w-md-100 w-sm-50 gap-2">
+                  <div className="input-icons col-sm-6">
                     <input
                       className="input-field form-control rounded-0"
                       type="text"

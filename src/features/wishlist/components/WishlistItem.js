@@ -3,13 +3,10 @@ import React from "react";
 const WishlistItem = ({ val, handleClick, RouterChange }) => {
   const item = val.product || val.sale || val.arrival;
   var src = item.thumbnail;
-  console.log(item)
   if (item.thumbnail.slice(0,6)=='image_') {
-    console.log(item.thumbnail.slice(0,6))
     const _path = "http://localhost:5000/images/";
      src = _path + item.thumbnail;
   }
-  console.log(src)
   return (
     <>
       <div className="col-md-3">

@@ -25,7 +25,6 @@ exports.addProduct = async (req, res) => {
 
 exports.addProductMany = async (req, res) => {
   try {
-    console.log(req.body);
     const product = Product.insertMany(req.body);
     await product.save();
     res.send('success');

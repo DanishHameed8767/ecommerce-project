@@ -148,7 +148,6 @@ export const productSlice = createSlice({
       })
       .addCase(updateProductStockAsync.rejected, (state,action) => {
         state.status = "idle";
-        console.log(action.error);
       })
       .addCase(searchProductsAsync.pending, (state) => {
         state.status = "loading";
@@ -159,7 +158,6 @@ export const productSlice = createSlice({
       })
       .addCase(searchProductsAsync.rejected, (state,action) => {
         state.status = "idle";
-        console.log(action.error);
       })
   },
 });

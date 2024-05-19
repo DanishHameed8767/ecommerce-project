@@ -16,7 +16,7 @@ export default function CardSlider() {
   const navigate = useNavigate();
   return (
     <>
-      <div className="container d-flex justify-content-start px-0 card-gap ms-4">
+      <div className="container d-flex justify-content-start px-0 card-gap ms-4 w-50">
         <div className="red-box bg-danger"></div>
         <div className="mt-2 text-danger ms-2">Today's</div>
       </div>

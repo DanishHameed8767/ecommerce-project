@@ -2,7 +2,12 @@
 
 export function fetchAllWishlistProducts() {
   return new Promise(async (resolve) => {
-    const response = await fetch("http://localhost:5000/wishlist");
+    const response = await fetch("http://localhost:5000/wishlist",{
+      method:"GET",
+      headers:{
+        "auth-token": localStorage.getItem("token")
+      }
+    });
     const data = await response.json();
     resolve({ data });
   });
@@ -14,6 +19,7 @@ export function addToWishlist(item) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "auth-token": localStorage.getItem("token")
         },
         body: JSON.stringify(item),
       });
@@ -31,7 +37,6 @@ export function delFromWishlist(item) {
       },
       body: JSON.stringify(item),
     });
-    console.log(item)
     const data = await response.json();
     resolve({ data });
   });

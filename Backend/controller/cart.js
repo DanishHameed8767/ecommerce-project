@@ -1,10 +1,11 @@
 const { Cart } = require("../models/cartModel");
-const id = "6516dd04b8f369dccde44140";
+const { Order } = require("../models/orderModel");
+const { Product } = require("../models/productModel");
 
 exports.showCart = async (req, res) => {
-  const id = "6516dd04b8f369dccde44140";
   try {
-    const products = await Cart.find({ user: id, product: { $exists: true }}).populate("product");
+    userId = req.user.id;
+    const products = await Cart.find({ user: userId, product: { $exists: true }}).populate("product");
     res.send(products);
   } catch (error) {
     res.send(error);
@@ -12,11 +13,12 @@ exports.showCart = async (req, res) => {
 };
 
 exports.addToCart = async (req, res) => {
+  userId = req.user.id;
   const product_id = req.body._id;
   const product_quantity = 1;
   const cart = new Cart({
     product: product_id,
-    user: id,
+    user: userId,
     quantity: product_quantity,
   });
   try {
@@ -53,9 +55,13 @@ exports.updateCart = async (req, res) => {
 };
 
 exports.clearCart = async (req, res) => {
-  try {
-    await Cart.deleteMany({ user: id });
-    res.status(200).json("success");
+  userId = req.user.id;
+  const orders = req.body;
+  try { 
+    const order = new Order({...orders,user:userId});
+    await order.save();
+    await Cart.deleteMany({ user: userId });
+    res.status(200).json(order);
   } catch (err) {
     res.status(404).json(err);
   }

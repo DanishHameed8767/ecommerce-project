@@ -1,9 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { addOrder, showOrders } from "./orderAPI";
+import { addOrder, showOrders, startStripeCheckout } from "./orderAPI";
 
 const initialState = {
   items: [],
   status: "idle",
+  stripeResponse:{}
 };
 
 export const showOrdersAsync = createAsyncThunk(
@@ -18,6 +19,14 @@ export const addOrderAsync = createAsyncThunk(
   "order/addOrder",
   async (data) => {
     const response = await addOrder(data);
+    return response.data;
+  }
+);
+
+export const startStripeCheckoutAsync = createAsyncThunk(
+  "order/stripeCheckout",
+  async (data) => {
+    const response = await startStripeCheckout(data);
     return response.data;
   }
 );
@@ -40,10 +49,18 @@ export const orderSlice = createSlice({
       .addCase(addOrderAsync.fulfilled, (state, action) => {
         state.status = "idle";
         state.items.push(action.payload);
+      })
+      .addCase(startStripeCheckoutAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(startStripeCheckoutAsync.fulfilled, (state, action) => {
+        state.status = "idle";
+        state.stripeResponse = action.payload;
       });
   },
 });
 
 export const selectAllOrders = (state) => state.order.items;
+export const selectStripeResponse = (state) => state.order.stripeResponse;
 
 export default orderSlice.reducer;

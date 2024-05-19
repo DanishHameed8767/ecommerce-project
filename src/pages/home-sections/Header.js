@@ -17,11 +17,10 @@ const Header = () => {
   const navigate = useNavigate();
   const selectCategory = useSelector(selectAllCategories);
   const categories = shuffle([...selectCategory]);
-  console.log(categories);
   return (
     <>
-      <div className="row container-fluid">
-        <div className="list-group col-3">
+      <div className="row container-fluid header-sec">
+        <div className="list-group col-3 header-cat">
           {categories.filter((x,i,arr)=>i<9).map((value) => {
             const capWords = capitalizeAllWords(value.category);
             const handleClick = () => {
@@ -40,7 +39,7 @@ const Header = () => {
           })}
         </div>
         <div className="vr p-0" style={{ height: "370px", width: "1px" }}></div>
-        {filter==1 && <div className="container col-6 col-md-8 col-sm-12 d-flex flex-row justify-content-between mt-3 align-items-center" style={{backgroundColor:"black"}}>
+        {filter==1 && <div className=".d-md-block container col-6 col-md-8 col-sm-12 d-flex flex-row .d-sm-none justify-content-between mt-3 align-items-center" style={{backgroundColor:"black"}}>
           <div>
             <div className="d-flex flex-row mt-3 align-items-start">
               {/* <img
@@ -65,7 +64,7 @@ const Header = () => {
           </div>
           <img src={featureImg1}  height="344x" alt="" />
         </div>}
-        {filter==2 && <div className="container col-6 col-md-8 col-sm-12 d-flex flex-row justify-content-between mt-3 align-items-center" style={{backgroundColor:"green"}}>
+        {filter==2 && <div className=".d-md-block .d-sm-none container col-6 col-md-8 col-sm-12 d-flex flex-row justify-content-between mt-3 align-items-center" style={{backgroundColor:"green"}}>
           <div>
             <div className="d-flex flex-row mt-3 align-items-start">
               {/* <img
@@ -90,7 +89,7 @@ const Header = () => {
           </div>
           <img src={featureImg2}  height="398px" alt="" />
         </div>}
-        {filter==3 && <div className="container col-6 col-md-8 col-sm-12 d-flex flex-row justify-content-between mt-3 align-items-center" style={{backgroundColor:"#cb081e"}}>
+        {filter==3 && <div className=".d-sm-none .d-md-block container col-6 col-md-8 col-sm-12 d-flex flex-row justify-content-between mt-3 align-items-center" style={{backgroundColor:"#cb081e"}}>
           <div>
             <div className="d-flex flex-row mt-3 align-items-start">
               {/* <img

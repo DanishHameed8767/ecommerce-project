@@ -4,6 +4,7 @@ import ProfileNavbar from "./ProfileNavbar";
 import { addProductAsync, fetchAllCategoriesAsync, selectAllCategories } from "../AdminSlice";
 import { useEffect } from "react";
 import JoditEditor from "jodit-react";
+import { capitalizeAllWords } from "../../../app/constant";
 
 export default function AddSale() {
   const dispatch = useDispatch();
@@ -182,10 +183,8 @@ export default function AddSale() {
           >
             <option value={credentials.category}>Choose Category</option>
             {categories.map((value) => {
-              const val = value.category;
-              const abc = val.charAt(0).toUpperCase();
-              const category = abc + val.slice(1);
-              return <option value={category}>{category}</option>;
+              const category = capitalizeAllWords(value.category);
+              return <option value={value.category}>{category}</option>;
             })}
           </select>
         </div>
@@ -201,10 +200,8 @@ export default function AddSale() {
           >
             <option value={credentials.category}>Choose Category</option>
             {subCategories.map((value) => {
-              // const val = value.category;
-              const abc = value.charAt(0).toUpperCase();
-              const category = abc + value.slice(1);
-              return <option value={category}>{category}</option>;
+              const category = capitalizeAllWords(value);
+              return <option value={value}>{category}</option>;
             })}
           </select>
         </div>

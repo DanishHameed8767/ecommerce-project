@@ -29,7 +29,6 @@ export default function NewArrival() {
 
   useEffect(()=>{
     if(selectArrivals){
-      console.log(selectArrivals)
       setMain(selectArrivals[0]);
       setSide1(selectArrivals[1]);
       setSide2(selectArrivals[2]);
@@ -42,7 +41,7 @@ export default function NewArrival() {
   },[])
   return (
     <>
-      <div className="container-fluid">
+      <div className="container-fluid arrival-sec">
         <div className="container d-flex justify-content-start px-0 card-gap ms-4">
           <div className="red-box bg-danger"></div>
           <div className="mt-2 text-danger ms-2">Featured</div>

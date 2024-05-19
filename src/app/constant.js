@@ -35,6 +35,7 @@ export function uncapitalizeFirstWord(word) {
 }
 
 export function capitalizeAllWords(strng) {
+            if(strng === undefined) return;
             const words = strng.split(' ');
             words.forEach((element,i,arr) => {
               const fst_letter = element.charAt(0).toUpperCase();

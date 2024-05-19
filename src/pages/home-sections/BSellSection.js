@@ -17,19 +17,19 @@ export default function BSellSection() {
   return (
     <>
       <div className="container-fluid card-gap">
-        <div className="container d-flex justify-content-start px-0 card-gap ms-4">
+        <div className="container d-flex justify-content-start px-0 card-gap ms-4 w-50">
           <div className="red-box bg-danger"></div>
           <div className="mt-2 text-danger ms-2">This Month</div>
         </div>
         <section className="pt-5 pb-5">
           <div className="container-fluid">
             <div className="row">
-              <div className="col-8">
+              <div className="col-md-8 col-sm-4">
                 <div className="mb-3 fs-2 ms-2 fw-bold">
                   Best Selling Products
                 </div>
               </div>
-              <div className="col-4 text-right d-flex justify-content-center">
+              <div className="col-md-4 col-sm-2 text-right d-flex justify-content-center">
                 <button className="btn btn-danger btn-view-all text-white me-2" onClick={
                   () =>{
                     dispatch(viewSaleProducts(products))
@@ -39,7 +39,7 @@ export default function BSellSection() {
                   View All Products
                 </button>
               </div>
-              <div className="col-12">
+              <div className="col-12 p-0">
                 <div
                   id="carouselExampleIndicators2"
                   className="carousel slide"

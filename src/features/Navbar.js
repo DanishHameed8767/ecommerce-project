@@ -16,9 +16,11 @@ const Navbar = () => {
   }
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(keyword);
     dispatch(searchProductsAsync(keyword));
     navigate('/search/results');
+  }
+  const handleLogOut = () => {
+    localStorage.removeItem("token");
   }
   return (
     <>
@@ -32,15 +34,14 @@ const Navbar = () => {
           >
             <span className="navbar-toggler-icon" />
           </button>
-          <div className="collapse navbar-collapse d-flex justify-content-around" id="mynavbar">
-            <ul className="navbar-nav">
-              <li className="">     
+          <div className="collapse navbar-collapse" id="mynavbar">
+            <ul className="navbar-nav  d-flex justify-content-around container">
+              <li className="nav-item">     
           <Link className="navbar-brand fs-3" to="/">
             Urban <span className=" text-danger">Cart</span>
           </Link>
               </li>
-            </ul>
-                <form className="d-flex me-5" role="search" onSubmit={handleSubmit}>
+                <li className="nav-item"><form className="d-flex me-5" role="search" onSubmit={handleSubmit}>
                   <input
                     className="form-control rounded-1"
                     value={keyword}
@@ -53,8 +54,9 @@ const Navbar = () => {
                     <i className="fa fa-search"></i>
                     
                   </button>
-                </form>
-                <div>
+                </form></li>
+                <li className="nav-item">
+                  <div>
             <Link to="/wishlist" className="link-dark">
               <i role="button" className="fa-regular fa-heart fa-xl"></i>
               <span className="badge bg-danger" id="lblWishCount">
@@ -67,10 +69,13 @@ const Navbar = () => {
                 {cartProducts.length}
               </span>
             </Link>
-            <Link className="text-decoration-none active fs-5 text-white" to="/login">
+            {localStorage.getItem("token")? <Link className="text-decoration-none active fs-5 text-white" to="/login">
+                  <span onClick={handleLogOut}>Log Out</span>
+                </Link> : <Link className="text-decoration-none active fs-5 text-white" to="/login">
                   <span>Log In</span>
-                </Link>
-                </div>
+                </Link>}
+                </div></li>
+            </ul>
           </div>
         </div>
       </nav>

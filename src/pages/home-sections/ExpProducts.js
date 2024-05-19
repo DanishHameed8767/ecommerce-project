@@ -21,20 +21,19 @@ export default function ExpProducts() {
         <hr />
       </div>
       <div className="container-fluid">
-        <div className="container d-flex justify-content-start px-0 card-gap ms-4">
+        <div className="container d-flex justify-content-start px-0 card-gap ms-4 w-50">
           <div className="red-box bg-danger"></div>
           <div className="mt-2 text-danger ms-2">Our Products</div>
         </div>
         <section className="pt-5 pb-5">
           <div className="container-fluid">
-            <div className="row">
-              <div className="col-8">
+              <div className="col-6">
                 <div className="mb-3 fs-2 ms-2 fw-bold">
                   Explore Our Products
                 </div>
               </div>
-              <div className="col-12">
-                <div className="row">
+            <div className="row">
+                <div className="row d-flex justify-content-center">
                   {products
                     .filter((value, index) => index > 10 && index < 19)
                     .map((value, index) => {
@@ -56,7 +55,7 @@ export default function ExpProducts() {
                     })}
                 </div>
               </div>
-            </div>
+            
           </div>
         </section>
 

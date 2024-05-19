@@ -20,7 +20,6 @@ export const fetchAllArrivalsAsync = createAsyncThunk(
   "admin/fetchAllArrivals",
   async () => {
     const response = await fetchAllArrivals();
-    console.log(response.data)
     return response.data;
   }
 );
@@ -52,7 +51,6 @@ export const addSubCategoryAsync = createAsyncThunk(
 export const uploadImageAsync = createAsyncThunk(
   "admin/uploadImage",
   async (formData) => {
-    console.log(formData);
     const response = await uploadImage(formData);
     return response.data;
   }
@@ -110,7 +108,6 @@ export const adminSlice = createSlice({
       })
       .addCase(addSubCategoryAsync.fulfilled, (state, action) => {
         state.status = "idle";
-        console.log(action.payload);
         const index = state.categories.findIndex(
           (item) => item.category === action.payload.category
         );

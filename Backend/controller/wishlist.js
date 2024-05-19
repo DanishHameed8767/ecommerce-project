@@ -1,9 +1,8 @@
 const { Wishlist } = require("../models/wishlistModel");
-const id = "6516dd04b8f369dccde44140";
 exports.showWishlist = async (req, res) => {
-  const id = "6516dd04b8f369dccde44140";
+  userId = req.user.id;
   try {
-    const products = await Wishlist.find({ user: id}).populate("product");
+    const products = await Wishlist.find({ user: userId}).populate("product");
     res.send(products);
   } catch (error) {
     res.send(error);
@@ -11,8 +10,9 @@ exports.showWishlist = async (req, res) => {
 };
 
 exports.addToWishlist = async (req, res) => {
+  userId = req.user.id;
   const product_id = req.body._id;
-  const wishlist = new Wishlist({ product: product_id, user: id });
+  const wishlist = new Wishlist({ product: product_id, user: userId });
   try {
     await wishlist.save();
     res.status(200).send(await wishlist.populate("product"));

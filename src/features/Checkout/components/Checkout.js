@@ -1,15 +1,21 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { clearCartAsync, selectAllCartProducts } from "../../cart/cartSlice";
+import { selectAllCartProducts } from "../../cart/cartSlice";
 import { discountedPrice } from "../../../app/constant";
 import { useNavigate } from "react-router-dom";
-import { addOrderAsync, selectAllOrders } from "../orderSlice";
+import {
+  addOrderAsync,
+  selectAllOrders,
+  selectStripeResponse,
+  startStripeCheckoutAsync,
+} from "../orderSlice";
 import { updateProductStockAsync } from "../../product/productSlice";
 
 export default function Checkout() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const cartProducts = useSelector(selectAllCartProducts);
+  const stripeURL = useSelector(selectStripeResponse);
   const orders = useSelector(selectAllOrders);
   const totalAmount = cartProducts.reduce((total, value) => {
     const product = value.product || value.sale || value.arrival;
@@ -19,15 +25,21 @@ export default function Checkout() {
       value.quantity
     ));
   }, 0);
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const item = { total_amount: totalAmount, order_number: orders.length + 1 };
-    const data = [...cartProducts];
-    dispatch(updateProductStockAsync(data));
-    dispatch(addOrderAsync(item));
-    dispatch(clearCartAsync());
-    navigate("/order/placed");
+    const item = { total_amount: totalAmount, products:[...cartProducts.map((item,i,arr)=>{return {product_id:item.product._id,quantity:item.quantity}})] };
+    dispatch(startStripeCheckoutAsync(item));
+    // dispatch(updateProductStockAsync(data));
+    localStorage.setItem("order",JSON.stringify(item));
+    // dispatch(addOrderAsync(item));
+    // navigate(stripeURL);
   };
+  useEffect(() => {
+    if (stripeURL.url) {
+      window.location = stripeURL.url;
+    }
+    console.log(stripeURL);
+  }, [stripeURL, selectStripeResponse]);
   useEffect(() => {
     if (cartProducts.length === 0) {
       navigate("/cart");
@@ -38,7 +50,7 @@ export default function Checkout() {
     <>
       <div className="container">
         <main>
-          <div className="py-5 text-center">
+          <div className="pb-5 text-center">
             <h2>Checkout form</h2>
           </div>
           <div className="row g-5 mb-5 bg-secondary-subtle pb-5">
@@ -61,7 +73,8 @@ export default function Checkout() {
                         </small>
                       </div>
                       <span className="text-body-secondary">
-                        PKR {discountedPrice(
+                        PKR{" "}
+                        {discountedPrice(
                           item.price,
                           item.discountPercentage,
                           value.quantity
@@ -104,71 +117,6 @@ export default function Checkout() {
                 }}
               >
                 <div className="row g-3">
-                  <div className="col-sm-6">
-                    <label htmlFor="firstName" className="form-label">
-                      First name
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="firstName"
-                      placeholder=""
-                      defaultValue=""
-                      required={true}
-                    />
-                    <div className="invalid-feedback">
-                      Valid first name is required.
-                    </div>
-                  </div>
-                  <div className="col-sm-6">
-                    <label htmlFor="lastName" className="form-label">
-                      Last name
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="lastName"
-                      placeholder=""
-                      defaultValue=""
-                      required={true}
-                    />
-                    <div className="invalid-feedback">
-                      Valid last name is required.
-                    </div>
-                  </div>
-                  <div className="col-12">
-                    <label htmlFor="username" className="form-label">
-                      Username
-                    </label>
-                    <div className="input-group has-validation">
-                      <span className="input-group-text">@</span>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="username"
-                        placeholder="Username"
-                        required={true}
-                      />
-                      <div className="invalid-feedback">
-                        Your username is required.
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-12">
-                    <label htmlFor="email" className="form-label">
-                      Email{" "}
-                      <span className="text-body-secondary">(Optional)</span>
-                    </label>
-                    <input
-                      type="email"
-                      className="form-control"
-                      id="email"
-                      placeholder="you@example.com"
-                    />
-                    <div className="invalid-feedback">
-                      Please enter a valid email address for shipping updates.
-                    </div>
-                  </div>
                   <div className="col-12">
                     <label htmlFor="address" className="form-label">
                       Address
@@ -177,26 +125,14 @@ export default function Checkout() {
                       type="text"
                       className="form-control"
                       id="address"
-                      placeholder="1234 Main St"
+                      placeholder="1234 Main St state country"
                       required={true}
                     />
                     <div className="invalid-feedback">
                       Please enter your shipping address.
                     </div>
                   </div>
-                  <div className="col-12">
-                    <label htmlFor="address2" className="form-label">
-                      Address 2{" "}
-                      <span className="text-body-secondary">(Optional)</span>
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="address2"
-                      placeholder="Apartment or suite"
-                    />
-                  </div>
-                  <div className="col-md-5">
+                  {/* <div className="col-md-5">
                     <label htmlFor="country" className="form-label">
                       Country
                     </label>
@@ -239,19 +175,9 @@ export default function Checkout() {
                       required={true}
                     />
                     <div className="invalid-feedback">Zip code required.</div>
-                  </div>
+                  </div> */}
                 </div>
                 <hr className="my-4" />
-                <div className="form-check">
-                  <input
-                    type="checkbox"
-                    className="form-check-input"
-                    id="same-address"
-                  />
-                  <label className="form-check-label" htmlFor="same-address">
-                    Shipping address is the same as my billing address
-                  </label>
-                </div>
                 <div className="form-check">
                   <input
                     type="checkbox"
@@ -263,8 +189,8 @@ export default function Checkout() {
                   </label>
                 </div>
                 <hr className="my-4" />
-                <h4 className="mb-3">Payment</h4>
-                <div className="my-3">
+                {/* <h4 className="mb-3">Payment</h4>? */}
+                {/* <div className="my-3">
                   <div className="form-check">
                     <input
                       id="credit"
@@ -367,10 +293,10 @@ export default function Checkout() {
                       Security code required
                     </div>
                   </div>
-                </div>
-                <hr className="my-4" />
+                </div> */}
+                {/* <hr className="my-4" /> */}
                 <button className="w-100 btn btn-danger btn-lg" type="submit">
-                  Place Order
+                  Proceed to Pay
                 </button>
               </form>
             </div>

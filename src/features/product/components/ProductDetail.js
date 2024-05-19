@@ -7,7 +7,6 @@ import Timer from "../../Timer";
 
 const ProductDetail = () => {
   var detail = useSelector(selectProductDetails);
-  console.log(detail);
   const dispatch = useDispatch();
   var currentTime = Date.now();
   var saleEnds = detail.saleEnds;
@@ -17,7 +16,6 @@ const ProductDetail = () => {
     discount = null;
 
   }
-  console.log(detail);
    const handleClick = () => {
      dispatch(addToCartAsync(detail));
     };
@@ -31,7 +29,7 @@ const ProductDetail = () => {
       <div className="container-fluid row">
         <div
           id="carouselExample"
-          className="carousel slide w-50 bg-dark row col-5 m-5"
+          className="carousel slide w-50 bg-dark row col-12 m-5"
         >
           <div className="carousel-inner">
             <div className="carousel-item active">

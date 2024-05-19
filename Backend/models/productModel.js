@@ -13,7 +13,7 @@ const productSchema = new Schema({
   subCategory: String,
   thumbnail: String,
   images: [String],
-  sellCount: Number,
+  sellCount: {type: Number, default: 0},
   saleStock: Number,
   saleStarts: Number,
   saleEnds: Number,

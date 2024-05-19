@@ -9,7 +9,6 @@ const Cartitem = ({ cart, delFromCart }) => {
   const [count, setCount] = useState(cart.quantity);
   var src = val.thumbnail;
   if (val.thumbnail.slice(0,6)=='image_') {
-    console.log(val.thumbnail.slice(0,6));
     const _path = "http://localhost:5000/images/";
      src = _path + val.thumbnail;
   }

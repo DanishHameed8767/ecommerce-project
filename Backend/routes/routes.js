@@ -31,7 +31,11 @@ const {
   loginUser,
   getUser,
 } = require("../controller/user");
-const { showOrders, addOrder } = require("../controller/order");
+const {
+  showOrders,
+  addOrder,
+  startStripeSession,
+} = require("../controller/order");
 var fetchuser = require("../middleware/fetchUser");
 const {
   addCategory,
@@ -49,19 +53,20 @@ Router.post("/category/products", getallProductsByCategory);
 
 Router.post("/addproduct", addProduct);
 Router.post("/updatearrival", updateArrival);
-Router.get("/wishlist", showWishlist);
-Router.post("/wishlist/add", addToWishlist);
+Router.get("/wishlist", fetchuser, showWishlist);
+Router.post("/wishlist/add", fetchuser, addToWishlist);
 Router.delete("/wishlist/del", delFromWishlist);
-Router.post("/addmany",addProductMany);
+Router.post("/addmany", addProductMany);
 
-Router.get("/cart", showCart);
-Router.post("/cart/add", addToCart);
+Router.get("/cart", fetchuser, showCart);
+Router.post("/cart/add", fetchuser, addToCart);
 Router.delete("/cart/del", delFromCart);
 Router.patch("/cart/update", updateCart);
-Router.delete("/cart/clear", clearCart);
+Router.post("/cart/clear", fetchuser, clearCart);
 
-Router.get("/order", showOrders);
-Router.post("/order/add", addOrder);
+Router.get("/order", fetchuser, showOrders);
+Router.post("/order/add", fetchuser, addOrder);
+Router.post("/order/checkout", startStripeSession);
 
 Router.get("/signup/allusers", allUsers);
 Router.post(
@@ -104,7 +109,6 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 Router.post("/uploadimage", upload.single("image"), function (req, res, next) {
   const imageName = req.file.filename;
-  console.log(imageName);
   res.json(imageName);
 });
 

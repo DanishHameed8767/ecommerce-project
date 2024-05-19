@@ -7,10 +7,6 @@
   border-bottom: 2px solid transparent;
 }
 
-.nav-item:hover {
-  border-bottom: 2px solid white;
-}
-
 .navbar{
   background-color: #172237;
 }
@@ -300,4 +296,20 @@ a.btn-google {
   left: 40px;
   font-size: 10px;
   font-weight: 400;
+}
+
+/* Header Categories Section */
+@media (max-width: 767px) {
+  .header-cat {
+    display: none;
+  }
+  .vr {
+    display: none;
+  }
+}
+
+@media (max-width: 575px) {
+  .header-sec, .footer-email, .arrival-sec {
+  display:none
+  }
 }

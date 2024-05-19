@@ -75,7 +75,6 @@ export const wishlistSlice = createSlice({
     //   })
     //   .addCase(updateCartAsync.fulfilled, (state) => {
     //     state.status = 'idle';
-    //     console.log("success");
     //  })
   },
 });

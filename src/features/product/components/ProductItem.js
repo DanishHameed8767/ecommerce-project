@@ -1,7 +1,6 @@
 import React from "react";
 
 const ProductItem = ({ item, handleClick, RouterChange }) => {
-  console.log(item);
   var src = item.thumbnail;
   if (item.thumbnail.slice(0,6)=='image_') {
     const _path = "http://localhost:5000/images/";
@@ -9,8 +8,8 @@ const ProductItem = ({ item, handleClick, RouterChange }) => {
   }
   return (
     <>
-      <div className="col-md-3">
-        <div className="card m-4 abc" style={{ width: "18rem" }}>
+      <div className="col-md-3 col-sm-3 my-4">
+        <div className="card m-md-4 m-0 abc" style={{ width: "18rem" }}>
           <span
             className="position-absolute fs-7 fw-light badge bg-danger"
             style={{ top: "8px", left: "7px" }}
