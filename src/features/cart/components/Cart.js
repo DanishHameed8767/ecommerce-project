@@ -10,6 +10,9 @@ import { Link } from "react-router-dom";
 const Cart = () => {
   const dispatch = useDispatch();
   const cartProducts = useSelector(selectAllCartProducts);
+  const handleCLick = async () => {
+    
+  };
 
   useEffect(() => {
     dispatch(fetchAllCartProductsAsync());
@@ -17,6 +20,7 @@ const Cart = () => {
   }, []);
   return (
     <>
+      {/* {orderId && orderId._id && (<Navigate to={"/checkout"} replace={true}>{dispatch(startStripeCheckoutAsync({...orderData,order_id:orderId}))}</Navigate>)} */}
       <section className="h-100" style={{ backgroundColor: "#eee" }}>
         <div className="container h-100 py-5">
           <div className="row d-flex justify-content-center align-items-center h-100">
@@ -24,12 +28,13 @@ const Cart = () => {
               <div className="d-flex justify-content-between align-items-center mb-4">
                 <h3 className="fw-normal mb-0 text-black">Shopping Cart</h3>
               </div>
-              {cartProducts && cartProducts.map((val) => {
-                const delFromCart = () => {
-                  dispatch(delFromCartAsync(val));
-                };
-                return <Cartitem cart={val} delFromCart={delFromCart} />;
-              })}
+              {cartProducts &&
+                cartProducts.map((val) => {
+                  const delFromCart = () => {
+                    dispatch(delFromCartAsync(val));
+                  };
+                  return <Cartitem cart={val} delFromCart={delFromCart} />;
+                })}
               <div className="card mb-4">
                 <div className="card-body p-4 d-flex flex-row">
                   <div className="form-outline flex-fill">
@@ -60,9 +65,10 @@ const Cart = () => {
               <div className="card">
                 <div className="card-body ">
                   <Link
-                    to="/checkout"
+                    to={"/address"}
                     type="button"
                     className="btn btn-danger btn-block btn-lg "
+                    onClick={handleCLick}
                   >
                     Continue to Checkout
                   </Link>

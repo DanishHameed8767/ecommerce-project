@@ -2,27 +2,18 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectProductDetails } from "../productSlice";
 import { addToCartAsync } from "../../cart/cartSlice";
-import Timer from "../../Timer";
-
 
 const ProductDetail = () => {
   var detail = useSelector(selectProductDetails);
   const dispatch = useDispatch();
-  var currentTime = Date.now();
-  var saleEnds = detail.saleEnds;
-  var discount = detail.discountPercentage;
-  if(saleEnds < currentTime){
-    saleEnds = null;
-    discount = null;
 
-  }
-   const handleClick = () => {
-     dispatch(addToCartAsync(detail));
-    };
-    var src = detail.thumbnail;
-  if (detail.thumbnail.slice(0,6)=='image_') {
+  const handleClick = () => {
+    dispatch(addToCartAsync(detail));
+  };
+  var src = detail.thumbnail;
+  if (detail.thumbnail.slice(0, 6) == "image_") {
     const _path = "http://localhost:5000/images/";
-     src = _path + detail.thumbnail;
+    src = _path + detail.thumbnail;
   }
   return (
     <>
@@ -115,17 +106,13 @@ const ProductDetail = () => {
               In Stock
             </span>
           </div>
-          {discount && <span className="text-danger fs-5">
-            {saleEnds && <span>Sale </span>}
-            {detail.discountPercentage}% Off{" "}
-            {saleEnds && <Timer endTime={saleEnds} />}
-          </span>}
           <div className="d-flex justify-content-start">
             <p className="text-decoration-line-through fs-3 ">
               PKR {detail.price}
             </p>
             <p className="text-danger fs-3 ms-3">
-              PKR {detail.price -
+              PKR{" "}
+              {detail.price -
                 Math.ceil((detail.price * detail.discountPercentage) / 100)}
               .00
             </p>

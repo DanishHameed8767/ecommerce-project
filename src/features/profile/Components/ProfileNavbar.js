@@ -40,11 +40,6 @@ export default function ProfileNavbar() {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link active fs-5" to="/admin/sale">
-                  Add Sale
-                </Link>
-              </li>
-              <li className="nav-item">
                 <Link className="nav-link active fs-5" to="/admin/updatearrival">
                   New Arrival
                 </Link>

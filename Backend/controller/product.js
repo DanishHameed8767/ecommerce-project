@@ -40,10 +40,10 @@ exports.getallProductsByCategory = async (req, res) => {
 };
 
 exports.updateProducts = async (req, res) => {
-  const arr = req.body;
+  const arr = req.body.products;
   try{arr.forEach(async(value)=>{
-    await Product.updateOne({_id:value.product._id},{stock: value.product.stock - value.quantity},{new: true});
-    await Product.updateOne({_id:value.product._id},{sellCount: value.product.sellCount + value.quantity},{new: true});
+    await Product.updateOne({_id:value.product_id},{stock: value.product.stock - value.quantity},{new: true});
+    await Product.updateOne({_id:value.product_id},{sellCount: value.product.sellCount + value.quantity},{new: true});
   })
   res.json("success");}
   catch(err){
@@ -55,11 +55,6 @@ exports.fetchProductById = async (req, res) => {
   const id = req.params.id;
   try {
     const product = await Product.findById(id);
-    if(!product){
-      const sale = await Sale.findById(id);
-      res.status(200).json(sale);
-      return;
-    }
     res.status(200).json(product);
   } catch (err) {
     res.status(400).json(err);

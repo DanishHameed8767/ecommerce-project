@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getProductDetail,
   selectAllProducts,
-  viewSaleProducts,
 } from "../../features/product/productSlice";
 import ProductItem from "../../features/product/components/ProductItem";
 import { addToWishlistAsync } from "../../features/wishlist/wishlistSlice";
@@ -62,7 +61,6 @@ export default function ExpProducts() {
         <div className="container d-flex justify-content-center">
           <button className="btn btn-danger btn-view-all text-white me-2" onClick={
             ()=>{
-              dispatch(viewSaleProducts(products))
               navigate("/products/view")
             }
           }>

@@ -1,15 +1,14 @@
 export function addOrder(item) {
   return new Promise(async (resolve) => {
-    const order = localStorage.getItem("order");
-    const response = await fetch("http://localhost:5000/cart/clear", {
+    const response = await fetch("http://localhost:5000/order/add", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "auth-token": localStorage.getItem("token"),
-      },
-      body: order,
-    });
-    const data = await response.json();
+        },
+        body: JSON.stringify(item),
+        });
+        const data = await response.json();
     resolve({ data });
   });
 }
@@ -28,6 +27,8 @@ export function showOrders() {
 }
 
 export function startStripeCheckout(item) {
+  console.log(item)
+  console.log("Checkout cycle was triggered")
   return new Promise(async (resolve) => {
     const response = await fetch("http://localhost:5000/order/checkout", {
       method: "POST",

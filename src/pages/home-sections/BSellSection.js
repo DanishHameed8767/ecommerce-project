@@ -2,7 +2,6 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectAllProducts,
-  viewSaleProducts,
 } from "../../features/product/productSlice";
 import ProductItem from "../../features/product/components/ProductItem";
 import { addToWishlistAsync } from "../../features/wishlist/wishlistSlice";
@@ -32,7 +31,6 @@ export default function BSellSection() {
               <div className="col-md-4 col-sm-2 text-right d-flex justify-content-center">
                 <button className="btn btn-danger btn-view-all text-white me-2" onClick={
                   () =>{
-                    dispatch(viewSaleProducts(products))
                     navigate("/products/view")
                   }
                 }>

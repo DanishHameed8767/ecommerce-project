@@ -1,7 +1,7 @@
 import React from "react";
 
 const WishlistItem = ({ val, handleClick, RouterChange }) => {
-  const item = val.product || val.sale || val.arrival;
+  const item = val.product || val.arrival;
   var src = item.thumbnail;
   if (item.thumbnail.slice(0,6)=='image_') {
     const _path = "http://localhost:5000/images/";

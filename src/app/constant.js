@@ -1,5 +1,5 @@
 export function discountedPrice(price, discountPercentage, quantity) {
-  return Math.ceil((price - (price * discountPercentage) / 100) * quantity);
+  return Math.ceil((price - ((price * discountPercentage) / 100)) * quantity);
 }
 
 export function shuffle(array) {
@@ -53,4 +53,15 @@ export function unCapitalizeAllWords(strng) {
             });
            const capString = words.join(' ');
            return capString;
+}
+
+export const calculateTotalAmount = (arr) =>{
+return arr.reduce((total, value) => {
+  const product = value.product || value.arrival;
+  return (total += discountedPrice(
+    product.price,
+    product.discountPercentage,
+    value.quantity
+  ));
+}, 0);
 }

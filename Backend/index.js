@@ -1,12 +1,15 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
+const { Router } = require("./routes/routes");
+const { listenWebHook } = require("./controller/order");
 const app = express();
 app.use(cors());
+app.post('/webhook', express.raw({ type: 'application/json' }), listenWebHook);
+
 app.use(express.json());
 app.use(express.static("Backend/public"));
 const port = 5000;
-const { Router } = require("./routes/routes");
 app.use("/", Router);
 main().catch((err) => console.log(err));
 async function main() {

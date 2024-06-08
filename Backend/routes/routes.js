@@ -23,7 +23,6 @@ const {
   showCart,
   delFromCart,
   updateCart,
-  clearCart,
 } = require("../controller/cart");
 const {
   createUser,
@@ -33,8 +32,8 @@ const {
 } = require("../controller/user");
 const {
   showOrders,
-  addOrder,
   startStripeSession,
+  sessionStatus,
 } = require("../controller/order");
 var fetchuser = require("../middleware/fetchUser");
 const {
@@ -62,11 +61,9 @@ Router.get("/cart", fetchuser, showCart);
 Router.post("/cart/add", fetchuser, addToCart);
 Router.delete("/cart/del", delFromCart);
 Router.patch("/cart/update", updateCart);
-Router.post("/cart/clear", fetchuser, clearCart);
 
 Router.get("/order", fetchuser, showOrders);
-Router.post("/order/add", fetchuser, addOrder);
-Router.post("/order/checkout", startStripeSession);
+Router.post("/order/checkout", fetchuser, startStripeSession);
 
 Router.get("/signup/allusers", allUsers);
 Router.post(
@@ -116,5 +113,10 @@ Router.post("/updatemany", updateProducts);
 Router.post("/updatem", updateMany);
 
 Router.get("/search", searchProducts);
+
+Router.get("/session-status", sessionStatus);
+
+const util = require("util");
+const bodyParser = require("body-parser");
 
 exports.Router = Router;

@@ -4,7 +4,7 @@ import { updateCartAsync } from "../cartSlice";
 import { discountedPrice } from "../../../app/constant";
 
 const Cartitem = ({ cart, delFromCart }) => {
-  const val = cart.product || cart.sale || cart.arrival;
+  const val = cart.product || cart.arrival;
   const dispatch = useDispatch();
   const [count, setCount] = useState(cart.quantity);
   var src = val.thumbnail;

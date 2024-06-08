@@ -31,7 +31,6 @@ const Wishlist = () => {
             const RouterChange = () => {
               
               value.product && navigate("/products/details/" + value.product._id + "/");
-              value.sale && navigate("/products/details/" + value.sale._id + "/");
             };
             return (
               <WishlistItem

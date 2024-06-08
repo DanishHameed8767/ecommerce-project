@@ -54,28 +54,11 @@ export function fetchProductById(id) {
   });
 }
 
-export function fetchSalesById(id) {
-  return new Promise(async (resolve) => {
-    //TODO: we will not hard-code server URL here
-    const response = await fetch("http://localhost:5000/sale/products/" + id);
-    const data = await response.json();
-    resolve({ data });
-  });
-}
 
 export function fetchArrivalsById(id) {
   return new Promise(async (resolve) => {
     //TODO: we will not hard-code server URL here
     const response = await fetch("http://localhost:5000/arrivals/" + id);
-    const data = await response.json();
-    resolve({ data });
-  });
-}
-
-export function fetchAllSales() {
-  return new Promise(async (resolve) => {
-    //TODO: we will not hard-code server URL here
-    const response = await fetch("http://localhost:5000/allproducts?type=sale");
     const data = await response.json();
     resolve({ data });
   });

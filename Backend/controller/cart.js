@@ -54,15 +54,10 @@ exports.updateCart = async (req, res) => {
   }
 };
 
-exports.clearCart = async (req, res) => {
-  userId = req.user.id;
-  const orders = req.body;
+exports.clearCart = async (user) => {
   try { 
-    const order = new Order({...orders,user:userId});
-    await order.save();
-    await Cart.deleteMany({ user: userId });
-    res.status(200).json(order);
+    await Cart.deleteMany({ user });
   } catch (err) {
-    res.status(404).json(err);
+    return err;
   }
 };

@@ -14,9 +14,6 @@ const productSchema = new Schema({
   thumbnail: String,
   images: [String],
   sellCount: {type: Number, default: 0},
-  saleStock: Number,
-  saleStarts: Number,
-  saleEnds: Number,
   type: { type: String, default: "product" },
   arrivalType: String,
 });

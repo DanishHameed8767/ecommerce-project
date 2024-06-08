@@ -83,13 +83,6 @@ export const cartSlice = createSlice({
         );
         state.items.splice(index, 1, action.payload);
       })
-      .addCase(addOrderAsync.pending, (state) => {
-        state.status = "loading";
-      })
-      .addCase(addOrderAsync.fulfilled, (state, action) => {
-        state.status = "idle";
-        state.items = [];
-      });
   },
 });
 
