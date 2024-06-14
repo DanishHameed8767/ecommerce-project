@@ -3,19 +3,32 @@ import Cartitem from "../components/Cartitem";
 import { useDispatch, useSelector } from "react-redux";
 import {
   delFromCartAsync,
+  deleteFromLocalStorageCart,
   fetchAllCartProductsAsync,
+  fetchLocalStorageCart,
   selectAllCartProducts,
 } from "../cartSlice";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { selectLoggedInUser } from "../../auth/authSlice";
 const Cart = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const isLoggedIn = useSelector(selectLoggedInUser);
   const cartProducts = useSelector(selectAllCartProducts);
-  const handleCLick = async () => {
-    
+  const handleCLick = () => {
+   if(isLoggedIn){
+    navigate("/address");
+   } else {
+    navigate("/login");
+   }
   };
 
   useEffect(() => {
-    dispatch(fetchAllCartProductsAsync());
+    if (isLoggedIn) {
+      dispatch(fetchAllCartProductsAsync());
+    } else {
+      dispatch(fetchLocalStorageCart());
+    }
     // eslint-disable-next-line
   }, []);
   return (
@@ -29,11 +42,15 @@ const Cart = () => {
                 <h3 className="fw-normal mb-0 text-black">Shopping Cart</h3>
               </div>
               {cartProducts &&
-                cartProducts.map((val) => {
+                cartProducts.map((cartItem) => {
                   const delFromCart = () => {
-                    dispatch(delFromCartAsync(val));
+                    if (isLoggedIn) {
+                      dispatch(delFromCartAsync(cartItem));
+                    } else {
+                      dispatch(deleteFromLocalStorageCart(cartItem));
+                    }
                   };
-                  return <Cartitem cart={val} delFromCart={delFromCart} />;
+                  return <Cartitem cart={cartItem} delFromCart={delFromCart} />;
                 })}
               <div className="card mb-4">
                 <div className="card-body p-4 d-flex flex-row">
@@ -64,14 +81,13 @@ const Cart = () => {
         </div> */}
               <div className="card">
                 <div className="card-body ">
-                  <Link
-                    to={"/address"}
+                  <div
                     type="button"
                     className="btn btn-danger btn-block btn-lg "
                     onClick={handleCLick}
                   >
                     Continue to Checkout
-                  </Link>
+                  </div>
                   <span className="ms-4 me-4">Or</span>
                   <Link to="/" style={{ textDecoration: "none" }}>
                     Continue Shopping

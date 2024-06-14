@@ -1,21 +1,20 @@
 import "./App.css";
 import Home from "./pages/Home";
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import CartPage from "./pages/CartPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import WishlistPage from "./pages/WishlistPage";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { fetchAllCartProductsAsync } from "./features/cart/cartSlice";
-import { fetchAllWishlistProductsAsync } from "./features/wishlist/wishlistSlice";
+import { useDispatch, useSelector } from "react-redux";
 import {
-  fetchAllProductsAsync,
-} from "./features/product/productSlice";
+  fetchAllCartProductsAsync,
+  fetchLocalStorageCart,
+  mergeCartsAsync,
+} from "./features/cart/cartSlice";
+import { fetchAllWishlistProductsAsync } from "./features/wishlist/wishlistSlice";
+import { fetchAllProductsAsync } from "./features/product/productSlice";
 import Checkout from "./features/Checkout/components/Checkout";
 import OrderPlaced from "./features/Checkout/components/OrderPlaced";
 import OrderList from "./features/Checkout/components/OrderList";
@@ -26,7 +25,7 @@ import ProtectedAdmin from "./features/auth/components/ProtectedAdmin";
 import { fetchAllCategoriesAsync } from "./features/profile/AdminSlice";
 import ViewProductsPage from "./pages/ViewProductsPage";
 import UpdateArrival from "./features/profile/Components/UpdateArrival";
-import { checkUserAsync } from "./features/auth/authSlice";
+import { checkUserAsync, selectLoggedInUser } from "./features/auth/authSlice";
 import ViewSearchPage from "./pages/ViewSearchPage";
 import Address from "./features/Checkout/components/Address";
 const router = createBrowserRouter([
@@ -114,14 +113,25 @@ const router = createBrowserRouter([
 
 function App() {
   const dispatch = useDispatch();
+  const isLoggedIn = useSelector(selectLoggedInUser);
 
   useEffect(() => {
-    dispatch(fetchAllCartProductsAsync());
-    dispatch(fetchAllWishlistProductsAsync());
-    dispatch(fetchAllProductsAsync("product"));
-    dispatch(fetchAllCategoriesAsync());
     dispatch(checkUserAsync());
-  }, []);
+    dispatch(fetchAllProductsAsync());
+    dispatch(fetchAllCategoriesAsync());
+  }, [dispatch]);
+
+  useEffect(() => {
+    const localStorageCart = JSON.parse(localStorage.getItem("cart"));
+    if (!isLoggedIn) {
+      dispatch(fetchLocalStorageCart());
+    } else if (localStorageCart) {
+      dispatch(mergeCartsAsync(localStorageCart));
+    } else {
+      dispatch(fetchAllCartProductsAsync());
+      dispatch(fetchAllWishlistProductsAsync());
+    }
+  }, [isLoggedIn]);
   return (
     <>
       <div className="App">

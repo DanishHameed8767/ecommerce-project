@@ -46,7 +46,7 @@ export default function ExpProducts() {
                       };
                       return (
                         <ProductItem
-                          item={value}
+                          product={value}
                           handleClick={handleClick}
                           RouterChange={RouterChange}
                         />

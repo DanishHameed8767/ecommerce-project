@@ -23,6 +23,7 @@ const {
   showCart,
   delFromCart,
   updateCart,
+  mergeCarts,
 } = require("../controller/cart");
 const {
   createUser,
@@ -59,8 +60,9 @@ Router.post("/addmany", addProductMany);
 
 Router.get("/cart", fetchuser, showCart);
 Router.post("/cart/add", fetchuser, addToCart);
-Router.delete("/cart/del", delFromCart);
-Router.patch("/cart/update", updateCart);
+Router.delete("/cart/del", fetchuser, delFromCart);
+Router.patch("/cart/update", fetchuser, updateCart);
+Router.post("/cart/merge",fetchuser, mergeCarts);
 
 Router.get("/order", fetchuser, showOrders);
 Router.post("/order/checkout", fetchuser, startStripeSession);

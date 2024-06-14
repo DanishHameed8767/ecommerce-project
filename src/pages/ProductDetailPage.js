@@ -6,12 +6,12 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchProductByIdAsync,
-  selectProductDetails,
+  selectProductData,
 } from "../features/product/productSlice";
 
 export default function ProductDetailPage() {
   const dispatch = useDispatch();
-  const pd = useSelector(selectProductDetails);
+  const pd = useSelector(selectProductData);
   const params = useParams();
   useEffect(() => {
     dispatch(fetchProductByIdAsync(params.id));

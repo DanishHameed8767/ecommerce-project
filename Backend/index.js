@@ -5,7 +5,7 @@ const { Router } = require("./routes/routes");
 const { listenWebHook } = require("./controller/order");
 const app = express();
 app.use(cors());
-app.post('/webhook', express.raw({ type: 'application/json' }), listenWebHook);
+app.post("/webhook", express.raw({ type: "application/json" }), listenWebHook);
 
 app.use(express.json());
 app.use(express.static("Backend/public"));

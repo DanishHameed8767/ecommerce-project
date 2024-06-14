@@ -1,10 +1,10 @@
 import React from "react";
 
-const ProductItem = ({ item, handleClick, RouterChange }) => {
-  var src = item.thumbnail;
-  if (item.thumbnail.slice(0,6)=='image_') {
+const ProductItem = ({ product, handleClick, RouterChange }) => {
+  var src = product.thumbnail;
+  if (product.thumbnail.slice(0,6)=='image_') {
     const _path = "http://localhost:5000/images/";
-     src = _path + item.thumbnail;
+     src = _path + product.thumbnail;
   }
   return (
     <>
@@ -14,7 +14,7 @@ const ProductItem = ({ item, handleClick, RouterChange }) => {
             className="position-absolute fs-7 fw-light badge bg-danger"
             style={{ top: "8px", left: "7px" }}
           >
-            -{Math.ceil(item.discountPercentage)}%
+            -{Math.ceil(product.discountPercentage)}%
           </span>
           <span
             onClick={(e) => {
@@ -46,20 +46,20 @@ const ProductItem = ({ item, handleClick, RouterChange }) => {
           />
           <div className="card-body" onClick={() => RouterChange()}>
             <h5 className="card-title">
-              {item.title.split(" ").slice(0, 3).join(" ")}
+              {product.title.split(" ").slice(0, 3).join(" ")}
             </h5>
-            <p className="card-text">{item.description.slice(0, 50)}...</p>
+            <p className="card-text">{product.description.slice(0, 50)}...</p>
             <span className="text-danger">
-              PKR {Math.ceil(
-                item.price - (item.price * item.discountPercentage) / 100
+              $ {Math.ceil(
+                product.price - (product.price * product.discountPercentage / 100)
               )}
             </span>
             <span className="text-decoration-line-through text-secondary ms-3">
-              PKR {item.price}
+              $ {product.price}
             </span>
             <div className="float-end">
               <i className="fa-regular fa-star"></i>
-              <span className="ms-1">{item.rating}</span>
+              <span className="ms-1">{product.rating}</span>
             </div>
           </div>
         </div>

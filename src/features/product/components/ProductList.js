@@ -34,7 +34,7 @@ export default function ProductList() {
             };
             return (
               <ProductItem
-                item={value}
+                product={value}
                 handleClick={handleClick}
                 RouterChange={RouterChange}
               />

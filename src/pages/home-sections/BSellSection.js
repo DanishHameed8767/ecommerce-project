@@ -59,7 +59,7 @@ export default function BSellSection() {
                             };
                             return (
                               <ProductItem
-                                item={value}
+                                product={value}
                                 handleClick={handleClick}
                                 RouterChange={RouterChange}
                               />

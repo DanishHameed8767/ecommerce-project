@@ -8,7 +8,6 @@ import { Elements } from '@stripe/react-stripe-js';
 
 export default function Checkout() {
     const clientSecret = useSelector(selectClientSecret) || "";
-    console.log(clientSecret);
     const appearance = {
         theme: "flat",
         variables: {

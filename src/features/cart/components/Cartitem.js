@@ -1,30 +1,41 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { updateCartAsync } from "../cartSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { updateCartAsync, updateLocalStorageCart } from "../cartSlice";
 import { discountedPrice } from "../../../app/constant";
+import { selectLoggedInUser } from "../../auth/authSlice";
 
 const Cartitem = ({ cart, delFromCart }) => {
+  const isLoggedIn = useSelector(selectLoggedInUser);
   const val = cart.product || cart.arrival;
   const dispatch = useDispatch();
   const [count, setCount] = useState(cart.quantity);
   var src = val.thumbnail;
-  if (val.thumbnail.slice(0,6)=='image_') {
+  if (val.thumbnail.slice(0, 6) == "image_") {
     const _path = "http://localhost:5000/images/";
-     src = _path + val.thumbnail;
+    src = _path + val.thumbnail;
   }
 
   const onPlusClick = () => {
     setCount(count + 1);
+    const item = { ...cart, quantity: count + 1 };
+    if (isLoggedIn) {
+      dispatch(updateCartAsync(item));
+    } else {
+      dispatch(updateLocalStorageCart(item));
+    }
   };
 
   const onMinusClick = () => {
     count > 1 ? setCount(count - 1) : setCount(1);
+    if (count > 1) {
+      const item = { ...cart, quantity: count - 1 };
+      if (isLoggedIn) {
+        dispatch(updateCartAsync(item));
+      } else {
+        dispatch(updateLocalStorageCart(item));
+      }
+    }
   };
-
-  useEffect(() => {
-    const item = { ...cart, quantity: count };
-    dispatch(updateCartAsync(item));
-  }, [count]);
 
   return (
     <>
@@ -32,11 +43,7 @@ const Cartitem = ({ cart, delFromCart }) => {
         <div className="card-body p-4">
           <div className="row d-flex justify-content-between align-items-center">
             <div className="col-md-2 col-lg-2 col-xl-2">
-              <img
-                src={src}
-                className="img-fluid rounded-3"
-                alt="val.title"
-              />
+              <img src={src} className="img-fluid rounded-3" alt="val.title" />
             </div>
             <div className="col-md-3 col-lg-3 col-xl-3">
               <p className="lead fw-normal mb-2">{val.title}</p>

@@ -1,19 +1,26 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectProductDetails } from "../productSlice";
-import { addToCartAsync } from "../../cart/cartSlice";
+import { selectProductData } from "../productSlice";
+import { addToCartAsync, addToLocalStorageCart } from "../../cart/cartSlice";
+import { selectLoggedInUser } from "../../auth/authSlice";
 
 const ProductDetail = () => {
-  var detail = useSelector(selectProductDetails);
+  var productData = useSelector(selectProductData);
   const dispatch = useDispatch();
+  const isLoggedIn = useSelector(selectLoggedInUser)
 
   const handleClick = () => {
-    dispatch(addToCartAsync(detail));
+    if(isLoggedIn){
+      dispatch(addToCartAsync(productData));
+    } else {
+      dispatch(addToLocalStorageCart(productData));
+    }
   };
-  var src = detail.thumbnail;
-  if (detail.thumbnail.slice(0, 6) == "image_") {
+
+  var productImageUrl = productData.thumbnail;
+  if (productData.thumbnail.slice(0, 6) == "image_") {
     const _path = "http://localhost:5000/images/";
-    src = _path + detail.thumbnail;
+    productImageUrl = _path + productData.thumbnail;
   }
   return (
     <>
@@ -25,46 +32,46 @@ const ProductDetail = () => {
           <div className="carousel-inner">
             <div className="carousel-item active">
               <img
-                src={src}
+                src={productImageUrl}
                 className="d-block mx-auto"
                 alt="..."
                 style={{ height: "400px" }}
               />
             </div>
-            {detail.images[1] && (
+            {productData.images[1] && (
               <div className="carousel-item">
                 <img
-                  src={detail.images[1]}
+                  src={productData.images[1]}
                   className="d-block mx-auto"
                   alt="..."
                   style={{ height: "400px" }}
                 />
               </div>
             )}
-            {detail.images[2] && (
+            {productData.images[2] && (
               <div className="carousel-item">
                 <img
-                  src={detail.images[2]}
+                  src={productData.images[2]}
                   className="d-block mx-auto"
                   alt="..."
                   style={{ height: "400px" }}
                 />
               </div>
             )}
-            {detail.images[3] && (
+            {productData.images[3] && (
               <div className="carousel-item">
                 <img
-                  src={detail.images[3]}
+                  src={productData.images[3]}
                   className="d-block mx-auto"
                   alt="..."
                   style={{ height: "400px" }}
                 />
               </div>
             )}
-            {detail.images[4] && (
+            {productData.images[4] && (
               <div className="carousel-item">
                 <img
-                  src={detail.images[4]}
+                  src={productData.images[4]}
                   className="d-block mx-auto"
                   alt="..."
                   style={{ height: "400px" }}
@@ -92,11 +99,11 @@ const ProductDetail = () => {
           </button>
         </div>
         <div className="col-4 m-5">
-          <h2>{detail.title}</h2>
+          <h2>{productData.title}</h2>
           <div className="d-flex justify-content-start">
             <p>
               <i className="fa-solid fa-star me-2"></i>
-              {detail.rating}
+              {productData.rating}
             </p>
             <div
               className="vr p-0 ms-3"
@@ -108,16 +115,18 @@ const ProductDetail = () => {
           </div>
           <div className="d-flex justify-content-start">
             <p className="text-decoration-line-through fs-3 ">
-              PKR {detail.price}
+              PKR {productData.price}
             </p>
             <p className="text-danger fs-3 ms-3">
               PKR{" "}
-              {detail.price -
-                Math.ceil((detail.price * detail.discountPercentage) / 100)}
+              {productData.price -
+                Math.ceil(
+                  (productData.price * productData.discountPercentage) / 100
+                )}
               .00
             </p>
           </div>
-          <p>{detail.description}</p>
+          <p>{productData.description}</p>
           <hr />
           <button
             className="btn btn-danger btn-lg rounded-0 me-3"

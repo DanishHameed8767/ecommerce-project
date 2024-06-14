@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import loginImg from "../../../images/login.png";
-import { useNavigate,Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUserAsync, selectLoggedInUser } from "../authSlice";
+import { loginUserAsync, selectLogInAlert, selectLoggedInUser } from "../authSlice";
 import { useEffect } from "react";
+import Alert from "../../Alert";
 const Login = () => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
+  const alertMsg = useSelector(selectLogInAlert);
+  const [loginAlert,setLoginAlert] = useState(false);
   let navigate = useNavigate();
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(selectLoggedInUser);
@@ -15,25 +18,32 @@ const Login = () => {
     const userData = {
       email: credentials.email,
       password: credentials.password,
-    }
+    };
     dispatch(loginUserAsync(userData));
   };
 
   useEffect(()=>{
-    if (isLoggedIn) {
-      // Save the auth token and redirect
-      navigate("/admin");
-      // props.showAlert("Logged in successfully","success")
-    } else {
-      // props.showAlert("Invalid Credentials","danger")
+    console.log("i was called")
+    if(alertMsg){
+      setLoginAlert(true);
     }
-  },[isLoggedIn])
+    setTimeout(()=>{setLoginAlert(false)},3000)
+  },[alertMsg])
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/admin");
+    }
+  }, [isLoggedIn]);
 
   const onChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
   return (
     <>
+      {loginAlert && (
+        <Alert type={alertMsg.type} msg={alertMsg.msg} />
+      )}
       <div className="container-fluid row mt-5">
         <div
           className="col w-50 p-0 h-50"
@@ -50,7 +60,7 @@ const Login = () => {
               id="email"
               name="email"
               aria-describedby="emailHelp"
-              placeholder="Email or Phone Number"
+              placeholder="Email Address"
               value={credentials.email}
               onChange={(e) => {
                 onChange(e);

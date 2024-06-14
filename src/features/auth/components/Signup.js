@@ -1,51 +1,62 @@
 import React from "react";
 import loginImg from "../../../images/login.png";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { createUserAsync, selectLogInAlert, selectLoggedInUser } from "../authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import Alert from "../../Alert";
+import { useState, useEffect } from "react";
 
 const Signup = () => {
+  let navigate = useNavigate();
+  let dispatch = useDispatch();
+  const alertMsg = useSelector(selectLogInAlert);
+  const [loginAlert,setLoginAlert] = useState(false);
+  const isLoggedIn = useSelector(selectLoggedInUser);
   const [credentials, setCredentials] = useState({
     userName: "",
     email: "",
     password: "",
     cPassword: "",
   });
-  let navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (credentials.password != credentials.cPassword) {
+  setLoginAlert(true);
       return;
     } else {
-      const response = await fetch("http://localhost:5000/signup/createuser", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: credentials.userName,
-          email: credentials.email,
-          password: credentials.password,
-        }),
-      });
-      const json = await response.json();
-      if (json.success) {
-        // Save the auth token and redirect
-        localStorage.setItem("token", json.authtoken);
-        navigate("/admin");
-        // props.showAlert("Logged in successfully","success")
-        // } else {
-        // props.showAlert("Invalid Credentials","danger")
-        // }
-      }
+      const data = {
+        name: credentials.userName,
+        email: credentials.email,
+        password: credentials.password,
+        }
+      dispatch(createUserAsync(data));
     }
   };
 
   const onChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
+
+  useEffect(()=>{
+    console.log("i was called")
+    if(alertMsg){
+      setLoginAlert(true);
+    }
+    setTimeout(()=>{setLoginAlert(false)},3000)
+  },[alertMsg])
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/");
+    }
+  }, [isLoggedIn]);
+
   return (
     <>
+      {loginAlert && (
+        <Alert type={alertMsg.type} msg={alertMsg.msg} />
+      )}
       <div className="container-fluid row mt-5">
         <div
           className="col w-50 p-0 h-50"
@@ -72,7 +83,7 @@ const Signup = () => {
               type="email"
               className="form-control border-0 border-bottom rounded-0 w-50"
               id="InputEmail"
-              placeholder="Email or Phone Number"
+              placeholder="Email Address"
               name="email"
               value={credentials.email}
               onChange={(e) => onChange(e)}

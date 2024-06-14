@@ -119,7 +119,7 @@ export default function Footer() {
                     href="..."
                     title="Google Play"
                   >
-                    Google Play
+                    Apple Store
                   </a>
                 </div>
               </form>
