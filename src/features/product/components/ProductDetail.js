@@ -24,65 +24,71 @@ const ProductDetail = () => {
   }
   return (
     <>
-      <div className="container-fluid row">
+      <div className="container-fluid d-flex justify-content-center align-items-center row">
         <div
-          id="carouselExample"
-          className="carousel slide w-50 bg-dark row col-12 m-5"
+          className="carousel slide  bg-dark row col-md-5 col-sm-12 m-4 ms-sm-5 ms-5"
+          id="imgCarousel"
         >
           <div className="carousel-inner">
             <div className="carousel-item active">
+              <div className="d-flex justify-content-center" style={{height:"400px"}}>
               <img
                 src={productImageUrl}
-                className="d-block mx-auto"
+                className="d-block mx-auto img-fluid"
                 alt="..."
-                style={{ height: "400px" }}
-              />
+                />
+                </div>
             </div>
             {productData.images[1] && (
               <div className="carousel-item">
+                <div className="d-flex justify-content-center" style={{height:"400px"}}>
                 <img
                   src={productData.images[1]}
-                  className="d-block mx-auto"
+                  className="d-block img-fluid mx-auto"
                   alt="..."
-                  style={{ height: "400px" }}
+                  // style={{height:"400px"}}
                 />
+                </div>
               </div>
             )}
             {productData.images[2] && (
               <div className="carousel-item">
+                <div className="d-flex justify-content-center" style={{height:"400px"}}>
                 <img
                   src={productData.images[2]}
-                  className="d-block mx-auto"
+                  className="d-block img-fluid mx-auto"
                   alt="..."
-                  style={{ height: "400px" }}
                 />
+                </div>
               </div>
             )}
             {productData.images[3] && (
               <div className="carousel-item">
+                <div className="d-flex justify-content-center" style={{height:"400px"}}>
                 <img
                   src={productData.images[3]}
-                  className="d-block mx-auto"
+                  className="d-block img-fluid mx-auto"
                   alt="..."
-                  style={{ height: "400px" }}
                 />
+                </div>
               </div>
             )}
             {productData.images[4] && (
               <div className="carousel-item">
+                <div className="d-flex justify-content-center" style={{height:"400px"}}>
                 <img
                   src={productData.images[4]}
-                  className="d-block mx-auto"
+                  className="d-block img-fluid mx-auto"
                   alt="..."
-                  style={{ height: "400px" }}
                 />
+                </div>
               </div>
             )}
           </div>
           <button
             className="carousel-control-prev"
             type="button"
-            data-bs-target="#carouselExample"
+            data-bs-target="#imgCarousel"
             data-bs-slide="prev"
           >
             <span className="carousel-control-prev-icon" aria-hidden="true" />
@@ -91,14 +97,14 @@ const ProductDetail = () => {
           <button
             className="carousel-control-next"
             type="button"
-            data-bs-target="#carouselExample"
+            data-bs-target="#imgCarousel"
             data-bs-slide="next"
           >
             <span className="carousel-control-next-icon" aria-hidden="true" />
             <span className="visually-hidden">Next</span>
           </button>
         </div>
-        <div className="col-4 m-5">
+        <div className="col-md-5 m-4">
           <h2>{productData.title}</h2>
           <div className="d-flex justify-content-start">
             <p>
@@ -115,15 +121,13 @@ const ProductDetail = () => {
           </div>
           <div className="d-flex justify-content-start">
             <p className="text-decoration-line-through fs-3 ">
-              PKR {productData.price}
+              $ {productData.price}
             </p>
             <p className="text-danger fs-3 ms-3">
-              PKR{" "}
-              {productData.price -
-                Math.ceil(
+              ${" "}
+              {Math.round(productData.price -
                   (productData.price * productData.discountPercentage) / 100
                 )}
-              .00
             </p>
           </div>
           <p>{productData.description}</p>

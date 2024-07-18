@@ -1,16 +1,22 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { selectAllCartProducts } from "./cart/cartSlice";
-import { fetchAllProductsByCategoryAsync, searchProductsAsync, selectAllProducts } from "./product/productSlice";
-import { capitalizeAllWords, shuffle } from "../app/constant";
+import { selectAllCartProducts } from "../features/cart/cartSlice";
+import {
+  fetchAllProductsByCategoryAsync,
+  searchProductsAsync,
+  selectAllProducts,
+} from "../features/product/productSlice";
+import { capitalizeAllWords, shuffle } from "./constant";
 
-const Navbar = () => {
+const Dashboard = () => {
   const cartProducts = useSelector(selectAllCartProducts);
   const selectProducts = useSelector(selectAllProducts);
-  const categories = [
+  const rawCategory = [
     ...new Set(selectProducts.map((product) => product.category)),
   ];
+  const categories = shuffle([...rawCategory]);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [keyword, setKeyword] = useState("");
   const onChange = (e) => {
@@ -18,7 +24,8 @@ const Navbar = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate(`/search/${keyword}`);
+    dispatch(searchProductsAsync(keyword));
+    navigate("/search/results");
   };
   const handleLogOut = () => {
     localStorage.removeItem("token");
@@ -72,7 +79,10 @@ const Navbar = () => {
                 .map((value) => {
                   const capWords = capitalizeAllWords(value);
                   const handleClick = () => {
-                    navigate(`/categories/${value}`);
+                    dispatch(
+                      fetchAllProductsByCategoryAsync({ category: value })
+                    );
+                    navigate("/products/view");
                   };
                   return (
                     <li
@@ -114,4 +124,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default Dashboard;

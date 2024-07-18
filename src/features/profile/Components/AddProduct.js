@@ -1,14 +1,10 @@
 import JoditEditor from "jodit-react";
 import React, { useState, useRef } from "react";
-import { showProduct } from "../../product/productSlice";
 import { useDispatch, useSelector } from "react-redux";
 import ProfileNavbar from "./ProfileNavbar";
 import {
   addProductAsync,
-  fetchAllCategoriesAsync,
   selectAllCategories,
-  selectUploadedImage,
-  uploadImageAsync,
 } from "../AdminSlice";
 import { useEffect } from "react";
 import { capitalizeAllWords } from "../../../app/constant";
@@ -16,7 +12,6 @@ import { capitalizeAllWords } from "../../../app/constant";
 export default function AddProduct() {
   const dispatch = useDispatch();
   const categories = useSelector(selectAllCategories);
-  // const imageName = useSelector(selectUploadedImage);
   const [productData, setProductData] = useState(null);
   const [credentials, setCredentials] = useState({
     title: "",
@@ -83,10 +78,6 @@ export default function AddProduct() {
       [e.target.name]: parseInt(e.target.value),
     });
   };
-
-  useEffect(() => {
-    dispatch(fetchAllCategoriesAsync());
-  }, []);
 
   return (
     <>
@@ -178,25 +169,6 @@ export default function AddProduct() {
             {categories.map((value) => {
               const category = capitalizeAllWords(value.category)
               return <option value={value.category}>{category}</option>;
-            })}
-          </select>
-        </div>
-        <div class="mb-3">
-          <label for="product-category" class="form-label">
-            Product Sub Category
-          </label>
-          <select
-            id="product-category"
-            class="form-select"
-            name="subCategory"
-            onChange={(e) => onChange(e)}
-          >
-            <option value={credentials.category}>Choose Category</option>
-            {subCategories.map((value) => {
-              // const val = value.category;
-              const abc = value.charAt(0).toUpperCase();
-              const category = abc + value.slice(1);
-              return <option value={category}>{category}</option>;
             })}
           </select>
         </div>

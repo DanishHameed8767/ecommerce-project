@@ -52,6 +52,7 @@ export function checkUser() {
     if (data.error) {
       reject({ ...data.error });
     } else {
+      console.log(data);
       resolve({ data });
     }
   });

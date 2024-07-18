@@ -1,11 +1,13 @@
 import "./App.css";
 import Home from "./pages/Home";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  Route,
+  Routes,
+} from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import CartPage from "./pages/CartPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
-import WishlistPage from "./pages/WishlistPage";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -13,103 +15,21 @@ import {
   fetchLocalStorageCart,
   mergeCartsAsync,
 } from "./features/cart/cartSlice";
-import { fetchAllWishlistProductsAsync } from "./features/wishlist/wishlistSlice";
 import { fetchAllProductsAsync } from "./features/product/productSlice";
 import Checkout from "./features/Checkout/components/Checkout";
 import OrderPlaced from "./features/Checkout/components/OrderPlaced";
 import OrderList from "./features/Checkout/components/OrderList";
 import AdminProfile from "./features/profile/AdminProfile";
-import AddCategory from "./features/profile/Components/AddCategory";
-import AddProduct from "./features/profile/Components/AddProduct";
 import ProtectedAdmin from "./features/auth/components/ProtectedAdmin";
 import { fetchAllCategoriesAsync } from "./features/profile/AdminSlice";
-import ViewProductsPage from "./pages/ViewProductsPage";
+import ViewCategoryProductsPage from "./pages/ViewCategoryProductsPage";
 import UpdateArrival from "./features/profile/Components/UpdateArrival";
 import { checkUserAsync, selectLoggedInUser } from "./features/auth/authSlice";
 import ViewSearchPage from "./pages/ViewSearchPage";
 import Address from "./features/Checkout/components/Address";
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Home />,
-  },
-  {
-    path: "/login",
-    element: <LoginPage />,
-  },
-  {
-    path: "/signup",
-    element: <SignUpPage />,
-  },
-  {
-    path: "/cart",
-    element: <CartPage />,
-  },
-  {
-    path: "/products/details/:id",
-    element: <ProductDetailPage />,
-  },
-  {
-    path: "/products/view",
-    element: <ViewProductsPage />,
-  },
-  {
-    path: "/search/results",
-    element: <ViewSearchPage />,
-  },
-  {
-    path: "/wishlist",
-    element: <WishlistPage />,
-  },
-  {
-    path: "/address",
-    element: <Address />,
-  },
-  {
-    path: "/checkout",
-    element: <Checkout />,
-  },
-  {
-    path: "/order/placed",
-    element: <OrderPlaced />,
-  },
-  {
-    path: "/order/list",
-    element: <OrderList />,
-  },
-  {
-    path: "/admin",
-    element: (
-      <ProtectedAdmin>
-        <AdminProfile />
-      </ProtectedAdmin>
-    ),
-  },
-  {
-    path: "/admin/updatearrival",
-    element: (
-      <ProtectedAdmin>
-        <UpdateArrival />
-      </ProtectedAdmin>
-    ),
-  },
-  {
-    path: "/admin/category",
-    element: (
-      <ProtectedAdmin>
-        <AddCategory />
-      </ProtectedAdmin>
-    ),
-  },
-  {
-    path: "/admin/product",
-    element: (
-      <ProtectedAdmin>
-        <AddProduct />
-      </ProtectedAdmin>
-    ),
-  },
-]);
+import Dashboard from "./app/Test";
+import ScrollToTop from "./app/ScrollToTop";
+import ViewAllProductsPage from "./pages/ViewAllProductsPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -118,7 +38,6 @@ function App() {
   useEffect(() => {
     dispatch(checkUserAsync());
     dispatch(fetchAllProductsAsync());
-    dispatch(fetchAllCategoriesAsync());
   }, [dispatch]);
 
   useEffect(() => {
@@ -129,14 +48,46 @@ function App() {
       dispatch(mergeCartsAsync(localStorageCart));
     } else {
       dispatch(fetchAllCartProductsAsync());
-      dispatch(fetchAllWishlistProductsAsync());
     }
   }, [isLoggedIn]);
   return (
     <>
       <div className="App">
-        <RouterProvider router={router} />
-        {/* Link must be inside the Provider */}
+        <ScrollToTop />
+          <Routes>
+            <Route path={"/"} element={<Home />} />
+            <Route path={"/login"} element={<LoginPage />} />
+            <Route path={"/signup"} element={<SignUpPage />} />
+            <Route path={"/cart"} element={<CartPage />} />
+            <Route
+              path={"/products/:id"}
+              element={<ProductDetailPage />}
+            />
+            <Route path={"/categories/:id"} element={<ViewCategoryProductsPage />} />
+            <Route path={"/products/"} element={<ViewAllProductsPage />} />
+            <Route path={"/search/:id"} element={<ViewSearchPage />} />
+            <Route path={"/address"} element={<Address />} />
+            <Route path={"/order/placed"} element={<OrderPlaced />} />
+            <Route path={"/checkout"} element={<Checkout />} />
+            <Route path={"/order/list"} element={<OrderList />} />
+            <Route
+              path={"/admin"}
+              element={
+                <ProtectedAdmin>
+                  <AdminProfile />
+                // </ProtectedAdmin>
+              }
+            />
+            <Route
+              path={"/admin/updatearrival"}
+              element={
+                <ProtectedAdmin>
+                  <UpdateArrival />
+                </ProtectedAdmin>
+              }
+            />
+            <Route path={"/test"} element={<Dashboard />} />
+          </Routes>
       </div>
     </>
   );

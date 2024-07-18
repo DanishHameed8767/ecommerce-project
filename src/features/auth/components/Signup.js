@@ -59,18 +59,18 @@ const Signup = () => {
       )}
       <div className="container-fluid row mt-5">
         <div
-          className="col w-50 p-0 h-50"
+          className="col w-50 p-0 h-50 d-none d-md-block"
           style={{ backgroundColor: "#CBE4E8" }}
         >
           <img src={loginImg} alt="" className="w-75" />
         </div>
-        <form className=" mt-3 col  mt-5 ms-5" onSubmit={handleSubmit}>
-          <h2 className="">Create an account</h2>
-          <span>Enter your details below</span>
+        <form className=" mt-md-3 col-md col-sm-12 d-flex flex-column ms-md-5" onSubmit={handleSubmit}>
+          <h4 className="text-center">Create an account</h4>
+          <div className="d-flex flex-column align-items-center">
           <div className="mb-3 mt-4">
             <input
               type="name"
-              className="form-control border-0 border-bottom rounded-0 w-50"
+              className="form-control border-0 border-bottom rounded-0"
               id="InputName"
               placeholder="Name"
               name="userName"
@@ -78,10 +78,10 @@ const Signup = () => {
               onChange={(e) => onChange(e)}
             />
           </div>
-          <div className="mb-3 mt-4">
+          <div className="mb-3">
             <input
               type="email"
-              className="form-control border-0 border-bottom rounded-0 w-50"
+              className="form-control border-0 border-bottom rounded-0"
               id="InputEmail"
               placeholder="Email Address"
               name="email"
@@ -92,7 +92,7 @@ const Signup = () => {
           <div className="mb-3">
             <input
               type="password"
-              className="form-control border-0 border-bottom rounded-0 w-50"
+              className="form-control border-0 border-bottom rounded-0"
               id="inputPassword"
               placeholder="Password"
               name="password"
@@ -103,7 +103,7 @@ const Signup = () => {
           <div className="mb-3">
             <input
               type="password"
-              className="form-control border-0 border-bottom rounded-0 w-50"
+              className="form-control border-0 border-bottom rounded-0"
               id="inputCPassword"
               placeholder="Confirm Password"
               name="cPassword"
@@ -111,7 +111,7 @@ const Signup = () => {
               onChange={(e) => onChange(e)}
             />
           </div>
-          <button type="submit" className="btn btn-danger fs-6 fw-normal w-50">
+          <button type="submit" className="btn btn-danger fs-6 fw-normal">
             Create Account
           </button>
           <div className="mt-3">
@@ -122,6 +122,7 @@ const Signup = () => {
             >
               Log in
             </Link>
+          </div>
           </div>
         </form>
       </div>

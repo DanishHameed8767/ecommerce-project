@@ -1,11 +1,9 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getProductDetail,
   selectAllProducts,
 } from "../../features/product/productSlice";
 import ProductItem from "../../features/product/components/ProductItem";
-import { addToWishlistAsync } from "../../features/wishlist/wishlistSlice";
 import { useNavigate } from "react-router-dom";
 import { shuffle } from "../../app/constant";
 
@@ -36,18 +34,12 @@ export default function ExpProducts() {
                   {products
                     .filter((value, index) => index > 10 && index < 19)
                     .map((value, index) => {
-                      const handleClick = (e) => {
-                        e.preventDefault();
-                        e.target.style.color = "red";
-                        dispatch(addToWishlistAsync(value));
-                      };
                       const RouterChange = () => {
-                        navigate("/products/details/" + value._id + "/");
+                        navigate("/products/" + value._id + "/");
                       };
                       return (
                         <ProductItem
                           product={value}
-                          handleClick={handleClick}
                           RouterChange={RouterChange}
                         />
                       );
@@ -61,7 +53,7 @@ export default function ExpProducts() {
         <div className="container d-flex justify-content-center">
           <button className="btn btn-danger btn-view-all text-white me-2" onClick={
             ()=>{
-              navigate("/products/view")
+              navigate("/products")
             }
           }>
             View All Products

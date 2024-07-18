@@ -58,8 +58,6 @@ export const authSlice = createSlice({
       .addCase(loginUserAsync.fulfilled, (state, action) => {
         state.status = "idle";
         state.isLoggedIn = action.payload.success;
-        state.userDetails = action.payload.user;
-        console.log(action.payload.authToken);
         localStorage.setItem("token", action.payload.authToken);
       })
       .addCase(loginUserAsync.rejected, (state, action) => {
@@ -87,7 +85,8 @@ export const authSlice = createSlice({
       .addCase(checkUserAsync.fulfilled, (state, action) => {
         state.status = "idle";
         state.isLoggedIn = action.payload.success;
-        state.userDetails = action.payload.user;
+        state.userDetails = action.payload._doc;
+        console.log(action.payload._doc);
       })
       .addCase(checkUserAsync.rejected, (state, action) => {
         state.status = "idle";

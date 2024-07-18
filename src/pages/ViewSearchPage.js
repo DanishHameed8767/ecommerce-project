@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ProductList from "../features/product/components/ProductList";
 import Navbar from "../features/Navbar";
-import { selectAllProductsList } from "../features/product/productSlice";
+import { searchProductsAsync, selectAllProductsList } from "../features/product/productSlice";
+import { useParams } from "react-router-dom";
+import { fetchAllProductsByCategoryAsync } from "../features/product/productSlice";
+import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 
 export default function ViewSearchPage() {
   const products = useSelector(selectAllProductsList);
+  const params = useParams();
+  const dispatch = useDispatch();
+  console.log(params.id);
+  useEffect(()=>{
+    dispatch(searchProductsAsync(params.id))
+  },[params.id])
   return (
     <>
       <Navbar />

@@ -1,20 +1,16 @@
-import React, { useEffect } from "react";
-import ProductItem from "./ProductItem";
+import React from "react";
+import Navbar from "../features/Navbar";
+import { selectAllProducts } from "../features/product/productSlice";
 import { useSelector } from "react-redux";
-import {
-  selectAllProductsList,
-} from "../productSlice";
 import { useNavigate } from "react-router-dom";
+import ProductItem from "../features/product/components/ProductItem";
 
-export default function ProductList() {
-  const navigate = useNavigate();
-  const selectProducts = useSelector(selectAllProductsList);
-  var products = selectProducts.filter((product) =>product.stock != 0);
-   products = [...products].sort(function(a, b){
-    return b.sellCount - a.sellCount;
-    });
+export default function ViewAllProductsPage() {
+ const products = useSelector(selectAllProducts);
+ const navigate = useNavigate();
   return (
     <>
+      <Navbar />
       <div className="mt-4  d-flex flex-row">
         <div className="row container-fluid">
 

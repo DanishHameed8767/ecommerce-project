@@ -14,11 +14,6 @@ const {
 const { body } = require("express-validator");
 const path = require("path");
 const {
-  showWishlist,
-  addToWishlist,
-  delFromWishlist,
-} = require("../controller/wishlist");
-const {
   addToCart,
   showCart,
   delFromCart,
@@ -37,12 +32,6 @@ const {
   sessionStatus,
 } = require("../controller/order");
 var fetchuser = require("../middleware/fetchUser");
-const {
-  addCategory,
-  updateCategory,
-  delCategory,
-  getallCategories,
-} = require("../controller/category");
 const Router = express.Router();
 const multer = require("multer");
 
@@ -53,9 +42,6 @@ Router.post("/category/products", getallProductsByCategory);
 
 Router.post("/addproduct", addProduct);
 Router.post("/updatearrival", updateArrival);
-Router.get("/wishlist", fetchuser, showWishlist);
-Router.post("/wishlist/add", fetchuser, addToWishlist);
-Router.delete("/wishlist/del", delFromWishlist);
 Router.post("/addmany", addProductMany);
 
 Router.get("/cart", fetchuser, showCart);
@@ -88,11 +74,6 @@ Router.post(
   loginUser
 );
 Router.get("/getuser", fetchuser, getUser);
-
-Router.get("/showcategory", getallCategories);
-Router.post("/addcategory", addCategory);
-Router.patch("/addsubcategory", updateCategory);
-Router.delete("/delcategory", delCategory);
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {

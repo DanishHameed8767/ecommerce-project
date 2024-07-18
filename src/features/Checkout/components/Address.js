@@ -64,7 +64,7 @@ export default function Address() {
                           </small>
                         </div>
                         <span className="text-body-secondary">
-                          PKR{" "}
+                          ${" "}
                           {discountedPrice(
                             item.price,
                             item.discountPercentage,
@@ -74,16 +74,9 @@ export default function Address() {
                       </li>
                     );
                   })}
-                  <li className="list-group-item d-flex justify-content-between bg-body-tertiary">
-                    <div className="text-success">
-                      <h6 className="my-0">Promo code</h6>
-                      <small>EXAMPLECODE</small>
-                    </div>
-                    <span className="text-success">−PKR 5</span>
-                  </li>
                   <li className="list-group-item d-flex justify-content-between">
                     <span>Total (USD)</span>
-                    <strong>PKR {calculateTotalAmount(cartProducts)}</strong>
+                    <strong>$ {calculateTotalAmount(cartProducts)}</strong>
                   </li>
                 </ul>
                 <form className="card p-2">

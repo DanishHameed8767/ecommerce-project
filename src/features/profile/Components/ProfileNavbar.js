@@ -1,12 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectAllWishlistProducts } from "../../wishlist/wishlistSlice";
 import { selectAllCartProducts } from "../../cart/cartSlice";
 
 export default function ProfileNavbar() {
-  const wishProducts = useSelector(selectAllWishlistProducts);
   const cartProducts = useSelector(selectAllCartProducts);
+  const handleLogOut = () => {
+    localStorage.removeItem("token");
+  };
   return (
     <>
       <nav className="navbar navbar-expand-sm navbar-dark sticky-top border-bottom p-4">
@@ -30,11 +31,6 @@ export default function ProfileNavbar() {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link active fs-5" to="/admin/category">
-                  Add Category
-                </Link>
-              </li>
-              <li className="nav-item">
                 <Link className="nav-link active fs-5" to="/admin/product">
                   Add Product
                 </Link>
@@ -45,18 +41,18 @@ export default function ProfileNavbar() {
                 </Link>
               </li>
             </ul>
-            <Link to="/wishlist" className="link-dark">
-              <i role="button" className="fa-regular fa-heart fa-xl"></i>
-              <span className="badge bg-danger" id="lblWishCount">
-                {wishProducts.length}
-              </span>
-            </Link>
             <Link to="/cart" className="link-dark">
               <i role="button" className="fa-solid fa-cart-shopping fa-xl"></i>
               <span className="badge bg-danger" id="lblCartCount">
                 {cartProducts.length}
               </span>
             </Link>
+            <Link
+                  className="text-decoration-none active fs-5 text-white"
+                  to="/login"
+                >
+                  <i role="button" onClick={handleLogOut} className="fa-solid fa-right-from-bracket fa-lg"></i>
+                </Link>
           </div>
         </div>
       </nav>

@@ -78,8 +78,8 @@ const searchQuery = {
     { title: { $regex: regex } },
     { description: { $regex: regex } },
     { category: { $regex: regex } },
-    { subCategory: { $regex: regex } },
-    { brands: { $regex: regex } },
+    { brand: { $regex: regex } },
+    { tags: { $regex: regex } },
   ],
 };
 try{

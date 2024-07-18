@@ -7,7 +7,7 @@ function ProtectedAdmin({ children }) {
   const dispatch = useDispatch();
   const userDetails = useSelector(selectUserDetails);
   const navigate = useNavigate();
-
+console.log(userDetails);
   useLayoutEffect(()=>{
     dispatch(checkUserAsync());
   },[])

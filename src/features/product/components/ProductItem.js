@@ -1,6 +1,6 @@
 import React from "react";
 
-const ProductItem = ({ product, handleClick, RouterChange }) => {
+const ProductItem = ({ product, RouterChange }) => {
   var src = product.thumbnail;
   if (product.thumbnail.slice(0,6)=='image_') {
     const _path = "http://localhost:5000/images/";
@@ -8,59 +8,44 @@ const ProductItem = ({ product, handleClick, RouterChange }) => {
   }
   return (
     <>
-      <div className="col-md-3 col-sm-3 my-4">
-        <div className="card m-md-4 m-0 abc" style={{ width: "18rem" }}>
+      <div className="col-md-4 col-lg-3 col-sm-6 my-4">
+        <div className="card m-md-2 m-0 product-item">
           <span
             className="position-absolute fs-7 fw-light badge bg-danger"
             style={{ top: "8px", left: "7px" }}
           >
-            -{Math.ceil(product.discountPercentage)}%
-          </span>
-          <span
-            onClick={(e) => {
-              handleClick(e);
-            }}
-            className="position-absolute text-center"
-            style={{
-              right: "10px",
-              top: "8px",
-              height: "30px",
-              width: "30px",
-              borderRadius: "30px",
-              backgroundColor: "white",
-              lineHeight: "30px",
-            }}
-          >
-            <i
-              role="button"
-              className="fa-regular fa-heart fa-lg"
-              style={{ color: "black" }}
-            ></i>
+            -{Math.round(product.discountPercentage)}%
           </span>
           <img
             src={src}
-            className="img-home card-img-top"
+            className="img-fluid "
             onClick={() => RouterChange()}
             alt="img"
-            style={{ height: "200px" }}
+            style={{height:"200px"}}
           />
-          <div className="card-body" onClick={() => RouterChange()}>
-            <h5 className="card-title">
-              {product.title.split(" ").slice(0, 3).join(" ")}
+          <div className="px-2" onClick={() => RouterChange()}>
+            <h5 className="card-title pt-2">
+              {product.title}
             </h5>
-            <p className="card-text">{product.description.slice(0, 50)}...</p>
+            <div className="container  product-item-bottom mb-2">
+              <div className="d-flex justify-content-between">
+                <div>
+
             <span className="text-danger">
-              $ {Math.ceil(
+              $ {Math.round(
                 product.price - (product.price * product.discountPercentage / 100)
               )}
             </span>
-            <span className="text-decoration-line-through text-secondary ms-3">
+            <span className="text-decoration-line-through text-secondary ms-2">
               $ {product.price}
             </span>
-            <div className="float-end">
+              </div>
+            <div className="">
               <i className="fa-regular fa-star"></i>
               <span className="ms-1">{product.rating}</span>
             </div>
+              </div>
+              </div>
           </div>
         </div>
       </div>
