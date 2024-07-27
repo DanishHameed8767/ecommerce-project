@@ -1,5 +1,4 @@
 import "./checkout.css";
-import "dotenv/config";
 import React, { useEffect, useState } from "react";
 import {
   PaymentElement,
@@ -61,7 +60,7 @@ export default function CheckoutForm() {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: `${process.env.SUCCESS_URL}/order/placed`,
+        return_url: `${process.env.REACT_APP_SUCCESS_URL}/order/placed`,
       },
       // redirect:'if_required',
     });
