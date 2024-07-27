@@ -1,4 +1,5 @@
 import "./checkout.css";
+import "dotenv/config";
 import React, { useEffect, useState } from "react";
 import {
   PaymentElement,
