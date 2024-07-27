@@ -14,13 +14,18 @@ const orderSchema = new Schema({
       quantity: Number,
     },
   ],
-  address:{
+  address: {
     detail: String,
     country: String,
     state: String,
-    zip: String
-  } ,
+    zip: String,
+  },
   status: { type: String, default: "pending" },
   paymentStatus: { type: String, default: "pending" },
+  orderDate: {
+    type: Date,
+    required: true,
+    default: Date.now(),
+  },
 });
 exports.Order = mongoose.model("Order", orderSchema);

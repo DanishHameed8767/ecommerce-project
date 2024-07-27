@@ -9,7 +9,6 @@ exports.showCart = async (req, res) => {
     }).populate("product");
     res.send(products);
   } catch (error) {
-    console.log(error);
     res.status(400).json({
       error: {
         message: error.message,

@@ -1,7 +1,6 @@
 const { User } = require("../models/userModel");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const JWT_SECRET = "Danishisweb@dev$expert";
 const { validationResult } = require("express-validator");
 
 exports.allUsers = async (req, res) => {
@@ -19,7 +18,6 @@ exports.createUser = async (req, res) => {
   // If there are errors, return Bad request and the errors
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    console.log(errors);
     return res.status(400).json({ name:"validationError",message: `${errors.errors[0].msg}` });
   }
   try {
@@ -46,7 +44,7 @@ exports.createUser = async (req, res) => {
         id: user.id,
       },
     };
-    const authToken = jwt.sign(data, JWT_SECRET);
+    const authToken = jwt.sign(data, process.env.JWT_SECRET);
 
     success = true;
     res.json({ success, authToken, user });
@@ -93,7 +91,7 @@ exports.loginUser = async (req, res) => {
         id: user.id,
       },
     };
-    const authToken = jwt.sign(data, JWT_SECRET);
+    const authToken = jwt.sign(data, process.env.JWT_SECRET);
     success = true;
     res.json({ success, authToken, user });
   } catch (error) {

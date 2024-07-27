@@ -1,4 +1,3 @@
-const { toBeRequired } = require("@testing-library/jest-dom/matchers");
 const { Order } = require("../models/orderModel");
 const { Product } = require("../models/productModel");
 const { clearCart } = require("./cart");
@@ -100,7 +99,6 @@ exports.listenWebHook = async (request, response) => {
       const { user, amount } = event.data.object.metadata;
       const products = JSON.parse(event.data.object.metadata.products);
       const address = JSON.parse(event.data.object.metadata.address);
-      console.log(address)
       await addOrder(user, amount, products,address);
       await clearCart(user);
 
