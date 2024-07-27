@@ -10,6 +10,7 @@ import {
 export default function CheckoutForm() {
   const stripe = useStripe();
   const elements = useElements();
+  const success_url = process.env.REACT_APP_SUCCESS_URL+"/order/placed";
 
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -60,7 +61,7 @@ export default function CheckoutForm() {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: `${process.env.REACT_APP_SUCCESS_URL}/order/placed`,
+        return_url: success_url,
       },
       // redirect:'if_required',
     });
