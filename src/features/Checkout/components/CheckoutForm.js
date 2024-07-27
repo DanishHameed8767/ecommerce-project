@@ -60,7 +60,7 @@ export default function CheckoutForm() {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: "/order/placed",
+        return_url: `${process.env.SUCCESS_URL}/order/placed`,
       },
       // redirect:'if_required',
     });
