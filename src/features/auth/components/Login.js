@@ -2,15 +2,16 @@ import React, { useState } from "react";
 import loginImg from "../../../images/login.png";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUserAsync, selectLogInAlert, selectLoggedInUser } from "../authSlice";
+import { loginUserAsync, selectLogInError, selectLoggedInUser } from "../authSlice";
 import { useEffect } from "react";
-import Alert from "../../Alert";
+import { useAlert } from 'react-alert'
+
 const Login = () => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
-  const alertMsg = useSelector(selectLogInAlert);
-  const [loginAlert,setLoginAlert] = useState(false);
+  const alert = useAlert();
   let navigate = useNavigate();
   const dispatch = useDispatch();
+  const logInError = useSelector(selectLogInError);
   const isLoggedIn = useSelector(selectLoggedInUser);
 
   const handleSubmit = async (e) => {
@@ -22,28 +23,23 @@ const Login = () => {
     dispatch(loginUserAsync(userData));
   };
 
-  useEffect(()=>{
-    console.log("i was called")
-    if(alertMsg){
-      setLoginAlert(true);
-    }
-    setTimeout(()=>{setLoginAlert(false)},3000)
-  },[alertMsg])
-
   useEffect(() => {
-    if (isLoggedIn) {
-      navigate("/cart");
+    if (isLoggedIn && localStorage.getItem("token")) {
+      navigate("/");
     }
   }, [isLoggedIn]);
+
+  useEffect(()=>{
+    if(logInError && logInError.name =="unauthorized"){
+     alert.error("Incorrect email or password");
+    }
+  },[logInError]);
 
   const onChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
   return (
     <>
-      {loginAlert && (
-        <Alert type={alertMsg.type} msg={alertMsg.msg} />
-      )}
       <div className="container-fluid row mt-5">
         <div
           className="col-md w-50 p-0 h-50 d-none d-md-block"

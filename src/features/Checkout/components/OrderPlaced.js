@@ -1,7 +1,4 @@
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { Link, Navigate } from "react-router-dom";
-import { addOrderAsync } from "../orderSlice";
+import { Link } from "react-router-dom";
 
 function OrderPlaced() {
     return (
@@ -18,7 +15,7 @@ function OrderPlaced() {
               <Link to="/" className="btn btn-danger me-3">
                 Back to home
               </Link>
-              <Link to="/order/list" className="btn btn-danger">
+              <Link to="/orders" className="btn btn-danger">
                 Check your orders
               </Link>
               <br />
@@ -32,18 +29,3 @@ function OrderPlaced() {
 
 export default OrderPlaced;
 
-// export const Return = () => {
-//   // useEffect(() => {}, []);
-
-//   return (
-//     <section id="success">
-//       <p>
-//         We appreciate your business! A confirmation email will be sent to{" "}
-//         {customerEmail}. If you have any questions, please email{" "}
-//         <a href="mailto:orders@example.com">orders@example.com</a>.
-//       </p>
-//     </section>
-//   );
-
-
-// };

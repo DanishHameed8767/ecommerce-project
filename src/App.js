@@ -1,9 +1,6 @@
 import "./App.css";
 import Home from "./pages/Home";
-import {
-  Route,
-  Routes,
-} from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import CartPage from "./pages/CartPage";
@@ -21,7 +18,6 @@ import OrderPlaced from "./features/Checkout/components/OrderPlaced";
 import OrderList from "./features/Checkout/components/OrderList";
 import AdminProfile from "./features/profile/AdminProfile";
 import ProtectedAdmin from "./features/auth/components/ProtectedAdmin";
-import { fetchAllCategoriesAsync } from "./features/profile/AdminSlice";
 import ViewCategoryProductsPage from "./pages/ViewCategoryProductsPage";
 import UpdateArrival from "./features/profile/Components/UpdateArrival";
 import { checkUserAsync, selectLoggedInUser } from "./features/auth/authSlice";
@@ -30,6 +26,8 @@ import Address from "./features/Checkout/components/Address";
 import Dashboard from "./app/Test";
 import ScrollToTop from "./app/ScrollToTop";
 import ViewAllProductsPage from "./pages/ViewAllProductsPage";
+import PageNotFound from "./app/PageNotFound";
+import Protected from "./features/auth/components/Protected";
 
 function App() {
   const dispatch = useDispatch();
@@ -49,45 +47,53 @@ function App() {
     } else {
       dispatch(fetchAllCartProductsAsync());
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, dispatch]);
   return (
     <>
       <div className="App">
         <ScrollToTop />
-          <Routes>
-            <Route path={"/"} element={<Home />} />
-            <Route path={"/login"} element={<LoginPage />} />
-            <Route path={"/signup"} element={<SignUpPage />} />
-            <Route path={"/cart"} element={<CartPage />} />
-            <Route
-              path={"/products/:id"}
-              element={<ProductDetailPage />}
-            />
-            <Route path={"/categories/:id"} element={<ViewCategoryProductsPage />} />
-            <Route path={"/products/"} element={<ViewAllProductsPage />} />
-            <Route path={"/search/:id"} element={<ViewSearchPage />} />
-            <Route path={"/address"} element={<Address />} />
-            <Route path={"/order/placed"} element={<OrderPlaced />} />
-            <Route path={"/checkout"} element={<Checkout />} />
-            <Route path={"/order/list"} element={<OrderList />} />
-            <Route
-              path={"/admin"}
-              element={
-                <ProtectedAdmin>
-                  <AdminProfile />
-                // </ProtectedAdmin>
-              }
-            />
-            <Route
-              path={"/admin/updatearrival"}
-              element={
-                <ProtectedAdmin>
-                  <UpdateArrival />
-                </ProtectedAdmin>
-              }
-            />
-            <Route path={"/test"} element={<Dashboard />} />
-          </Routes>
+        <Routes>
+          <Route path={"/"} element={<Home />} />
+          <Route path={"/login"} element={<LoginPage />} />
+          <Route path={"/signup"} element={<SignUpPage />} />
+          <Route path={"/cart"} element={<CartPage />} />
+          <Route path={"/products/:id"} element={<ProductDetailPage />} />
+          <Route
+            path={"/categories/:id"}
+            element={<ViewCategoryProductsPage />}
+          />
+          <Route path={"/products/"} element={<ViewAllProductsPage />} />
+          <Route path={"/search/:id"} element={<ViewSearchPage />} />
+          <Route path={"/address"} element={<Protected><Address /></Protected>} />
+          <Route path={"/order/placed"} element={<Protected><OrderPlaced /></Protected>} />
+          <Route path={"/checkout"} element={<Protected><Checkout /></Protected>} />
+          <Route
+            path={"/orders"}
+            element={
+              <Protected>
+                <OrderList />
+              </Protected>
+            }
+          />
+          <Route
+            path={"/admin"}
+            element={
+              <ProtectedAdmin>
+                <AdminProfile />
+              </ProtectedAdmin>
+            }
+          />
+          <Route
+            path={"/admin/updatearrival"}
+            element={
+              <ProtectedAdmin>
+                <UpdateArrival />
+              </ProtectedAdmin>
+            }
+          />
+          <Route path={"/test"} element={<Dashboard />} />
+          <Route path={"*"} element={<PageNotFound />} />
+        </Routes>
       </div>
     </>
   );

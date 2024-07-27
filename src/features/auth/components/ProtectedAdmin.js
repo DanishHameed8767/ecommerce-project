@@ -1,16 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate,useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { checkUserAsync, selectUserDetails } from "../authSlice";
-import { useEffect, useLayoutEffect } from "react";
+import { useLayoutEffect } from "react";
 
 function ProtectedAdmin({ children }) {
   const dispatch = useDispatch();
   const userDetails = useSelector(selectUserDetails);
-  const navigate = useNavigate();
-console.log(userDetails);
   useLayoutEffect(()=>{
     dispatch(checkUserAsync());
-  },[])
+  },[dispatch])
 
     return (<>
     {userDetails && <div>

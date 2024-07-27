@@ -10,11 +10,13 @@ import {
 } from "../cartSlice";
 import { Link, useNavigate } from "react-router-dom";
 import { selectLoggedInUser } from "../../auth/authSlice";
+import { useAlert } from "react-alert";
 const Cart = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isLoggedIn = useSelector(selectLoggedInUser);
   const cartProducts = useSelector(selectAllCartProducts);
+  const alert = useAlert();
   const handleCLick = () => {
    if(isLoggedIn){
     navigate("/address");
@@ -30,7 +32,7 @@ const Cart = () => {
       dispatch(fetchLocalStorageCart());
     }
     // eslint-disable-next-line
-  }, []);
+  }, [dispatch]);
   return (
     <>
       {/* {orderId && orderId._id && (<Navigate to={"/checkout"} replace={true}>{dispatch(startStripeCheckoutAsync({...orderData,order_id:orderId}))}</Navigate>)} */}
@@ -46,8 +48,11 @@ const Cart = () => {
                   const delFromCart = () => {
                     if (isLoggedIn) {
                       dispatch(delFromCartAsync(cartItem));
+                      alert.success("Item removed from cart");
+                      
                     } else {
                       dispatch(deleteFromLocalStorageCart(cartItem));
+                      alert.success("Item removed from cart");
                     }
                   };
                   return <Cartitem cart={cartItem} delFromCart={delFromCart} />;

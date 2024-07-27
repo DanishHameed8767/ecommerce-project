@@ -10,7 +10,7 @@ export default function ViewCategoryProductsPage() {
   const dispatch = useDispatch();
   useEffect(()=>{
     dispatch(fetchAllProductsByCategoryAsync({ category: params.id }))
-  },[])
+  },[dispatch])
   return (
     <>
       <Navbar />

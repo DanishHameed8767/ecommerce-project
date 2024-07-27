@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { selectAllCartProducts } from "./cart/cartSlice";
-import { fetchAllProductsByCategoryAsync, searchProductsAsync, selectAllProducts } from "./product/productSlice";
+import { selectAllCartProducts, handleLogOutCart } from "./cart/cartSlice";
+import { selectAllProducts } from "./product/productSlice";
 import { capitalizeAllWords, shuffle } from "../app/constant";
+import { handleLogOutSession } from "./auth/authSlice";
 
 const Navbar = () => {
   const cartProducts = useSelector(selectAllCartProducts);
   const selectProducts = useSelector(selectAllProducts);
+  const dispatch = useDispatch();
   const categories = [
     ...new Set(selectProducts.map((product) => product.category)),
   ];
@@ -22,6 +24,9 @@ const Navbar = () => {
   };
   const handleLogOut = () => {
     localStorage.removeItem("token");
+    dispatch(handleLogOutSession());
+    dispatch(handleLogOutCart());
+    navigate("/login");
   };
   return (
     <>

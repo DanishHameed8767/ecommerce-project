@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 export default function NewArrival() {
   const dispatch = useDispatch();
-  const _path = "http://localhost:5000/images/";
+  const _path = "https://urban-cart-backend.vercel.app/images/";
   const selectArrivals = useSelector(selectAllArrivals);
 
   const [main, setMain] = useState({title:'',description:''});
@@ -38,7 +38,7 @@ export default function NewArrival() {
 
   useEffect(()=>{
     dispatch(fetchAllArrivalsAsync());
-  },[])
+  },[dispatch])
   return (
     <>
       <div className="container-fluid arrival-sec">

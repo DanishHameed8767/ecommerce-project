@@ -28,7 +28,7 @@ export default function BSellSection() {
               <div className="col-md-4 col-sm-2 text-right d-flex justify-content-center">
                 <button className="btn btn-danger btn-view-all text-white me-2" onClick={
                   () =>{
-                    navigate("/products/view")
+                    navigate("/products")
                   }
                 }>
                   View All Products

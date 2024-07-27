@@ -25,13 +25,12 @@ export default function Address() {
   const orderData = {
     total_amount:calculateTotalAmount(cartProducts),
     products: [
-      ...cartProducts.map((item, i, arr) => {
+      ...cartProducts.map((item) => {
         return { product_id: item.product._id, quantity: item.quantity };
       }),
       ],
     address:address
   };
-  console.log(orderData);
   dispatch(startStripeCheckoutAsync(orderData));
   navigate("/checkout",{replace:true});
   }

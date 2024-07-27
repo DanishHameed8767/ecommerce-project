@@ -34,7 +34,7 @@ export default function AddProduct() {
     e.preventDefault();
     const formData = new FormData();
     formData.append("image", credentials.thumbnail);
-    const img_response = await fetch("http://localhost:5000/uploadimage", {
+    const img_response = await fetch("https://urban-cart-backend.vercel.app/uploadimage", {
       method: "POST",
       body: formData,
     });
@@ -51,7 +51,7 @@ export default function AddProduct() {
       };
       sendData();
     }
-  }, [productData]);
+  }, [productData, dispatch]);
 
   const onChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });

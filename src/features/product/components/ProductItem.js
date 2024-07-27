@@ -3,7 +3,7 @@ import React from "react";
 const ProductItem = ({ product, RouterChange }) => {
   var src = product.thumbnail;
   if (product.thumbnail.slice(0,6)=='image_') {
-    const _path = "http://localhost:5000/images/";
+    const _path = "https://urban-cart-backend.vercel.app/images/";
      src = _path + product.thumbnail;
   }
   return (

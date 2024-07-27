@@ -112,13 +112,15 @@ export const cartSlice = createSlice({
         product: action.payload.product,
         quantity: action.payload.quantity,
       });
-      console.log(action.payload.quantity)
       localStorage.setItem("cart", JSON.stringify(state.cartItems));
     },
     clearLocalStorageCart: (state) => {
       state.cartItems = [];
       localStorage.removeItem("cart");
     },
+    handleLogOutCart:(state) => {
+      state.cartItems = [];
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -196,6 +198,7 @@ export const {
   deleteFromLocalStorageCart,
   updateLocalStorageCart,
   clearLocalStorageCart,
+  handleLogOutCart
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

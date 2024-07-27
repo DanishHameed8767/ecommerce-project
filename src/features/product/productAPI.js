@@ -2,7 +2,7 @@
 // export function fetchAllProducts() {
 //   return new Promise(async (resolve) => {
 //     //TODO: we will not hard-code server URL here
-//     const response = await fetch("http://localhost:5000/allproducts");
+//     const response = await fetch("https://urban-cart-backend.vercel.app/allproducts");
 //     const data = await response.json();
 //     resolve({ data });
 //   });
@@ -11,7 +11,7 @@
 export function fetchAllProducts() {
   return new Promise(async (resolve) => {
     //TODO: we will not hard-code server URL here
-    const response = await fetch("http://localhost:5000/products?type=product");
+    const response = await fetch("https://urban-cart-backend.vercel.app/products?type=product");
     const data = await response.json();
     resolve({ data });
   });
@@ -19,7 +19,7 @@ export function fetchAllProducts() {
 
 export function fetchAllProductsByCategory(item) {
   return new Promise(async (resolve) => {
-    const response = await fetch("http://localhost:5000/category/products", {
+    const response = await fetch("https://urban-cart-backend.vercel.app/category/products", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -33,7 +33,7 @@ export function fetchAllProductsByCategory(item) {
 
 export function updateProductStock(item) {
   return new Promise(async (resolve) => {
-    const response = await fetch("http://localhost:5000/updatemany", {
+    const response = await fetch("https://urban-cart-backend.vercel.app/updatemany", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -48,7 +48,7 @@ export function updateProductStock(item) {
 export function fetchProductById(id) {
   return new Promise(async (resolve) => {
     //TODO: we will not hard-code server URL here
-    const response = await fetch("http://localhost:5000/products/" + id);
+    const response = await fetch("https://urban-cart-backend.vercel.app/products/" + id);
     const data = await response.json();
     resolve({ data });
   });
@@ -58,7 +58,7 @@ export function fetchProductById(id) {
 export function fetchArrivalsById(id) {
   return new Promise(async (resolve) => {
     //TODO: we will not hard-code server URL here
-    const response = await fetch("http://localhost:5000/arrivals/" + id);
+    const response = await fetch("https://urban-cart-backend.vercel.app/arrivals/" + id);
     const data = await response.json();
     resolve({ data });
   });
@@ -66,7 +66,7 @@ export function fetchArrivalsById(id) {
 
 export function searchProducts(keyword) {
   return new Promise(async (resolve, reject) => {
-    const response = await fetch("http://localhost:5000/search?q=" + keyword);
+    const response = await fetch("https://urban-cart-backend.vercel.app/search?q=" + keyword);
     const data = await response.json();
     if (data.error) {
       reject(data.error);

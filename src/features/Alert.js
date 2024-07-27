@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 
 export default function Alert(props) {
   const inputElement = useRef();
@@ -9,11 +9,7 @@ export default function Alert(props) {
     let y = x.toLowerCase();
     return y.charAt(0).toUpperCase() + y.slice(1);
   };
-  // useEffect(()=>{
-  //   setTimeout(()=>{
-  //     inputElement.current.click();
-  //   },3000)
-  // },[])
+
   return (
     props.type && props.msg && (
       <>

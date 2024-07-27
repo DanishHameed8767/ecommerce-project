@@ -15,7 +15,7 @@ export default function ProductDetailPage() {
   const params = useParams();
   useEffect(() => {
     dispatch(fetchProductByIdAsync(params.id));
-  }, []);
+  },[dispatch])
   return (
     <>
       <Navbar />

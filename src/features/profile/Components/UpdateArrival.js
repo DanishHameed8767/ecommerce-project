@@ -7,7 +7,7 @@ import { useRef } from "react";
 
 export default function UpdateArrival() {
   const dispatch = useDispatch();
-  const _path = "http://localhost:5000/images/";
+  const _path = "https://urban-cart-backend.vercel.app/images/";
   const selectArrivals = useSelector(selectAllArrivals);
 
   const [main, setMain] = useState({title:'',description:''});
@@ -67,10 +67,10 @@ export default function UpdateArrival() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if(credentials.thumbnail.slice(0,6) != 'image_'){
+    if(credentials.thumbnail.slice(0,6) !== 'image_'){
       const formData = new FormData();
       formData.append("image", credentials.thumbnail);
-      const img_response = await fetch("http://localhost:5000/uploadimage", {
+      const img_response = await fetch("https://urban-cart-backend.vercel.app/uploadimage", {
         method: "POST",
         body: formData,
       });
@@ -91,7 +91,7 @@ export default function UpdateArrival() {
       };
       sendData();
     }
-  }, [productData]);
+  }, [productData, dispatch]);
 
   const onChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
@@ -130,7 +130,7 @@ export default function UpdateArrival() {
 
   useEffect(()=>{
     dispatch(fetchAllArrivalsAsync());
-  },[])
+  },[dispatch])
   return (
     <>
       {selectArrivals && <div className="container-fluid">

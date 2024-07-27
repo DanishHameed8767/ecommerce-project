@@ -12,7 +12,6 @@ const Header = () => {
   const navigate = useNavigate();
   const selectProducts = useSelector(selectAllProducts);
   const rawCategory = [...new Set(selectProducts.map(product=>product.category))];
-  console.log(rawCategory)
   const categories = shuffle([...rawCategory]);
   return (
     <>

@@ -1,25 +1,37 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectProductData } from "../productSlice";
-import { addToCartAsync, addToLocalStorageCart } from "../../cart/cartSlice";
+import { addToCartAsync, addToLocalStorageCart, selectAllCartProducts } from "../../cart/cartSlice";
 import { selectLoggedInUser } from "../../auth/authSlice";
+import { useAlert } from "react-alert";
 
 const ProductDetail = () => {
   var productData = useSelector(selectProductData);
+  const cartProducts = useSelector(selectAllCartProducts);
+  const alert = useAlert();
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(selectLoggedInUser)
 
   const handleClick = () => {
+    const cartItemIndex = cartProducts.findIndex(
+      (cartItem) => cartItem.product._id === productData._id
+    );
+    if(cartItemIndex>=0){
+      alert.show("Item already added");
+      return;
+    }
     if(isLoggedIn){
       dispatch(addToCartAsync(productData));
+      alert.success("Item added to cart");
     } else {
       dispatch(addToLocalStorageCart(productData));
+      alert.success("Item added to cart");
     }
   };
 
   var productImageUrl = productData.thumbnail;
   if (productData.thumbnail.slice(0, 6) == "image_") {
-    const _path = "http://localhost:5000/images/";
+    const _path = "https://urban-cart-backend.vercel.app/images/";
     productImageUrl = _path + productData.thumbnail;
   }
   return (

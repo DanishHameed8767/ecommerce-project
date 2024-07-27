@@ -51,7 +51,7 @@ export default function Footer() {
                   </Link>
                 </li>
                 <li className="mb-2">
-                  <Link to='/order/list' className="nav-link p-0 text-white">
+                  <Link to='/orders' className="nav-link p-0 text-white">
                     My Orders
                   </Link>
                 </li>

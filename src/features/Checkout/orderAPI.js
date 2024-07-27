@@ -1,6 +1,6 @@
 export function addOrder(item) {
   return new Promise(async (resolve) => {
-    const response = await fetch("http://localhost:5000/order/add", {
+    const response = await fetch("https://urban-cart-backend.vercel.app/order/add", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -15,7 +15,7 @@ export function addOrder(item) {
 
 export function showOrders() {
   return new Promise(async (resolve) => {
-    const response = await fetch("http://localhost:5000/order", {
+    const response = await fetch("https://urban-cart-backend.vercel.app/order", {
       method: "GET",
       headers: {
         "auth-token": localStorage.getItem("token")
@@ -27,10 +27,8 @@ export function showOrders() {
 }
 
 export function startStripeCheckout(item) {
-  console.log(item)
-  console.log("Checkout cycle was triggered")
   return new Promise(async (resolve) => {
-    const response = await fetch("http://localhost:5000/order/checkout", {
+    const response = await fetch("https://urban-cart-backend.vercel.app/order/checkout", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

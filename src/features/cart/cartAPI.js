@@ -2,7 +2,7 @@
 
 export function fetchAllCartProducts() {
   return new Promise(async (resolve, reject) => {
-    const response = await fetch("http://localhost:5000/cart", {
+    const response = await fetch("https://urban-cart-backend.vercel.app/cart", {
       method: "GET",
       headers: {
         "auth-token": localStorage.getItem("token"),
@@ -19,7 +19,7 @@ export function fetchAllCartProducts() {
 
 export function addToCart(item) {
   return new Promise(async (resolve, reject) => {
-      const response = await fetch("http://localhost:5000/cart/add", {
+      const response = await fetch("https://urban-cart-backend.vercel.app/cart/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -38,7 +38,7 @@ export function addToCart(item) {
 
 export function delFromCart(item) {
   return new Promise(async (resolve, reject) => {
-    const response = await fetch("http://localhost:5000/cart/del", {
+    const response = await fetch("https://urban-cart-backend.vercel.app/cart/del", {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -57,7 +57,7 @@ export function delFromCart(item) {
 
 export function updateCart(item) {
   return new Promise(async (resolve, reject) => {
-    const response = await fetch("http://localhost:5000/cart/update", {
+    const response = await fetch("https://urban-cart-backend.vercel.app/cart/update", {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -77,7 +77,7 @@ export function updateCart(item) {
 
 export function mergeCarts(item) {
   return new Promise(async (resolve, reject) => {
-      const response = await fetch("http://localhost:5000/cart/merge", {
+      const response = await fetch("https://urban-cart-backend.vercel.app/cart/merge", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -86,7 +86,6 @@ export function mergeCarts(item) {
         body: JSON.stringify(item),
       });
       const data = await response.json();
-      console.log(data);
       if (data.error) {
         reject(data.error);
       } else {

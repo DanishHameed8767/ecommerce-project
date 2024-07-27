@@ -42,7 +42,6 @@ export default function CheckoutForm() {
           setMessage("Something went wrong.");
           break;
       }
-      console.log(paymentIntent.status);
     });
   }, [stripe]);
 
@@ -61,7 +60,7 @@ export default function CheckoutForm() {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: "http://localhost:3000/order/placed",
+        return_url: "/order/placed",
       },
       // redirect:'if_required',
     });
@@ -85,7 +84,7 @@ export default function CheckoutForm() {
   };
 
   return <form id="payment-form" onSubmit={handleSubmit}>
-      <PaymentElement id="payment-element" options={paymentElementOptions} />
+      <PaymentElement id="payment-element" className="mb-4" options={paymentElementOptions} />
       <hr className="my-4" />
       <button
         disabled={isLoading || !stripe || !elements}

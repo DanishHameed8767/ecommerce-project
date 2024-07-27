@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateCartAsync, updateLocalStorageCart } from "../cartSlice";
 import { discountedPrice } from "../../../app/constant";
@@ -11,7 +11,7 @@ const Cartitem = ({ cart, delFromCart }) => {
   const [count, setCount] = useState(cart.quantity);
   var src = val.thumbnail;
   if (val.thumbnail.slice(0, 6) == "image_") {
-    const _path = "http://localhost:5000/images/";
+    const _path = "https://urban-cart-backend.vercel.app/images/";
     src = _path + val.thumbnail;
   }
 

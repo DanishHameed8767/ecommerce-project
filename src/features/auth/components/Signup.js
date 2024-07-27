@@ -1,15 +1,15 @@
 import React from "react";
 import loginImg from "../../../images/login.png";
 import { Link, useNavigate } from "react-router-dom";
-import { createUserAsync, selectLogInAlert, selectLoggedInUser } from "../authSlice";
+import { createUserAsync, selectLoggedInUser } from "../authSlice";
 import { useDispatch, useSelector } from "react-redux";
-import Alert from "../../Alert";
 import { useState, useEffect } from "react";
+import { useAlert } from "react-alert";
 
 const Signup = () => {
   let navigate = useNavigate();
   let dispatch = useDispatch();
-  const alertMsg = useSelector(selectLogInAlert);
+  const alert = useAlert();
   const [loginAlert,setLoginAlert] = useState(false);
   const isLoggedIn = useSelector(selectLoggedInUser);
   const [credentials, setCredentials] = useState({
@@ -21,8 +21,14 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (credentials.password != credentials.cPassword) {
-  setLoginAlert(true);
+    if(!validateEmail(credentials.email)){
+      alert.error("Please enter a valid email.");
+    }
+    else if (credentials.password.length<6){
+      alert.error("Password must be atleast 6 characters long")
+    }
+  else if (credentials.password != credentials.cPassword) {
+  alert.error("Passwords don't match");
       return;
     } else {
       const data = {
@@ -38,13 +44,11 @@ const Signup = () => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
 
-  useEffect(()=>{
-    console.log("i was called")
-    if(alertMsg){
-      setLoginAlert(true);
-    }
-    setTimeout(()=>{setLoginAlert(false)},3000)
-  },[alertMsg])
+  
+  const validateEmail = (email) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  };
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -54,9 +58,9 @@ const Signup = () => {
 
   return (
     <>
-      {loginAlert && (
+      {/* {loginAlert && (
         <Alert type={alertMsg.type} msg={alertMsg.msg} />
-      )}
+      )} */}
       <div className="container-fluid row mt-5">
         <div
           className="col w-50 p-0 h-50 d-none d-md-block"

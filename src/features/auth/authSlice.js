@@ -6,7 +6,6 @@ const initialState = {
   isLoggedIn: null,
   userDetails: null,
   error: null,
-  alert: null,
 };
 
 export const loginUserAsync = createAsyncThunk(
@@ -14,10 +13,8 @@ export const loginUserAsync = createAsyncThunk(
   async (data) => {
     try {
       const response = await loginUser(data);
-      console.log("data returned", response);
       return response;
     } catch (error) {
-      console.log(error);
       throw error;
     }
   }
@@ -28,10 +25,8 @@ export const createUserAsync = createAsyncThunk(
   async (data) => {
     try {
       const response = await createUser(data);
-      console.log("data returned", response);
       return response;
     } catch (error) {
-      console.log(error);
       throw error;
     }
   }
@@ -49,7 +44,13 @@ export const checkUserAsync = createAsyncThunk("auth/checkUser", async () => {
 export const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    handleLogOutSession: (state, action) =>{
+    state.isLoggedIn = null;
+    state.userDetails = null;
+    state.error = null;
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(loginUserAsync.pending, (state) => {
@@ -63,7 +64,6 @@ export const authSlice = createSlice({
       .addCase(loginUserAsync.rejected, (state, action) => {
         state.status = "idle";
         state.error = action.error;
-        state.alert = { type: "danger", msg: action.error.message };
       })
       .addCase(createUserAsync.pending, (state) => {
         state.status = "loading";
@@ -77,7 +77,6 @@ export const authSlice = createSlice({
       .addCase(createUserAsync.rejected, (state, action) => {
         state.status = "idle";
         state.error = action.error;
-        state.alert = { type: "danger", msg: action.error.message };
       })
       .addCase(checkUserAsync.pending, (state) => {
         state.status = "loading";
@@ -86,7 +85,6 @@ export const authSlice = createSlice({
         state.status = "idle";
         state.isLoggedIn = action.payload.success;
         state.userDetails = action.payload._doc;
-        console.log(action.payload._doc);
       })
       .addCase(checkUserAsync.rejected, (state, action) => {
         state.status = "idle";
@@ -99,6 +97,8 @@ export const authSlice = createSlice({
 
 export const selectUserDetails = (state) => state.auth.userDetails;
 export const selectLoggedInUser = (state) => state.auth.isLoggedIn;
-export const selectLogInAlert = (state) => state.auth.alert;
+export const selectLogInError = (state) => state.auth.error;
+
+export const { handleLogOutSession } = authSlice.actions;
 
 export default authSlice.reducer;
