@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import { checkUserAsync, selectLoading, selectLoggedInUser } from "../authSlice";
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import ClipLoader from "react-spinners/ClipLoader";
 import { useLayoutEffect } from "react";
 
-function Protected({ component: Component, ...rest }) {
+export default function Protected() {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(selectLoggedInUser);
   const isLoading = useSelector(selectLoading);
@@ -15,7 +15,6 @@ function Protected({ component: Component, ...rest }) {
   if(isLoading) {
     return <ClipLoader className="mx-auto" loading={isLoading} width={100} size={150} color="red" />
   }
-  return isLoggedIn ? <Component {...rest} /> : <Navigate to="/login" />;
+  return isLoggedIn ? <Outlet /> : <Navigate to="/login" />;
 }
 
-export default Protected;
