@@ -32,7 +32,8 @@ import Protected from "./features/auth/components/Protected";
 function App() {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(selectLoggedInUser);
-
+  console.log(process.env.NODE_ENV);
+  console.log(process.env.REACT_APP_SUCCESS_URL);
   useEffect(() => {
     dispatch(checkUserAsync());
     dispatch(fetchAllProductsAsync());
