@@ -11,6 +11,7 @@ export default function CheckoutForm() {
   const stripe = useStripe();
   const elements = useElements();
   const success_url = process.env.REACT_APP_SUCCESS_URL+"/order/placed";
+  console.log(success_url);
 
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);

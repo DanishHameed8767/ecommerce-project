@@ -4,6 +4,7 @@ import { checkUser, createUser, loginUser } from "./authAPI";
 const initialState = {
   status: "idle",
   isLoggedIn: null,
+  isLoading:true,
   userDetails: null,
   error: null,
 };
@@ -85,18 +86,21 @@ export const authSlice = createSlice({
         state.status = "idle";
         state.isLoggedIn = action.payload.success;
         state.userDetails = action.payload._doc;
+        state.isLoading = false;
       })
       .addCase(checkUserAsync.rejected, (state, action) => {
         state.status = "idle";
         state.error = action.error;
         state.isLoggedIn = false;
         state.userDetails = {};
+        state.isLoading = false;
       });
   },
 });
 
 export const selectUserDetails = (state) => state.auth.userDetails;
 export const selectLoggedInUser = (state) => state.auth.isLoggedIn;
+export const selectLoading = (state) => state.auth.isLoading;
 export const selectLogInError = (state) => state.auth.error;
 
 export const { handleLogOutSession } = authSlice.actions;

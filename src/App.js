@@ -64,15 +64,13 @@ function App() {
           />
           <Route path={"/products/"} element={<ViewAllProductsPage />} />
           <Route path={"/search/:id"} element={<ViewSearchPage />} />
-          <Route path={"/address"} element={<Protected><Address /></Protected>} />
+          <Route path={"/address"} element={<Protected component={Address} />} />
           <Route path={"/order/placed"} element={<OrderPlaced />} />
           <Route path={"/checkout"} element={<Protected><Checkout /></Protected>} />
           <Route
             path={"/orders"}
             element={
-              <Protected>
-                <OrderList />
-              </Protected>
+              <Protected component={OrderList}/>
             }
           />
           <Route
