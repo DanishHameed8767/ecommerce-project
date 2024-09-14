@@ -24,7 +24,7 @@ const ProductItem = ({ product, RouterChange }) => {
             style={{height:"200px"}}
           />
           <div className="px-2" onClick={() => RouterChange()}>
-            <h5 className="card-title pt-2">
+            <h5 className="card-title title-padding-top">
               {product.title}
             </h5>
             <div className="container  product-item-bottom mb-2">

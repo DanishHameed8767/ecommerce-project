@@ -54,6 +54,10 @@ width: 50px;
   height: 290px;
 }
 
+.title-padding-top {
+  padding-top:4px;
+}
+
 .product-item-bottom {
  position: absolute;
  bottom: 0;
