@@ -1,7 +1,4 @@
-# Getting Started with Create React App and Redux
-
-This project is under development.
-Log in and sign up backend functionality is not added yet.
+Live Website: [Urban Cart](http://ecommerce-project-nu-lovat.vercel.app/)
 
 ## Available Scripts
 
